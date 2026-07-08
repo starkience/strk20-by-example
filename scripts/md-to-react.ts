@@ -5,9 +5,14 @@ import mustache from "mustache"
 import { marked } from "marked"
 import { markedHighlight } from "marked-highlight"
 import hljs from "highlight.js"
-// @ts-ignore
-import { solidity } from "highlightjs-solidity"
-import { exists, removeExt, getExt, renderTemplateToFile, parseYaml } from "./lib"
+import {
+  exists,
+  removeExt,
+  getExt,
+  renderTemplateToFile,
+  parseYaml,
+  getFiles,
+} from "./lib"
 
 const { readFile, readdir } = fs.promises
 
@@ -19,20 +24,18 @@ marked.use(
       if (lang == "") {
         language = "plaintext"
       }
-      // use python
-      else if (lang === "vyper") {
-        language = "python"
+      // Cairo 2 is Rust-shaped - use the rust grammar
+      else if (lang === "cairo") {
+        language = "rust"
       }
       return hljs.highlight(code, { language }).value
     },
   }),
 )
 
-hljs.registerLanguage("solidity", solidity)
-
-async function findSolidityFiles(dir: string): Promise<string[]> {
+async function findCodeFiles(dir: string): Promise<string[]> {
   const files = await readdir(dir)
-  return files.filter((file) => file.split(".").pop() == "sol")
+  return files.filter((file) => file.split(".").pop() == "cairo")
 }
 
 async function mdToHtml(filePath: string) {
@@ -45,16 +48,18 @@ async function mdToHtml(filePath: string) {
   const fileName = removeExt(tail)
   const dir = folders.join("/")
 
-  // get solidity code
-  const solidityFileNames = await findSolidityFiles(dir)
+  // get cairo code
+  const codeFileNames = await findCodeFiles(dir)
 
   const codes: { [key: string]: string } = {}
-  for (const solFileName of solidityFileNames) {
-    const source = (await readFile(path.join(dir, solFileName))).toString()
-    codes[removeExt(solFileName)] = source
+  const fileNames: { [key: string]: string } = {}
+  for (const codeFileName of codeFileNames) {
+    const source = (await readFile(path.join(dir, codeFileName))).toString()
+    codes[removeExt(codeFileName)] = source
+    fileNames[removeExt(codeFileName)] = codeFileName
   }
 
-  // render Solidity inside markdown
+  // render code inside markdown
   const { content, metadata } = await parseYaml(filePath)
 
   const markdown = mustache.render(content, codes)
@@ -62,6 +67,10 @@ async function mdToHtml(filePath: string) {
     .replace(/&quot;/g, `"`)
     // replace \ with \\
     .replace(/\\/g, `\\\\`)
+    // escape back ticks and ${ - html is embedded in a template literal.
+    // TypeScript snippets contain both and would break the generated file.
+    .replace(/`/g, "\\`")
+    .replace(/\$\{/g, "\\${")
 
   // render markdown to html
   await renderTemplateToFile(
@@ -73,9 +82,9 @@ async function mdToHtml(filePath: string) {
       version: metadata.version,
       description: metadata.description,
       keywords: metadata.keywords,
-      cyfrinLink: metadata.cyfrinLink || "",
+      githubLink: metadata.githubLink || "",
       codes: Object.entries(codes).map(([key, val]) => ({
-        key: `${key}.sol`,
+        key: fileNames[key],
         val: Buffer.from(val).toString("base64"),
       })),
     },
@@ -102,10 +111,7 @@ function removeTrailingSlash(dir: string): string {
   return dir
 }
 
-async function main() {
-  const args = process.argv.slice(2)
-  const dir = removeTrailingSlash(args[0])
-
+async function renderPage(dir: string) {
   const mdPath = path.join(dir, "index.md")
 
   if (!(await exists(mdPath))) {
@@ -123,6 +129,21 @@ async function main() {
       importPathToExample: getImportPathToExample(dir),
     },
   )
+}
+
+async function main() {
+  const args = process.argv.slice(2)
+
+  if (args[0] === "--all") {
+    const pagesDir = path.join(__dirname, "..", "src/pages")
+    const mdFiles = await getFiles(pagesDir, new RegExp("^index\\.md$"))
+    for (const mdFile of mdFiles) {
+      await renderPage(path.dirname(mdFile))
+    }
+    return
+  }
+
+  await renderPage(removeTrailingSlash(args[0]))
 }
 
 main()

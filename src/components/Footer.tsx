@@ -5,7 +5,10 @@ function Footer() {
   return (
     <div className={styles.component}>
       <div className={styles.row}>
-        <a href="https://docs.starknet.io/build/starknet-privacy/overview" target="__blank">
+        <a
+          href="https://docs.starknet.io/build/starknet-privacy/overview"
+          target="__blank"
+        >
           Starknet Privacy docs
         </a>
       </div>
