@@ -3,7 +3,7 @@ import React from "react"
 interface Props {
   size: number
   className?: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 const Hamburger: React.FC<Props> = ({ size, className = "", onClick }) => {

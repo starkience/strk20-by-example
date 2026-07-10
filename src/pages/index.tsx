@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import SEO from "../components/SEO"
 import SearchBar from "../components/SearchBar"
+import Strk20 from "../components/svg/Strk20"
 import useDebounce from "../hooks/useDebounce"
 import { search, unique } from "../lib/search"
 import styles from "./index.module.css"
@@ -61,11 +62,11 @@ export default function HomePage() {
   function renderLinks() {
     if (searchResults) {
       if (Object.keys(searchResults).length == 0) {
-        return <div>No results</div>
+        return <div className={styles.noResults}>No results</div>
       }
 
       return (
-        <ul className={styles.list}>
+        <ul className={styles.searchResultList}>
           {ROUTES.filter(({ path }) => searchResults[path]).map(({ path, title }) => (
             <li className={styles.listItem} key={path}>
               <a href={path}>{title}</a>
@@ -76,10 +77,10 @@ export default function HomePage() {
     }
 
     return (
-      <>
+      <div className={styles.grid}>
         {ROUTES_BY_CATEGORY.map(({ routes = [], groups = [], title }, i) => (
-          <div key={i}>
-            {title && <h3 className={styles.category}>{title}</h3>}
+          <section className={styles.card} key={i}>
+            <h3 className={styles.category}>{title || "Concepts"}</h3>
 
             {routes.length > 0 && (
               <ul className={styles.list}>
@@ -103,9 +104,9 @@ export default function HomePage() {
                 </ul>
               </div>
             ))}
-          </div>
+          </section>
         ))}
-      </>
+      </div>
     )
   }
 
@@ -115,12 +116,15 @@ export default function HomePage() {
         title="STRK20 by Example"
         description="Learn Starknet Privacy (STRK20) with simple examples - privacy pools, notes and nullifiers, viewing keys, the Starknet Wallet API, helper contracts, and wallet-builder SDK flows"
       />
-      <h1 className={styles.header}>
-        <a href="/">STRK20 by Example</a>
-      </h1>
-      <div className={styles.subHeader}>Starknet Privacy</div>
-      <div className={styles.main}>
-        <p>
+      <div className={styles.hero}>
+        <h1 className={styles.header}>
+          <a href="/" className={styles.headerLink}>
+            <Strk20 size={72} className={styles.heroLogo} />
+            <span className={styles.byExample}>by Example</span>
+          </a>
+        </h1>
+        <div className={styles.subHeader}>Starknet Privacy</div>
+        <p className={styles.intro}>
           An introduction to{" "}
           <a href="https://docs.starknet.io/build/starknet-privacy/overview">
             Starknet Privacy
@@ -138,9 +142,9 @@ export default function HomePage() {
         <div className={styles.search}>
           <SearchBar value={query} onChange={onChangeSearchQuery} />
         </div>
-
-        {renderLinks()}
       </div>
+
+      {renderLinks()}
     </div>
   )
 }

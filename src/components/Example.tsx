@@ -44,12 +44,12 @@ const Example: React.FC<Props> = ({
         githubLink={githubLink}
       />
       <div className={styles.content}>
-        <h2>{title}</h2>
+        <h1 className={styles.title}>{title}</h1>
 
         {githubLink ? (
           <div className={styles.sourceLink}>
             View the full source in the{" "}
-            <a href={githubLink} target="__blank">
+            <a href={githubLink} target="_blank" rel="noopener noreferrer">
               {githubLabel || "starknet-privacy repo"}
             </a>
             {!githubLabel && " (coming soon)"}
@@ -58,20 +58,24 @@ const Example: React.FC<Props> = ({
 
         <Html html={html} />
 
-        <div className={styles.prevNext}>
-          {prev && (
-            <a href={prev.path}>
-              {`< `}
-              {prev.title}
+        <nav className={styles.prevNext} aria-label="Previous and next pages">
+          {prev ? (
+            <a href={prev.path} className={styles.prevLink}>
+              <span className={styles.pagerLabel}>&larr; Previous</span>
+              <span className={styles.pagerTitle}>{prev.title}</span>
             </a>
+          ) : (
+            <span />
           )}
-          {next && (
-            <a href={next.path}>
-              {next.title}
-              {` >`}
+          {next ? (
+            <a href={next.path} className={styles.nextLink}>
+              <span className={styles.pagerLabel}>Next &rarr;</span>
+              <span className={styles.pagerTitle}>{next.title}</span>
             </a>
+          ) : (
+            <span />
           )}
-        </div>
+        </nav>
       </div>
     </div>
   )

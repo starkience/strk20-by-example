@@ -33,7 +33,8 @@ const Layout: React.FC<Props> = ({ children }) => {
           state.sideNav
             ? {
                 width: "var(--side-nav-width)",
-                padding: "20px 10px 60px 10px",
+                padding: "20px 12px 60px 12px",
+                borderRight: "1px solid var(--border-color)",
               }
             : {
                 width: 0,
