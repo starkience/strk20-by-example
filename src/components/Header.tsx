@@ -15,25 +15,35 @@ function Header() {
 
   return (
     <div className={styles.component}>
-      <Hamburger size={20} className={styles.hamburger} onClick={toggleSideNav} />
+      <button
+        className={styles.navToggle}
+        onClick={toggleSideNav}
+        title="Toggle navigation"
+        aria-label="Toggle navigation"
+      >
+        <Hamburger size={20} className={styles.hamburger} />
+      </button>
       <div className={styles.center}>
         <div className={styles.centerInner}>
-          <a href="/" className={styles.a}>
-            <Strk20
-              className={styles.logo}
-              size={30}
-              fill={state.theme == "dark" ? "rgb(0, 255, 0)" : "currentColor"}
-            />
+          <a href="/" className={styles.a} aria-label="STRK20 by Example home">
+            <Strk20 className={styles.logo} size={20} />
           </a>
-          <h3 className={styles.header}>
+          <span className={styles.header}>
             <a href="/" className={styles.a}>
-              STRK20 by Example
+              by Example
             </a>
-          </h3>
+          </span>
         </div>
       </div>
-      <button className={styles.mode} onClick={onClickTheme}>
-        {state.theme == "dark" ? <DarkMode size={20} /> : <LightMode size={20} />}
+      <button
+        className={styles.mode}
+        onClick={onClickTheme}
+        title={state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        aria-label={
+          state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"
+        }
+      >
+        {state.theme == "dark" ? <LightMode size={20} /> : <DarkMode size={18} />}
       </button>
     </div>
   )

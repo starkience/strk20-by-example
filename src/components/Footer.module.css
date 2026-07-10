@@ -1,9 +1,11 @@
 .component {
-  margin: 15px;
-  color: var(--color);
+  margin: 40px 15px 15px 15px;
+  color: var(--color-muted);
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2px;
+  font-size: 14px;
 }
 .row {
   display: flex;
@@ -11,35 +13,16 @@
   align-items: center;
 }
 .row .bar {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: var(--border-color);
 }
 .row a,
 .row a:visited {
+  color: var(--color-muted);
+  text-decoration-color: transparent;
+}
+.row a:hover {
   color: var(--link-color);
-}
-.to {
-  margin: 0 5px 0 5px;
-}
-.social {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.updraft {
-  width: 20px;
-  margin: 5px;
-  border-radius: 4px;
-}
-.telegram {
-  width: 20px;
-  margin: 5px;
-}
-.discord {
-  width: 20px;
-  margin: 5px;
-}
-.youTube {
-  width: 20px;
-  margin: 5px;
+  text-decoration-color: var(--link-color);
 }

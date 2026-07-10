@@ -1,64 +1,147 @@
 :root {
-  --black: #252519;
-  --side-nav-width: 240px;
+  --black: #1c1815;
+  --side-nav-width: 260px;
   --min-main-width: 300px;
+
+  /* Original Solidity by Example font stacks */
+  --font-body:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+/* STRK20 brand (strk20.starknet.io): dark-first, near-black + burnt orange.
+   Light mode is the warm-paper counterpart with the same orange. */
+body.light {
+  --bg-color: #faf8f5;
+  --color: #1c1815;
+  --color-muted: #6b645c;
+  --color-1: #1c1815;
+  --hover-color-1: #000000;
+  --code-bg: #f3f0ea;
+  --link-color: #b83500;
+  --accent: #c53400;
+  --accent-strong: #9e2a00;
+  --accent-soft: rgba(197, 52, 0, 0.1);
+  --input-bg: #f1ede6;
+  --link-active-color: rgba(197, 52, 0, 0.1);
+  --border-color: #e6e1d8;
+  --side-nav-color: #f4f1eb;
+  --scrollbar-thumb: #d6d0c6;
+  --table-border-color: #e2ddd3;
+  --table-header-bg: #f3f0ea;
+  --table-row-alt-bg: #f6f3ee;
+}
+body.dark {
+  --bg-color: #0d0d0d;
+  --color: #e8e4e0;
+  --color-muted: #9b9591;
+  --color-1: #d9d4d0;
+  --hover-color-1: #ffffff;
+  --code-bg: #141414;
+  --link-color: #ff7a45;
+  --accent: #ff4d12;
+  --accent-strong: #ff7a45;
+  --accent-soft: rgba(255, 77, 18, 0.14);
+  --input-bg: #1a1a1a;
+  --link-active-color: rgba(255, 77, 18, 0.14);
+  --border-color: #272727;
+  --side-nav-color: #111111;
+  --scrollbar-thumb: #3a3a3a;
+  --table-border-color: #2a2a2a;
+  --table-header-bg: #1a1a1a;
+  --table-row-alt-bg: #141414;
+}
+
 /* custom scroll */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #cccccc;
+  background-color: var(--scrollbar-thumb);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 1.6;
 
   background-color: var(--bg-color);
   color: var(--color);
-  /* transition: background-color 0.5s; */
-  /* min-width: 400px; */
 }
-body.light {
-  --bg-color: white;
-  --color: #252519;
-  --color-1: #212529;
-  --hover-color-1: #212529;
-  --code-bg: #f5f5f5;
-  --link-color: #261a3b;
-  --input-bg: #f1f1f1;
-  --link-active-color: rgba(0, 0, 0, 0.06);
-  --table-border-color: #d0d7de;
-  --table-header-bg: #f6f8fa;
-  --table-row-alt-bg: #f8fafc;
+
+::selection {
+  background: rgba(255, 77, 18, 0.3);
 }
-body.dark {
-  --bg-color: #161b22;
-  --color: rgb(201, 209, 217);
-  --color-1: #c9d1d9;
-  --hover-color-1: white;
-  --code-bg: #0d1117;
-  --link-color: #f6f6f6;
-  --input-bg: white;
-  --link-active-color: rgba(255, 255, 255, 0.08);
-  --table-border-color: #30363d;
-  --table-header-bg: #21262d;
-  --table-row-alt-bg: #1c2128;
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 44px 0 14px 0;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 32px 0 10px 0;
+}
+h2:first-child,
+h3:first-child {
+  margin-top: 0;
+}
+em {
+  font-style: italic;
+}
+strong {
+  font-weight: 600;
+}
+
+a,
+a:visited {
+  color: var(--link-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--link-color) 45%, transparent);
+  transition: text-decoration-color 0.15s ease;
+}
+a:hover {
+  text-decoration-color: var(--link-color);
+}
+
 pre {
-  padding: 15px;
-  margin: 0;
-  font-size: 14px;
-  /* position: relative; */
-  overflow-x: scroll;
+  padding: 16px 18px;
+  margin: 18px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--code-bg);
 }
 
 pre .buttons {
@@ -75,11 +158,18 @@ pre .buttons button {
   cursor: inherit;
 }
 pre .buttons button:hover {
-  color: #008cff;
+  color: var(--accent);
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: var(--font-mono);
   color: inherit;
+}
+:not(pre) > code {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1px 5px;
+  font-size: 0.85em;
 }
 .language-solidity,
 .language-cairo,
@@ -87,23 +177,13 @@ code {
   display: block;
   color: inherit;
 }
-a,
-a:visited {
-  color: var(--link-color);
-}
-h2 {
-  font-size: 32px;
-  line-height: 40px;
-}
-em {
-  font-style: italic;
-}
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 18px 0 28px 0;
   table-layout: auto;
+  font-size: 15px;
 }
 
 th,
@@ -116,15 +196,11 @@ td {
 
 th {
   background-color: var(--table-header-bg);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 tr:nth-child(even) td {
   background-color: var(--table-row-alt-bg);
-}
-
-pre {
-  background-color: var(--code-bg);
 }
 
 /* Code highlighting. Cairo is highlighted through the Rust grammar; keep the
@@ -209,7 +285,7 @@ body.light .hljs-deletion {
 
 body.dark .hljs {
   color: #c9d1d9;
-  background: #0d1117;
+  background: var(--code-bg);
 }
 
 body.dark .hljs-doctag,
@@ -308,20 +384,25 @@ body.dark .hljs-deletion {
   position: relative;
   /* set to 100% to enable y scroll */
   height: 100%;
+  margin: 18px 0;
+}
+.copy-wrapper pre {
+  margin: 0;
 }
 .copy {
   position: absolute;
   top: 0px;
   right: 0px;
-  margin-top: 4px;
+  margin-top: 10px;
   margin-right: 12px;
-  color: var(--color-1);
+  color: var(--color-muted);
   background-color: transparent;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
+  padding: 4px;
 }
 .copy:hover {
-  color: var(--hover-color-1);
+  color: var(--accent-strong);
   transition: color linear 0.2s;
 }

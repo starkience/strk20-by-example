@@ -5,12 +5,68 @@
 .content {
   margin: 15px 10px 15px 10px;
 }
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+/* Keep prose at a readable measure; code blocks and tables stay wide. */
+.content p,
+.content ul,
+.content ol,
+.content blockquote,
+.content h2,
+.content h3,
+.content h4 {
+  max-width: 72ch;
+}
 .sourceLink {
   font-style: italic;
+  font-size: 14.5px;
+  color: var(--color-muted);
+  margin-bottom: 6px;
 }
 .prevNext {
-  margin: 20px;
+  margin: 48px 0 12px 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.prevLink,
+.nextLink {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-decoration: none;
+  min-width: 180px;
+  transition: border-color 0.15s ease;
+}
+.prevLink:hover,
+.nextLink:hover {
+  border-color: var(--accent);
+}
+.nextLink {
+  align-items: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+.pagerLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+.pagerTitle {
+  color: var(--link-color);
+  font-weight: 500;
+  font-size: 15px;
 }
