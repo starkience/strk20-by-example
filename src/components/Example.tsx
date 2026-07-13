@@ -52,7 +52,6 @@ const Example: React.FC<Props> = ({
             <a href={githubLink} target="_blank" rel="noopener noreferrer">
               {githubLabel || "starknet-privacy repo"}
             </a>
-            {!githubLabel && " (coming soon)"}
           </div>
         ) : null}
 
