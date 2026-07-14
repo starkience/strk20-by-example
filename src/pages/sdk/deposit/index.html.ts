@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Deposit"
 export const description =
   "Approve the pool, then deposit public ERC-20 tokens into a private note"

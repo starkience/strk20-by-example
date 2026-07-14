@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Swap Helper"
 export const description =
   "A DEX swap anonymizer contract - trade privately through any AMM using the balance-delta idiom"

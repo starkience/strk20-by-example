@@ -1,6 +1,6 @@
 ---
 title: Anonymizer Contract Anatomy
-version: 0.14.2
+version: 0.14.3
 description: The privacy_invoke pattern - how the pool calls external contracts and credits open notes
 keywords: [privacy_invoke, helper, invoke, opennotedeposit, anonymizing, defi]
 ---

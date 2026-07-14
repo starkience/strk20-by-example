@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Overview"
 export const description =
   "A concise builder overview for choosing the right STRK20 integration route"

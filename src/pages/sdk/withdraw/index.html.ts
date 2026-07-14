@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Withdraw"
 export const description =
   "Withdraw private notes back to a public Starknet address as ERC-20 tokens"

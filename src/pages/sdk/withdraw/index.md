@@ -1,6 +1,6 @@
 ---
 title: Withdraw
-version: 0.14.2
+version: 0.14.3
 description: Withdraw private notes back to a public Starknet address as ERC-20 tokens
 keywords: [withdraw, erc20, public, notes, maturity, surplusTo]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

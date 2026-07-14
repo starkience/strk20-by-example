@@ -1,6 +1,6 @@
 ---
 title: Compliance & Auditing
-version: 0.14.2
+version: 0.14.3
 description: Selective disclosure via an auditor-escrowed viewing key, fund tracing, and known privacy limits
 keywords: [compliance, auditor, selective disclosure, tracing, viewing key]
 ---

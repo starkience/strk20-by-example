@@ -1,6 +1,6 @@
 ---
 title: Channels & Setup Requirements
-version: 0.14.2
+version: 0.14.3
 description: Check what setup a recipient needs with discoverRequirement and open channels explicitly
 keywords:
   [channels, subchannel, setup, discoverRequirement, SetupRequirement, autoSetup]

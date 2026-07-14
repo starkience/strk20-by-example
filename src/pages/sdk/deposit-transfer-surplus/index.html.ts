@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Deposit + Transfer"
 export const description =
   "Deposit and transfer in one transaction, with surplusTo directing the remainder"

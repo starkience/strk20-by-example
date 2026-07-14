@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Getting Started"
 export const description =
   "Build privacy wallets on Starknet with the low-level STRK20 SDK and createPrivateTransfers"

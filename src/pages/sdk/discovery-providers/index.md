@@ -1,6 +1,6 @@
 ---
 title: Discovery Providers
-version: 0.14.2
+version: 0.14.3
 description: Choose between IndexerDiscoveryProvider and ContractDiscoveryProvider
 keywords: [discovery, indexer, contract, provider, rate limit, deep import]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

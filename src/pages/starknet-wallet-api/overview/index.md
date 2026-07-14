@@ -1,6 +1,6 @@
 ---
 title: Starknet Wallet API
-version: 0.14.2
+version: 0.14.3
 description: "The standard route for private dapps on Starknet: ask a privacy-enabled wallet to shield, transfer, and withdraw via starknet.js."
 keywords:
   [

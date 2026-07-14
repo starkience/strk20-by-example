@@ -1,6 +1,6 @@
 ---
 title: Register
-version: 0.14.2
+version: 0.14.3
 description: Register your viewing key in the privacy pool with the builder or autoRegister
 keywords: [register, viewing key, builder, autoRegister, onboarding]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

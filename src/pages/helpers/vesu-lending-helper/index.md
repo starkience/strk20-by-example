@@ -1,6 +1,6 @@
 ---
 title: Vesu Lending Helper
-version: 0.14.2
+version: 0.14.3
 description: Earn lending yield privately - the official reference helper for Vesu ERC-4626 vaults
 keywords: [vesu, lending, vault, erc4626, vtoken, helper, yield]
 ---

@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "starknet.js"
 export const description =
   "Call the Starknet Wallet API directly with starknet.js WalletAccountV6 for non-React apps or finer control."

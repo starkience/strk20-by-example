@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Proving Configuration"
 export const description =
   "Configure ProvingServiceProofProvider, pick provingBlockId, and submit proofs correctly"

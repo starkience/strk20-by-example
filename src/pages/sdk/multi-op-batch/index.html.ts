@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Multi-Operation Batches"
 export const description =
   "Chain several operations on one token and several tokens in a single transaction"

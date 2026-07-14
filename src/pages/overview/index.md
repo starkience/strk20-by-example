@@ -1,6 +1,6 @@
 ---
 title: Overview
-version: 0.14.2
+version: 0.14.3
 description: A concise builder overview for choosing the right STRK20 integration route
 keywords:
   [

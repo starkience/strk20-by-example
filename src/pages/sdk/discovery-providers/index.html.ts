@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Discovery Providers"
 export const description =
   "Choose between IndexerDiscoveryProvider and ContractDiscoveryProvider"

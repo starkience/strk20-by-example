@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Register"
 export const description =
   "Register your viewing key in the privacy pool with the builder or autoRegister"

@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Compliance & Auditing"
 export const description =
   "Selective disclosure via an auditor-escrowed viewing key, fund tracing, and known privacy limits"

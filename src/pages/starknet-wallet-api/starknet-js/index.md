@@ -1,6 +1,6 @@
 ---
 title: starknet.js
-version: 0.14.2
+version: 0.14.3
 description: "Call the Starknet Wallet API directly with starknet.js WalletAccountV6 for non-React apps or finer control."
 keywords:
   [

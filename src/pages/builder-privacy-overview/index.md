@@ -1,6 +1,6 @@
 ---
 title: Builder Privacy Overview
-version: 0.14.2
+version: 0.14.3
 description: "Choose the right STRK20 integration path: Starknet Wallet API, anonymizer contracts, building privacy wallets, sub-accounts, or prover infrastructure."
 keywords:
   [

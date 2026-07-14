@@ -1,6 +1,6 @@
 ---
 title: Deposit + Transfer
-version: 0.14.2
+version: 0.14.3
 description: Deposit and transfer in one transaction, with surplusTo directing the remainder
 keywords: [deposit, transfer, surplusTo, compose, batch, change]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Anonymizer Contract Anatomy"
 export const description =
   "The privacy_invoke pattern - how the pool calls external contracts and credits open notes"

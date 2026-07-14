@@ -1,6 +1,6 @@
 ---
 title: What is STRK20?
-version: 0.14.2
+version: 0.14.3
 description: An introduction to Starknet Privacy - confidential token transfers on a public chain
 keywords: [strk20, privacy, pool, starknet, introduction, overview]
 ---

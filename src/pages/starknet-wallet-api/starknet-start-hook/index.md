@@ -1,6 +1,6 @@
 ---
 title: starknet-start
-version: 0.14.2
+version: 0.14.3
 description: "Use the starknet-start useStrk20 React hooks as a convenience wrapper over the Starknet Wallet API."
 keywords:
   [

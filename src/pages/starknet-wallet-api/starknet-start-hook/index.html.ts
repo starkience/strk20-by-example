@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "starknet-start"
 export const description =
   "Use the starknet-start useStrk20 React hooks as a convenience wrapper over the Starknet Wallet API."

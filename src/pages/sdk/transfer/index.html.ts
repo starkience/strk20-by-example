@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Transfer"
 export const description =
   "Spend private notes and transfer an amount to a recipient, with change back to you"

@@ -1,6 +1,6 @@
 ---
 title: Deposit
-version: 0.14.2
+version: 0.14.3
 description: Approve the pool, then deposit public ERC-20 tokens into a private note
 keywords: [deposit, erc20, approve, surplusTo, note, maturity]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

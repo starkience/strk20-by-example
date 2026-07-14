@@ -1,6 +1,6 @@
 ---
 title: Encryption & Viewing Keys
-version: 0.14.2
+version: 0.14.3
 description: How viewing keys, domain-separated masking and ECDH on the STARK curve keep note data private
 keywords: [viewing key, encryption, ecdh, stark curve, masking, auditor]
 ---

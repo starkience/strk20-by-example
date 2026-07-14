@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Notes & Nullifiers"
 export const description =
   "The UTXO note model - how private balances are stored, spent and protected from double-spending"

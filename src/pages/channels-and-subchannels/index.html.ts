@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Channels & Note Discovery"
 export const description =
   "Directional channels, per-token subchannels and the scan algorithm recipients use to find their notes"

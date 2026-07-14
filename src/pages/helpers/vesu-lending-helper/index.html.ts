@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Vesu Lending Helper"
 export const description =
   "Earn lending yield privately - the official reference helper for Vesu ERC-4626 vaults"

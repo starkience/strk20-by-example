@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "What is STRK20?"
 export const description =
   "An introduction to Starknet Privacy - confidential token transfers on a public chain"

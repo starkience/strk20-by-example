@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Actions, Phases & Proofs"
 export const description =
   "The phased action model, the per-token balance invariant, and how transactions are proven with Stwo"

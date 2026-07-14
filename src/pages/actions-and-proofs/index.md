@@ -1,6 +1,6 @@
 ---
 title: Actions, Phases & Proofs
-version: 0.14.2
+version: 0.14.3
 description: The phased action model, the per-token balance invariant, and how transactions are proven with Stwo
 keywords: [actions, phases, balance invariant, stwo, proof, virtual execution]
 ---

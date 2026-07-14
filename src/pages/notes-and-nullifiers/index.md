@@ -1,6 +1,6 @@
 ---
 title: Notes & Nullifiers
-version: 0.14.2
+version: 0.14.3
 description: The UTXO note model - how private balances are stored, spent and protected from double-spending
 keywords: [note, nullifier, utxo, open note, double-spend, poseidon]
 ---

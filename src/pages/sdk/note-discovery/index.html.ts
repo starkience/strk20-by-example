@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Discovering Notes"
 export const description =
   "Scan your channels for unspent notes with discoverNotes and discoverChannels"

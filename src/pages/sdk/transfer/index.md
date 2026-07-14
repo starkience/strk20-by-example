@@ -1,6 +1,6 @@
 ---
 title: Transfer
-version: 0.14.2
+version: 0.14.3
 description: Spend private notes and transfer an amount to a recipient, with change back to you
 keywords: [transfer, notes, inputs, surplusTo, change, autoSelectNotes]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

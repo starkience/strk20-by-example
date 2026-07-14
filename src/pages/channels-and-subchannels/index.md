@@ -1,6 +1,6 @@
 ---
 title: Channels & Note Discovery
-version: 0.14.2
+version: 0.14.3
 description: Directional channels, per-token subchannels and the scan algorithm recipients use to find their notes
 keywords: [channel, subchannel, discovery, scanning, note index, channel key]
 ---

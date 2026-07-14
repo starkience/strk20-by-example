@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-version: 0.14.2
+version: 0.14.3
 description: Build privacy wallets on Starknet with the low-level STRK20 SDK and createPrivateTransfers
 keywords:
   [

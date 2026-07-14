@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Encryption & Viewing Keys"
 export const description =
   "How viewing keys, domain-separated masking and ECDH on the STARK curve keep note data private"

@@ -1,5 +1,5 @@
 // metadata
-export const version = "0.14.2"
+export const version = "0.14.3"
 export const title = "Channels & Setup Requirements"
 export const description =
   "Check what setup a recipient needs with discoverRequirement and open channels explicitly"

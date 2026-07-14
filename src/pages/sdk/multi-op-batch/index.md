@@ -1,6 +1,6 @@
 ---
 title: Multi-Operation Batches
-version: 0.14.2
+version: 0.14.3
 description: Chain several operations on one token and several tokens in a single transaction
 keywords: [batch, multi-token, compose, builder, atomic, invoke]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

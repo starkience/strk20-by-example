@@ -1,6 +1,6 @@
 ---
 title: Proving Configuration
-version: 0.14.2
+version: 0.14.3
 description: Configure ProvingServiceProofProvider, pick provingBlockId, and submit proofs correctly
 keywords: [proving, provingBlockId, proofFacts, nonce, reorg, maturity]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md

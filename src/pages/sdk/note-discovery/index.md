@@ -1,6 +1,6 @@
 ---
 title: Discovering Notes
-version: 0.14.2
+version: 0.14.3
 description: Scan your channels for unspent notes with discoverNotes and discoverChannels
 keywords: [discovery, notes, cursor, AddressMap, registry, channels]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md
