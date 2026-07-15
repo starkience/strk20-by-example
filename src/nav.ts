@@ -175,6 +175,15 @@ export const ROUTES_BY_CATEGORY: RouteCategory[] = [
     title: "Applications",
     routes: prefixRoutes("/app", APP_ROUTES),
   },
+  {
+    title: "Agent Tooling",
+    routes: [
+      {
+        path: "/agent-skill",
+        title: "Agent Skill",
+      },
+    ],
+  },
 ]
 
 export const ROUTES = ROUTES_BY_CATEGORY.map(({ routes = [], groups = [] }) => [

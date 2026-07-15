@@ -49,6 +49,36 @@
   color: var(--color);
 }
 
+.right {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.agentLink,
+.agentLink:visited {
+  text-decoration: none;
+  color: var(--color-muted);
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.agentLink:hover {
+  color: var(--color);
+  background-color: var(--link-active-color);
+}
+
+@media (max-width: 540px) {
+  .agentLabel {
+    display: none;
+  }
+}
+
 .mode {
   background-color: transparent;
   border: 0px;

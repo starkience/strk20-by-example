@@ -87,3 +87,6 @@ you will have the full mental model.
   Wallets.
 - **Anyone** who wants to understand how private payments work on Starknet - start
   with the Concepts pages.
+
+Have a coding agent? It can run this integration for you - see
+[Agent Skill](/agent-skill).

@@ -119,6 +119,8 @@ Wallets.</li>
 <li><strong>Anyone</strong> who wants to understand how private payments work on Starknet - start
 with the Concepts pages.</li>
 </ul>
+<p>Have a coding agent? It can run this integration for you - see
+<a href="/agent-skill">Agent Skill</a>.</p>
 `
 
 export default html

@@ -193,7 +193,8 @@
     "/channels-and-subchannels"
   ],
   "cursor": [
-    "/sdk/note-discovery"
+    "/sdk/note-discovery",
+    "/agent-skill"
   ],
   "AddressMap": [
     "/sdk/note-discovery"
@@ -392,6 +393,30 @@
   ],
   "anonymous airdrop": [
     "/app/anonymous-airdrop"
+  ],
+  "agent": [
+    "/agent-skill"
+  ],
+  "skill": [
+    "/agent-skill"
+  ],
+  "ai": [
+    "/agent-skill"
+  ],
+  "claude": [
+    "/agent-skill"
+  ],
+  "codex": [
+    "/agent-skill"
+  ],
+  "integration": [
+    "/agent-skill"
+  ],
+  "plan": [
+    "/agent-skill"
+  ],
+  "execute": [
+    "/agent-skill"
   ],
   "actions": [
     "/actions-and-proofs"

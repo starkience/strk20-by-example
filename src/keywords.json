@@ -215,6 +215,17 @@
     "airdrop",
     "anonymous airdrop"
   ],
+  "/agent-skill": [
+    "agent",
+    "skill",
+    "ai",
+    "claude",
+    "codex",
+    "cursor",
+    "integration",
+    "plan",
+    "execute"
+  ],
   "/actions-and-proofs": [
     "actions",
     "phases",

@@ -5,6 +5,7 @@ import styles from "./Header.module.css"
 import DarkMode from "./svg/DarkMode"
 import LightMode from "./svg/LightMode"
 import Strk20 from "./svg/Strk20"
+import Agent from "./svg/Agent"
 
 function Header() {
   const { state, setTheme, toggleSideNav } = useAppContext()
@@ -35,16 +36,27 @@ function Header() {
           </span>
         </div>
       </div>
-      <button
-        className={styles.mode}
-        onClick={onClickTheme}
-        title={state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"}
-        aria-label={
-          state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"
-        }
-      >
-        {state.theme == "dark" ? <LightMode size={20} /> : <DarkMode size={18} />}
-      </button>
+      <div className={styles.right}>
+        <a
+          href="/agent-skill"
+          className={styles.agentLink}
+          title="Let a coding agent build your STRK20 integration"
+          aria-label="Agent skill"
+        >
+          <Agent size={18} />
+          <span className={styles.agentLabel}>Agent skill</span>
+        </a>
+        <button
+          className={styles.mode}
+          onClick={onClickTheme}
+          title={state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label={
+            state.theme == "dark" ? "Switch to light mode" : "Switch to dark mode"
+          }
+        >
+          {state.theme == "dark" ? <LightMode size={20} /> : <DarkMode size={18} />}
+        </button>
+      </div>
     </div>
   )
 }
