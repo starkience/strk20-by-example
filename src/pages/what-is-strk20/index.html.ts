@@ -49,12 +49,17 @@ the same underlying token.</li>
 visible on-chain (depositor and amount), but the resulting note is encrypted.</li>
 <li><strong>Private transfers</strong> - transfer value inside the pool by spending notes and
 creating new ones. Nobody watching the chain can tell who paid whom, or how much.</li>
-<li><strong>DeFi</strong> (optional) - interact with DeFi from the pool through an anonymizer
-contract, with results credited back as private notes. This leg is
-confidential rather than fully private: the link to the user is hidden, but
-the app-side action and amounts can still be public.</li>
+<li><strong>DeFi</strong> - if your flow calls for it, notes can fund DeFi actions through an
+anonymizer contract, with results credited back as private notes. This leg
+is confidential rather than fully private: the link to the user is hidden,
+but the app-side action and amounts can still be public.</li>
 <li><strong>Withdraw</strong> - move tokens back out of the pool to a public address.</li>
 </ol>
+<p>Upcoming <strong>private sub-accounts</strong> (coming soon) will widen the DeFi leg:
+account-based flows such as borrowing and staking will run through real
+Starknet accounts that carry no public onchain link back to the user&#39;s main
+wallet, and using fresh sub-accounts per app fragments the trail further. The
+same caveat applies - app-side activity and amounts can still be public.</p>
 <h2>What makes it different</h2>
 <ul>
 <li><strong>Native to Starknet</strong> - no separate chain or bridge. It runs as a contract on

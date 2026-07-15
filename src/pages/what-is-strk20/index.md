@@ -38,11 +38,17 @@ exist rather than a separate ecosystem.
    visible on-chain (depositor and amount), but the resulting note is encrypted.
 2. **Private transfers** - transfer value inside the pool by spending notes and
    creating new ones. Nobody watching the chain can tell who paid whom, or how much.
-3. **DeFi** (optional) - interact with DeFi from the pool through an anonymizer
-   contract, with results credited back as private notes. This leg is
-   confidential rather than fully private: the link to the user is hidden, but
-   the app-side action and amounts can still be public.
+3. **DeFi** - if your flow calls for it, notes can fund DeFi actions through an
+   anonymizer contract, with results credited back as private notes. This leg
+   is confidential rather than fully private: the link to the user is hidden,
+   but the app-side action and amounts can still be public.
 4. **Withdraw** - move tokens back out of the pool to a public address.
+
+Upcoming **private sub-accounts** (coming soon) will widen the DeFi leg:
+account-based flows such as borrowing and staking will run through real
+Starknet accounts that carry no public onchain link back to the user's main
+wallet, and using fresh sub-accounts per app fragments the trail further. The
+same caveat applies - app-side activity and amounts can still be public.
 
 ## What makes it different
 
