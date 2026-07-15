@@ -38,7 +38,9 @@ app."**
 
 - **Generate or edit Cairo contracts.** An anonymizer contract stays your
   team's code to write, review, and audit; the skill points at the public
-  reference packages instead.
+  reference packages instead. Learn more about Cairo at
+  [cairo-lang.org](https://www.cairo-lang.org/) and about anonymizer contracts
+  in [Anonymizer Contract Anatomy](/helpers/privacy-invoke).
 - **Touch key material.** Viewing keys, private keys, and secrets never land
   in files - env-var placeholders only.
 - **Ship to mainnet silently.** Testnet by default; mainnet-affecting changes
