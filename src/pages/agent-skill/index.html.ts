@@ -54,6 +54,10 @@ in files - env-var placeholders only.</li>
 <li><strong>Ship to mainnet silently.</strong> Testnet by default; mainnet-affecting changes
 require your explicit confirmation.</li>
 </ul>
+<h3>This site is agent-readable</h3>
+<p>Agents don&#39;t need to parse the app bundle: every page on this site is mirrored
+as raw Markdown. Start from <a href="/llms.txt">/llms.txt</a> (index of all pages as <code>.md</code>
+URLs) or fetch the whole site in one file at <a href="/llms-full.txt">/llms-full.txt</a>.</p>
 <p>Source, docs, and issues:
 <a href="https://github.com/starkience/strk20-agent-skills">github.com/starkience/strk20-agent-skills</a>
 (Apache 2.0).</p>

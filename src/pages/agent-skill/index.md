@@ -46,6 +46,12 @@ app."**
 - **Ship to mainnet silently.** Testnet by default; mainnet-affecting changes
   require your explicit confirmation.
 
+### This site is agent-readable
+
+Agents don't need to parse the app bundle: every page on this site is mirrored
+as raw Markdown. Start from [/llms.txt](/llms.txt) (index of all pages as `.md`
+URLs) or fetch the whole site in one file at [/llms-full.txt](/llms-full.txt).
+
 Source, docs, and issues:
 [github.com/starkience/strk20-agent-skills](https://github.com/starkience/strk20-agent-skills)
 (Apache 2.0).
