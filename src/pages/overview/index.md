@@ -49,6 +49,14 @@ route that fits your product, and only move lower when you need more control.
 Inside the pool, sender, receiver, token, amount, and spent notes are private.
 Deposits, withdrawals, timing, and some app-side activity may still be public.
 
+## Start from a template
+
+The [STRK20 starter kit](https://github.com/Akashneelesh/strk20-starter-kit) is a
+lean Next.js app with the Wallet API route already wired: wallet picker,
+shield / unshield / private transfer, shielded balances, and a deployable
+`privacy_invoke` helper. [Try the live demo](https://starknet-privacy-starter.vercel.app/),
+then swap the `DEMO`-labelled defaults for your own token and helper.
+
 ## Read next
 
 - [Anonymizer Contracts](/helpers/privacy-invoke)
