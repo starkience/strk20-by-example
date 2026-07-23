@@ -1,50 +1,108 @@
+// Build the client-side search index consumed by src/lib/search.ts.
+// Emits src/search-docs.json: one record per page with the fields MiniSearch
+// indexes at runtime (title, headings, keywords, body). Code blocks are kept
+// in the body so API names like createPrivateTransfers stay searchable.
+
 import fs from "fs"
-import assert from "assert"
 import path from "path"
-import { getFiles, parseYaml, buildRoute } from "./lib"
+import { parseYaml } from "./lib"
+import { ROUTES_BY_CATEGORY } from "../src/nav"
+
 const { writeFile } = fs.promises
 
-async function main() {
-  const SEARCH_OUT_PATH = path.join(__dirname, "..", "src/search.json")
-  const KEY_OUT_PATH = path.join(__dirname, "..", "src/keywords.json")
+const PAGES_DIR = path.join(__dirname, "..", "src/pages")
+const OUT_PATH = path.join(__dirname, "..", "src/search-docs.json")
 
-  const files = await getFiles(
-    path.join(__dirname, "..", "src/pages"),
-    new RegExp("index.md"),
+interface SearchDoc {
+  route: string
+  title: string
+  category: string
+  keywords: string[]
+  headings: string
+  body: string
+}
+
+// Strip Markdown syntax down to searchable text. Keeps code content
+// (identifiers matter in docs search), drops pure markup.
+function toPlainText(md: string): string {
+  return (
+    md
+      // fenced code block markers (keep the code itself)
+      .replace(/^```[^\n]*$/gm, " ")
+      // images, then links: keep the label, drop the URL
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+      // html tags
+      .replace(/<[^>]+>/g, " ")
+      // heading markers, emphasis, inline-code ticks, table pipes
+      .replace(/^#{1,6}\s+/gm, " ")
+      .replace(/[*_`|]/g, " ")
+      // collapse whitespace
+      .replace(/\s+/g, " ")
+      .trim()
   )
+}
 
-  // keyword => pages
-  // Create object without constructor
-  const index: { [key: string]: string[] } = Object.create(null)
-
-  // route => keywords
-  const keys: { [key: string]: string[] } = {}
-
-  for (const file of files) {
-    const route = buildRoute(file.split("/"))
-
-    const {
-      metadata: { keywords },
-    } = await parseYaml(file)
-
-    assert(keywords.length > 0, "keywords = []")
-
-    for (const keyword of keywords) {
-      // object has constructor property so check if key is array
-      if (!(index[keyword]?.length > 0)) {
-        index[keyword] = []
-      }
-      index[keyword].push(route)
+function extractHeadings(md: string): string {
+  const headings: string[] = []
+  for (const line of md.split("\n")) {
+    const m = line.match(/^#{1,6}\s+(.*)/)
+    if (m) {
+      headings.push(m[1].replace(/[*_`]/g, "").trim())
     }
+  }
+  return headings.join(" ")
+}
 
-    keys[route] = keywords
+async function loadDoc(
+  route: string,
+  navTitle: string,
+  category: string,
+): Promise<SearchDoc | null> {
+  const parts = route.split("/").filter(Boolean)
+  const mdPath = path.join(PAGES_DIR, ...parts, "index.md")
+
+  if (!fs.existsSync(mdPath)) {
+    return null
   }
 
-  await writeFile(SEARCH_OUT_PATH, JSON.stringify(index, null, 2))
-  console.log(`File saved to ${SEARCH_OUT_PATH}`)
+  const { metadata, content } = await parseYaml(mdPath)
 
-  await writeFile(KEY_OUT_PATH, JSON.stringify(keys, null, 2))
-  console.log(`File saved to ${KEY_OUT_PATH}`)
+  return {
+    route,
+    title: metadata.title || navTitle,
+    category,
+    keywords: metadata.keywords || [],
+    headings: extractHeadings(content),
+    body: toPlainText(content),
+  }
+}
+
+async function main() {
+  const docs: SearchDoc[] = []
+
+  for (const category of ROUTES_BY_CATEGORY) {
+    const categoryTitle = (category.title || "Concepts").replace(/\s*\n\s*/g, " ")
+
+    for (const route of category.routes || []) {
+      const doc = await loadDoc(route.path, route.title, categoryTitle)
+      if (doc) {
+        docs.push(doc)
+      }
+    }
+
+    for (const group of category.groups || []) {
+      for (const route of group.routes) {
+        const doc = await loadDoc(route.path, route.title, group.title)
+        if (doc) {
+          docs.push(doc)
+        }
+      }
+    }
+  }
+
+  await writeFile(OUT_PATH, JSON.stringify(docs))
+  console.log(`Indexed ${docs.length} pages to ${OUT_PATH}`)
 }
 
 main()

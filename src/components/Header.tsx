@@ -6,6 +6,7 @@ import DarkMode from "./svg/DarkMode"
 import LightMode from "./svg/LightMode"
 import Strk20 from "./svg/Strk20"
 import Agent from "./svg/Agent"
+import HeaderSearch from "./HeaderSearch"
 
 function Header() {
   const { state, setTheme, toggleSideNav } = useAppContext()
@@ -37,6 +38,7 @@ function Header() {
         </div>
       </div>
       <div className={styles.right}>
+        <HeaderSearch />
         <a
           href="/agent-skill"
           className={styles.agentLink}

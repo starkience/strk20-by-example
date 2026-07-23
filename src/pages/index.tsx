@@ -4,7 +4,7 @@ import SEO from "../components/SEO"
 import SearchBar from "../components/SearchBar"
 import Strk20 from "../components/svg/Strk20"
 import useDebounce from "../hooks/useDebounce"
-import { search, unique } from "../lib/search"
+import { search } from "../lib/search"
 import styles from "./index.module.css"
 import { ROUTES, ROUTES_BY_CATEGORY } from "../nav"
 
@@ -25,7 +25,7 @@ export default function HomePage() {
     }
   }, [])
 
-  function _search(query: string, save: boolean) {
+  async function _search(query: string, save: boolean) {
     const q = query.trim()
 
     if (q.length == 0) {
@@ -36,14 +36,11 @@ export default function HomePage() {
       return
     }
 
-    const words = unique(q.split(" "))
+    const results = await search(q)
     const pages: { [key: string]: boolean } = {}
 
-    for (const word of words) {
-      const res = search(word)
-      for (const page of res) {
-        pages[page] = true
-      }
+    for (const result of results) {
+      pages[result.route] = true
     }
 
     setSearchResults(pages)
@@ -52,7 +49,7 @@ export default function HomePage() {
     }
   }
 
-  const _searchWithDelay = useDebounce((query: string) => _search(query, true), 500, [])
+  const _searchWithDelay = useDebounce((query: string) => _search(query, true), 200, [])
 
   function onChangeSearchQuery(query: string) {
     setQuery(query)
