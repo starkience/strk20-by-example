@@ -69,7 +69,9 @@ and a <strong>discovery provider</strong> (finds your notes and channels).</p>
   ),
   <span class="hljs-attr">poolContractAddress</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!,
 })
-</code></pre><h2>Your first transaction</h2>
+</code></pre><p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
+<a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.</p>
+<h2>Your first transaction</h2>
 <p>Every operation follows the same shape: <code>build()</code> a batch of operations, then
 <code>execute()</code> it and submit the resulting call.</p>
 <pre><code class="language-typescript"><span class="hljs-comment">// Prove against a slightly older block: notes mature 10 blocks after</span>

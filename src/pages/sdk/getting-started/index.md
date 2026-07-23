@@ -75,6 +75,9 @@ const transfers = createPrivateTransfers({
 })
 ```
 
+On Sepolia, `POOL_ADDRESS` is the privacy pool (v2.0) deployed at
+[`0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91`](https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91).
+
 ## Your first transaction
 
 Every operation follows the same shape: `build()` a batch of operations, then

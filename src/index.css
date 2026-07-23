@@ -170,6 +170,7 @@ code {
   border-radius: 6px;
   padding: 1px 5px;
   font-size: 0.85em;
+  overflow-wrap: anywhere;
 }
 .language-solidity,
 .language-cairo,
