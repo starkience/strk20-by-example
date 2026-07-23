@@ -12,9 +12,24 @@ import {
   renderTemplateToFile,
   parseYaml,
   getFiles,
+  Slugger,
 } from "./lib"
 
 const { readFile, readdir } = fs.promises
+
+// Give every heading a GitHub-style id so search results and shared links
+// can deep-link to sections. Slugs must match build-search-index.ts, which
+// uses the same Slugger. Reset per page in mdToHtml.
+let slugger = new Slugger()
+
+marked.use({
+  renderer: {
+    heading({ tokens, depth, text }) {
+      const id = slugger.slug(text)
+      return `<h${depth} id="${id}">${this.parser.parseInline(tokens)}</h${depth}>\n`
+    },
+  },
+})
 
 marked.use(
   markedHighlight({
@@ -63,6 +78,7 @@ async function mdToHtml(filePath: string) {
   const { content, metadata } = await parseYaml(filePath)
 
   const markdown = mustache.render(content, codes)
+  slugger = new Slugger()
   const html = (await marked.parse(markdown))
     .replace(/&quot;/g, `"`)
     // replace \ with \\

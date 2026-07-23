@@ -2,7 +2,11 @@ import MiniSearch from "minisearch"
 
 export interface SearchResult {
   route: string
+  // route plus #anchor when the match is a specific section
+  url: string
   title: string
+  // section heading; empty when the match is the page preamble
+  section: string
   category: string
   // snippet of body text around the first matched term
   snippet: string
@@ -11,11 +15,13 @@ export interface SearchResult {
 }
 
 interface SearchDoc {
+  id: string
   route: string
+  anchor: string
   title: string
+  section: string
   category: string
   keywords: string[]
-  headings: string
   body: string
 }
 
@@ -23,14 +29,17 @@ const SEARCH_OPTIONS = {
   prefix: true,
   // typo tolerance: "nulifier" still finds Notes & Nullifiers
   fuzzy: 0.2,
-  boost: { title: 6, headings: 3, keywords: 3 },
+  boost: { title: 6, section: 4, keywords: 3 },
 }
+
+// keep one page from flooding the dropdown with all of its sections
+const MAX_PER_PAGE = 2
 
 // Lazy singleton: the index chunk is only fetched when search is first used,
 // keeping it out of the initial page load.
 let enginePromise: Promise<{
   mini: MiniSearch<SearchDoc>
-  docsByRoute: Map<string, SearchDoc>
+  docsById: Map<string, SearchDoc>
 }> | null = null
 
 function getEngine() {
@@ -39,9 +48,8 @@ function getEngine() {
       const docs = mod.default as SearchDoc[]
 
       const mini = new MiniSearch<SearchDoc>({
-        idField: "route",
-        fields: ["title", "headings", "keywords", "body"],
-        storeFields: ["route", "title", "category"],
+        fields: ["title", "section", "keywords", "body"],
+        storeFields: ["route", "anchor", "title", "section", "category"],
         extractField: (doc, field) => {
           const value = doc[field as keyof SearchDoc]
           return Array.isArray(value) ? value.join(" ") : (value as string)
@@ -49,8 +57,8 @@ function getEngine() {
       })
       mini.addAll(docs)
 
-      const docsByRoute = new Map(docs.map((doc) => [doc.route, doc]))
-      return { mini, docsByRoute }
+      const docsById = new Map(docs.map((doc) => [doc.id, doc]))
+      return { mini, docsById }
     })
   }
   return enginePromise
@@ -91,16 +99,32 @@ export async function search(query: string): Promise<SearchResult[]> {
     return []
   }
 
-  const { mini, docsByRoute } = await getEngine()
+  const { mini, docsById } = await getEngine()
 
-  return mini.search(q, SEARCH_OPTIONS).map((result) => {
-    const doc = docsByRoute.get(result.id as string)
-    return {
-      route: result.id as string,
+  const perPage: { [route: string]: number } = {}
+  const results: SearchResult[] = []
+
+  for (const result of mini.search(q, SEARCH_OPTIONS)) {
+    const route = result.route as string
+    const count = perPage[route] ?? 0
+    if (count >= MAX_PER_PAGE) {
+      continue
+    }
+    perPage[route] = count + 1
+
+    const doc = docsById.get(result.id as string)
+    const anchor = result.anchor as string
+
+    results.push({
+      route,
+      url: anchor ? `${route}#${anchor}` : route,
       title: result.title as string,
+      section: result.section as string,
       category: result.category as string,
       snippet: doc ? buildSnippet(doc.body, result.terms) : "",
       terms: result.terms,
-    }
-  })
+    })
+  }
+
+  return results
 }

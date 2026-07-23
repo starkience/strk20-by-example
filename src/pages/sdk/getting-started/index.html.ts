@@ -26,9 +26,9 @@ If you are building a private dapp on top of an existing wallet, use the
 <a href="/starknet-wallet-api/overview">Starknet Wallet API</a> instead - it keeps viewing
 keys inside the wallet. Everything here goes through one factory:
 <code>createPrivateTransfers</code>.</p>
-<h2>Install</h2>
+<h2 id="install">Install</h2>
 <pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk
-</code></pre><h2>Wire it up</h2>
+</code></pre><h2 id="wire-it-up">Wire it up</h2>
 <p>The factory needs a Starknet account plus three providers: a <strong>viewing key
 provider</strong> (your privacy key), a <strong>proving provider</strong> (generates validity proofs)
 and a <strong>discovery provider</strong> (finds your notes and channels).</p>
@@ -71,7 +71,7 @@ and a <strong>discovery provider</strong> (finds your notes and channels).</p>
 })
 </code></pre><p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
 <a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.</p>
-<h2>Your first transaction</h2>
+<h2 id="your-first-transaction">Your first transaction</h2>
 <p>Every operation follows the same shape: <code>build()</code> a batch of operations, then
 <code>execute()</code> it and submit the resulting call.</p>
 <pre><code class="language-typescript"><span class="hljs-comment">// Prove against a slightly older block: notes mature 10 blocks after</span>
@@ -94,7 +94,7 @@ and a <strong>discovery provider</strong> (finds your notes and channels).</p>
 </code></pre><p>This submission tail - back off <code>provingBlockId</code>, conditionally spread
 <code>proofDetails</code>, pass <code>tip: 0n</code>, wait - is identical for every operation in the
 following pages. We will not repeat the explanation, just the code.</p>
-<h2>What each provider does</h2>
+<h2 id="what-each-provider-does">What each provider does</h2>
 <table>
 <thead>
 <tr>

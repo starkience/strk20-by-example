@@ -161,3 +161,69 @@ export function buildRoute(folders: string[]) {
 
   return path.join(...route)
 }
+
+// headings & anchors
+// GitHub-style slug for a heading. Both the page renderer (md-to-react) and
+// the search index builder (build-search-index) MUST use this so search
+// anchors match the ids on the rendered pages.
+export function slugify(heading: string): string {
+  return (
+    heading
+      // strip markdown emphasis, inline-code ticks and link syntax
+      .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .replace(/[*_`]/g, "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, "")
+      .replace(/\s+/g, "-")
+  )
+}
+
+// Per-page slug dedupe: "install", "install-1", ...
+export class Slugger {
+  private seen: { [slug: string]: number } = {}
+
+  slug(heading: string): string {
+    const base = slugify(heading)
+    const count = this.seen[base] ?? 0
+    this.seen[base] = count + 1
+    return count === 0 ? base : `${base}-${count}`
+  }
+}
+
+export interface MdSection {
+  // empty for the preamble before the first heading
+  heading: string
+  anchor: string
+  depth: number
+  body: string
+}
+
+// Split markdown into sections at ## / ### headings, ignoring heading-like
+// lines inside fenced code blocks. Deeper headings stay in their section.
+export function splitSections(md: string): MdSection[] {
+  const slugger = new Slugger()
+  const sections: MdSection[] = [{ heading: "", anchor: "", depth: 0, body: "" }]
+
+  let inFence = false
+  for (const line of md.split("\n")) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence
+    }
+
+    const m = !inFence && line.match(/^(#{1,6})\s+(.*)/)
+    if (m) {
+      // every heading consumes a slug so ids stay in sync with the renderer,
+      // but only depth 2-3 starts a new section
+      const anchor = slugger.slug(m[2])
+      if (m[1].length <= 3) {
+        sections.push({ heading: m[2], anchor, depth: m[1].length, body: "" })
+        continue
+      }
+    }
+
+    sections[sections.length - 1].body += line + "\n"
+  }
+
+  return sections.filter((s) => s.heading !== "" || s.body.trim().length > 0)
+}

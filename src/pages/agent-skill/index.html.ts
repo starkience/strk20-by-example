@@ -26,7 +26,7 @@ an integration engineer for the repo they run in:</p>
 <pre><code class="language-sh">npx skills add starkience/strk20-agent-skills
 </code></pre><p>Then, inside your project, ask your agent to <strong>"plan STRK20 privacy for this
 app."</strong></p>
-<h3>What it does</h3>
+<h3 id="what-it-does">What it does</h3>
 <ol>
 <li><strong>Scans</strong> your repo - starknet.js version, get-starknet, Cairo contracts,
 backend SDKs - and finds the plug-in points.</li>
@@ -42,7 +42,7 @@ headless checks per phase and a short manual wallet check handed to you at
 every phase boundary. Its chat output links back to the matching pages on
 this site.</li>
 </ol>
-<h3>What it never does</h3>
+<h3 id="what-it-never-does">What it never does</h3>
 <ul>
 <li><strong>Generate or edit Cairo contracts.</strong> An anonymizer contract stays your
 team&#39;s code to write, review, and audit; the skill points at the public
@@ -54,7 +54,7 @@ in files - env-var placeholders only.</li>
 <li><strong>Ship to mainnet silently.</strong> Testnet by default; mainnet-affecting changes
 require your explicit confirmation.</li>
 </ul>
-<h3>This site is agent-readable</h3>
+<h3 id="this-site-is-agent-readable">This site is agent-readable</h3>
 <p>Agents don&#39;t need to parse the app bundle: every page on this site is mirrored
 as raw Markdown. Start from <a href="/llms.txt">/llms.txt</a> (index of all pages as <code>.md</code>
 URLs) or fetch the whole site in one file at <a href="/llms-full.txt">/llms-full.txt</a>.</p>

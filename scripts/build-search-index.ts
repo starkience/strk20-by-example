@@ -1,11 +1,13 @@
 // Build the client-side search index consumed by src/lib/search.ts.
-// Emits src/search-docs.json: one record per page with the fields MiniSearch
-// indexes at runtime (title, headings, keywords, body). Code blocks are kept
-// in the body so API names like createPrivateTransfers stay searchable.
+// Emits src/search-docs.json: one record per page SECTION (split at ##/###
+// headings) so results deep-link to /route#anchor. Anchors come from the same
+// Slugger as md-to-react.ts, which stamps matching ids on rendered headings.
+// Code blocks are kept in the body so API names like createPrivateTransfers
+// stay searchable.
 
 import fs from "fs"
 import path from "path"
-import { parseYaml } from "./lib"
+import { parseYaml, splitSections } from "./lib"
 import { ROUTES_BY_CATEGORY } from "../src/nav"
 
 const { writeFile } = fs.promises
@@ -14,11 +16,14 @@ const PAGES_DIR = path.join(__dirname, "..", "src/pages")
 const OUT_PATH = path.join(__dirname, "..", "src/search-docs.json")
 
 interface SearchDoc {
+  id: string
   route: string
+  anchor: string
   title: string
+  // section heading; empty for the page preamble
+  section: string
   category: string
   keywords: string[]
-  headings: string
   body: string
 }
 
@@ -28,7 +33,7 @@ function toPlainText(md: string): string {
   return (
     md
       // fenced code block markers (keep the code itself)
-      .replace(/^```[^\n]*$/gm, " ")
+      .replace(/^\s*(```|~~~)[^\n]*$/gm, " ")
       // images, then links: keep the label, drop the URL
       .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
       .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
@@ -43,39 +48,49 @@ function toPlainText(md: string): string {
   )
 }
 
-function extractHeadings(md: string): string {
-  const headings: string[] = []
-  for (const line of md.split("\n")) {
-    const m = line.match(/^#{1,6}\s+(.*)/)
-    if (m) {
-      headings.push(m[1].replace(/[*_`]/g, "").trim())
-    }
-  }
-  return headings.join(" ")
-}
-
-async function loadDoc(
+async function loadDocs(
   route: string,
   navTitle: string,
   category: string,
-): Promise<SearchDoc | null> {
+): Promise<SearchDoc[]> {
   const parts = route.split("/").filter(Boolean)
   const mdPath = path.join(PAGES_DIR, ...parts, "index.md")
 
   if (!fs.existsSync(mdPath)) {
-    return null
+    return []
   }
 
   const { metadata, content } = await parseYaml(mdPath)
+  const title = metadata.title || navTitle
 
-  return {
+  const docs = splitSections(content).map((section) => ({
+    id: section.anchor ? `${route}#${section.anchor}` : route,
     route,
-    title: metadata.title || navTitle,
+    anchor: section.anchor,
+    title,
+    section: section.heading.replace(/[*_`]/g, "").trim(),
     category,
-    keywords: metadata.keywords || [],
-    headings: extractHeadings(content),
-    body: toPlainText(content),
+    // page keywords only on the preamble doc so one keyword hit does not
+    // rank every section of the page
+    keywords: section.anchor ? [] : metadata.keywords || [],
+    body: toPlainText(section.body),
+  }))
+
+  // placeholder pages have no body yet - keep them findable by title/keywords
+  if (docs.length === 0) {
+    docs.push({
+      id: route,
+      route,
+      anchor: "",
+      title,
+      section: "",
+      category,
+      keywords: metadata.keywords || [],
+      body: toPlainText(metadata.description || ""),
+    })
   }
+
+  return docs
 }
 
 async function main() {
@@ -85,24 +100,19 @@ async function main() {
     const categoryTitle = (category.title || "Concepts").replace(/\s*\n\s*/g, " ")
 
     for (const route of category.routes || []) {
-      const doc = await loadDoc(route.path, route.title, categoryTitle)
-      if (doc) {
-        docs.push(doc)
-      }
+      docs.push(...(await loadDocs(route.path, route.title, categoryTitle)))
     }
 
     for (const group of category.groups || []) {
       for (const route of group.routes) {
-        const doc = await loadDoc(route.path, route.title, group.title)
-        if (doc) {
-          docs.push(doc)
-        }
+        docs.push(...(await loadDocs(route.path, route.title, group.title)))
       }
     }
   }
 
   await writeFile(OUT_PATH, JSON.stringify(docs))
-  console.log(`Indexed ${docs.length} pages to ${OUT_PATH}`)
+  const pages = new Set(docs.map((doc) => doc.route)).size
+  console.log(`Indexed ${docs.length} sections across ${pages} pages to ${OUT_PATH}`)
 }
 
 main()

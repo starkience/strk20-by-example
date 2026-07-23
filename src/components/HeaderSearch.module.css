@@ -118,6 +118,11 @@
   font-weight: 600;
 }
 
+.resultSection {
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
 .resultCategory {
   font-size: 11px;
   color: var(--color-muted);

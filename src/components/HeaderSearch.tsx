@@ -75,7 +75,7 @@ function HeaderSearch() {
     } else if (e.key === "Enter") {
       const result = results[active]
       if (result) {
-        window.location.assign(result.route)
+        window.location.assign(result.url)
       }
     } else if (e.key === "Escape") {
       close()
@@ -151,14 +151,22 @@ function HeaderSearch() {
           ) : (
             <ul className={styles.list}>
               {results.map((result, i) => (
-                <li key={result.route}>
+                <li key={result.url}>
                   <a
-                    href={result.route}
+                    href={result.url}
                     className={`${styles.result} ${i === active ? styles.active : ""}`}
                     onMouseEnter={() => setActive(i)}
                   >
                     <div className={styles.resultTop}>
-                      <span className={styles.resultTitle}>{result.title}</span>
+                      <span className={styles.resultTitle}>
+                        {result.title}
+                        {result.section && (
+                          <span className={styles.resultSection}>
+                            {" › "}
+                            {result.section}
+                          </span>
+                        )}
+                      </span>
                       <span className={styles.resultCategory}>{result.category}</span>
                     </div>
                     {result.snippet && (
