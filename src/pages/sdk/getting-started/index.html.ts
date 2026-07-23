@@ -27,15 +27,18 @@ If you are building a private dapp on top of an existing wallet, use the
 keys inside the wallet. Everything here goes through one factory:
 <code>createPrivateTransfers</code>.</p>
 <h2 id="install">Install</h2>
-<p>The SDK is published to the <strong>GitHub npm registry</strong>, not npmjs.com - a plain
-<code>npm install</code> will 404. Point the <code>@starkware-libs</code> scope at GitHub Packages
-and authenticate with a GitHub token (GitHub Packages requires one even for
-public packages):</p>
-<pre><code class="language-shell">echo "@starkware-libs:registry=https://npm.pkg.github.com" &gt;&gt; ~/.npmrc
-echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" &gt;&gt; ~/.npmrc
+<pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk
+</code></pre><p><strong>Getting a 404?</strong> Known temporary issue - the package is not on npmjs.com yet
+while StarkWare restores access to its npm org. Until then it is published to
+<a href="https://github.com/starkware-libs/starknet-privacy/pkgs/npm/starknet-privacy-sdk">GitHub Packages</a>,
+which needs a GitHub token even for public packages. With the
+<a href="https://cli.github.com">GitHub CLI</a>:</p>
+<pre><code class="language-shell">gh auth refresh -h github.com -s read:packages
+npm config set @starkware-libs:registry https://npm.pkg.github.com
+npm config set &#x27;//npm.pkg.github.com/:_authToken&#x27; "$(gh auth token)"
 
 npm install @starkware-libs/starknet-privacy-sdk
-</code></pre><p>Or skip the registry and install straight from git at a specific commit:</p>
+</code></pre><p>Or skip the registry entirely and install from git at a specific commit:</p>
 <pre><code class="language-shell">npm install "starkware-libs/starknet-privacy#&lt;commit-sha&gt;"
 </code></pre><h2 id="wire-it-up">Wire it up</h2>
 <p>The factory needs a Starknet account plus three providers: a <strong>viewing key
