@@ -25,8 +25,22 @@ keys inside the wallet. Everything here goes through one factory:
 
 ## Install
 
+The SDK is published to the **GitHub npm registry**, not npmjs.com - a plain
+`npm install` will 404. Point the `@starkware-libs` scope at GitHub Packages
+and authenticate with a GitHub token (GitHub Packages requires one even for
+public packages):
+
 ```shell
+echo "@starkware-libs:registry=https://npm.pkg.github.com" >> ~/.npmrc
+echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" >> ~/.npmrc
+
 npm install @starkware-libs/starknet-privacy-sdk
+```
+
+Or skip the registry and install straight from git at a specific commit:
+
+```shell
+npm install "starkware-libs/starknet-privacy#<commit-sha>"
 ```
 
 ## Wire it up
