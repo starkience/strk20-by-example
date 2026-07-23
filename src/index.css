@@ -131,6 +131,26 @@ h6[id] {
   scroll-margin-top: 70px;
 }
 
+/* briefly light up the heading the page scrolled to (class set by Html.tsx -
+   :target can't be used, the SPA mounts the heading after fragment navigation) */
+@media (prefers-reduced-motion: no-preference) {
+  .anchor-flash {
+    animation: anchor-flash 2s ease-out 0.55s backwards;
+    border-radius: 6px;
+  }
+
+  @keyframes anchor-flash {
+    from {
+      background-color: color-mix(in srgb, var(--accent) 22%, transparent);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    to {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
 a,
 a:visited {
   color: var(--link-color);

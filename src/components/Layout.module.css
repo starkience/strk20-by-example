@@ -20,6 +20,13 @@
   overflow-y: auto;
   overflow-x: auto;
 }
+
+/* smooth in-page anchor jumps (search deep-links animate via scrollIntoView) */
+@media (prefers-reduced-motion: no-preference) {
+  .main {
+    scroll-behavior: smooth;
+  }
+}
 .children {
   display: flex;
   flex-direction: column;
