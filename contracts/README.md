@@ -14,7 +14,7 @@ These contracts are adapted from the
 | `src/helpers/privacy-invoke/EchoHelper.cairo` | `packages/privacy/src/tests/mock_invoke_returns.cairo` |
 | `src/helpers/swap-helper/SwapHelper.cairo` | `packages/privacy/src/test_contracts/mock_swap_executor.cairo` |
 | `src/helpers/swap-helper/MockAmm.cairo` | `packages/privacy/src/test_contracts/mock_amm.cairo` |
-| `src/helpers/vesu-lending-helper/VesuLendingHelper.cairo` | `packages/vesu_lending_helper/src/vesu_lending_helper.cairo` |
+| `src/helpers/vesu-lending-helper/VesuLendingHelper.cairo` | `packages/vesu_lending_anonymizer/src/vesu_lending_anonymizer.cairo` |
 | `src/helpers/escrow/Escrow.cairo` | `packages/escrow/src/escrow.cairo` |
 
 Adaptations are limited to: trimming module-level doc comments that live in the

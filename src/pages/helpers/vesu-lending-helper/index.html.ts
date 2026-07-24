@@ -39,7 +39,7 @@ calls <code>withdraw</code> and the returned assets land in an open note.</li>
 </ul>
 <p>Your position in the vault is itself a private note holding vTokens - the yield
 accrues to a position nobody can attribute to you.</p>
-<pre><code class="language-cairo"><span class="hljs-comment">// Adapted from starknet-privacy packages/vesu_lending_helper/src/vesu_lending_helper.cairo</span>
+<pre><code class="language-cairo"><span class="hljs-comment">// Adapted from starknet-privacy packages/vesu_lending_anonymizer/src/vesu_lending_anonymizer.cairo</span>
 <span class="hljs-comment">// (Apache-2.0, StarkWare)</span>
 <span class="hljs-keyword">use</span> privacy::objects::OpenNoteDeposit;
 <span class="hljs-keyword">use</span> starknet::ContractAddress;

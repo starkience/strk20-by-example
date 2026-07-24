@@ -1,4 +1,4 @@
-// Adapted from starknet-privacy packages/vesu_lending_helper/src/vesu_lending_helper.cairo
+// Adapted from starknet-privacy packages/vesu_lending_anonymizer/src/vesu_lending_anonymizer.cairo
 // (Apache-2.0, StarkWare)
 use privacy::objects::OpenNoteDeposit;
 use starknet::ContractAddress;
