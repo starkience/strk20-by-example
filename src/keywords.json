@@ -211,6 +211,16 @@
     "prover",
     "strk20"
   ],
+  "/app/strk20-tip-jar": [
+    "tip jar",
+    "private transfer",
+    "shield",
+    "wallet api",
+    "existing app",
+    "unlinkability",
+    "private swap",
+    "agent skill"
+  ],
   "/app/anonymous-airdrop": [
     "airdrop",
     "anonymous airdrop"

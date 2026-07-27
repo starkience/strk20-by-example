@@ -56,7 +56,8 @@
     "/starknet-wallet-api/starknet-js",
     "/starknet-wallet-api/overview",
     "/overview",
-    "/builder-privacy-overview"
+    "/builder-privacy-overview",
+    "/app/strk20-tip-jar"
   ],
   "WalletAccountV6": [
     "/starknet-wallet-api/starknet-start-hook",
@@ -89,10 +90,12 @@
     "/builder-privacy-overview"
   ],
   "shield": [
-    "/starknet-wallet-api/overview"
+    "/starknet-wallet-api/overview",
+    "/app/strk20-tip-jar"
   ],
   "private transfer": [
-    "/starknet-wallet-api/overview"
+    "/starknet-wallet-api/overview",
+    "/app/strk20-tip-jar"
   ],
   "withdraw": [
     "/starknet-wallet-api/overview",
@@ -386,6 +389,21 @@
   ],
   "prover": [
     "/builder-privacy-overview"
+  ],
+  "tip jar": [
+    "/app/strk20-tip-jar"
+  ],
+  "existing app": [
+    "/app/strk20-tip-jar"
+  ],
+  "unlinkability": [
+    "/app/strk20-tip-jar"
+  ],
+  "private swap": [
+    "/app/strk20-tip-jar"
+  ],
+  "agent skill": [
+    "/app/strk20-tip-jar"
   ],
   "airdrop": [
     "/app/anonymous-airdrop"

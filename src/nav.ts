@@ -134,6 +134,10 @@ export const APP_ROUTES: Route[] = [
     path: "anonymous-airdrop",
     title: "Anonymous Airdrop",
   },
+  {
+    path: "strk20-tip-jar",
+    title: "Tip Jar",
+  },
 ]
 
 function prefixRoutes(prefix: string, routes: Route[]): Route[] {

@@ -1,5 +1,6 @@
 import component_actions_and_proofs from "./pages/actions-and-proofs"
 import component_app_anonymous_airdrop from "./pages/app/anonymous-airdrop"
+import component_app_strk20_tip_jar from "./pages/app/strk20-tip-jar"
 import component_builder_privacy_overview from "./pages/builder-privacy-overview"
 import component_channels_and_subchannels from "./pages/channels-and-subchannels"
 import component_compliance from "./pages/compliance"
@@ -51,6 +52,10 @@ const routes: Route[] = [
   {
     path: "/app/anonymous-airdrop",
     component: component_app_anonymous_airdrop,
+  },
+  {
+    path: "/app/strk20-tip-jar",
+    component: component_app_strk20_tip_jar,
   },
   {
     path: "/builder-privacy-overview",
