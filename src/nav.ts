@@ -131,6 +131,10 @@ export const HELPER_ROUTES: Route[] = [
 
 export const APP_ROUTES: Route[] = [
   {
+    path: "tip-jar",
+    title: "Tip Jar",
+  },
+  {
     path: "anonymous-airdrop",
     title: "Anonymous Airdrop",
   },
