@@ -19,90 +19,85 @@ export const keywords = [
 
 export const codes = []
 
-const html = `<p>Most privacy examples start from an empty directory. This one starts from an
-app that is <strong>already deployed and transacting on Starknet mainnet</strong> — an
-ordinary tip jar — and adds a private path beside the public one.</p>
-<p>That is the case worth showing. <strong>You can add privacy to an app with existing
-users, liquidity, and activity</strong> — nothing migrates, and the deployed contract
-is never touched.</p>
-<p><strong><a href="https://app-chi-three-39.vercel.app">Live demo</a></strong> ·
-<strong><a href="https://github.com/starkience/strk20-tipjar-example">Repository</a></strong> ·
-<strong><a href="https://github.com/starkience/strk20-tipjar-example/blob/main/TUTORIAL.md">Full tutorial</a></strong></p>
-<h2 id="the-two-paths">The two paths</h2>
-<p>A tip jar has one on-chain action: tip the creator. The public path calls a
-<code>TipJar</code> contract, which forwards the token and emits a <code>Tipped</code> event — so who
-paid whom, how much, and when are permanently visible.</p>
-<p>The private path calls no contract at all:</p>
+const html = `<p>The <strong>Tip Jar</strong> is a worked example of the
+<a href="/starknet-wallet-api/overview">Starknet Wallet API</a> route applied to an app that
+already exists. It starts as an ordinary public tip jar deployed on Starknet
+mainnet, then gains a private tipping path beside the public one. You can <strong>add
+privacy to an app with existing users, liquidity, and activity</strong>, which is the
+key advantage of STRK20 over building a separate private app.</p>
+<p>Use it as a reference when you have a live app and want to see which files
+change. The deployed contract is not one of them. The app itself runs at
+<a href="https://app-chi-three-39.vercel.app">app-chi-three-39.vercel.app</a>.</p>
+<h2 id="what-the-two-paths-look-like">What the two paths look like</h2>
+<p>A tip jar has one onchain action: tip the creator.</p>
+<p>The <strong>public path</strong> calls a <code>TipJar</code> contract, which forwards the token and emits
+a <code>Tipped</code> event. Who paid whom, how much, and when are permanently visible.</p>
+<p>The <strong>private path</strong> calls no contract at all:</p>
 <ol>
-<li>The tipper <strong>shields</strong> tokens into the pool — a public deposit, made earlier
-and on its own.</li>
-<li>The note <strong>matures</strong> (~10 blocks).</li>
-<li>Optionally, a <strong>private swap</strong> turns any shielded token into STRK inside the
-pool.</li>
-<li>The tipper sends a <strong>private transfer</strong> to the creator — no public leg.</li>
+<li><strong>Shield</strong> - the tipper deposits tokens into the pool, earlier and on its own.</li>
+<li><strong>Wait</strong> - the resulting note matures after roughly 10 blocks.</li>
+<li><strong>Swap</strong> (optional) - a private swap turns any shielded token into STRK inside
+the pool.</li>
+<li><strong>Private transfer</strong> - the tipper pays the creator, with no public leg.</li>
 </ol>
 <p>Both paths deliver the same value to the creator. The private one leaves no
-public link between the two of them.</p>
-<h2 id="what-it-takes">What it takes</h2>
-<p>The whole privacy feature is one call:</p>
+public link between the two.</p>
+<h2 id="how-it-works-in-code">How it works in code</h2>
+<p>The private tip is a single action handed to the wallet:</p>
 <pre><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-attr">actions</span>: <span class="hljs-title class_">STRK20</span>_ACTION[] = [
   { <span class="hljs-attr">type</span>: <span class="hljs-string">"transfer"</span>, <span class="hljs-attr">token</span>: strkAddress, amount, recipient },
 ]
 <span class="hljs-keyword">const</span> { transaction_hash } = <span class="hljs-keyword">await</span> account.<span class="hljs-title function_">strk20InvokeTransaction</span>(actions)
-</code></pre><p>No contract call, no event, no approve. The wallet holds the keys, finds the
-notes, proves, and submits. The app describes intent and nothing else.</p>
+</code></pre><p>There is no contract call, no event, and no approval step. The wallet holds the
+keys, discovers the notes, generates the proof, and submits.</p>
 <p>Shielding is the same call with a different action:</p>
-<pre><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-attr">actions</span>: <span class="hljs-title class_">STRK20</span>_ACTION[] = [
-  { <span class="hljs-attr">type</span>: <span class="hljs-string">"deposit"</span>, <span class="hljs-attr">token</span>: tokenAddress, amount },
-]
-</code></pre><p>The <code>TipJar</code> contract is never modified — and the repository makes that
-checkable rather than asserted. Two tags bracket the integration:</p>
-<pre><code class="language-sh">git diff --<span class="hljs-built_in">stat</span> v1-public v2-private -- contracts/src/tipjar.cairo   <span class="hljs-comment"># empty</span>
-</code></pre><h2 id="shield-separately-on-purpose">Shield separately, on purpose</h2>
-<p>The single most important design decision here, and the easiest to get wrong.</p>
-<p>Bundling the shield into the same transaction as the private transfer is one
-click and one fee — and it defeats the purpose. A deposit is a <strong>public leg that
-names the tipper</strong>, so an observer who sees both in one transaction correlates
-the two ends trivially. The pool fee gets paid and the link survives.</p>
-<p>Shielding <strong>earlier, as its own transaction</strong>, is what actually breaks the link,
-because the later transfer carries no public leg at all. The extra transaction,
-the extra pool fee and the maturity wait are the price of unlinkability, not
-overhead to optimise away.</p>
-<h2 id="designing-the-ux">Designing the UX</h2>
-<p>The code is the easy part. A private flow has properties a public one does not,
-and each is something the user has to be able to see:</p>
+<pre><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-attr">actions</span>: <span class="hljs-title class_">STRK20</span>_ACTION[] = [{ <span class="hljs-attr">type</span>: <span class="hljs-string">"deposit"</span>, <span class="hljs-attr">token</span>: tokenAddress, amount }]
+</code></pre><p>Capability detection reads no private state:</p>
+<pre><code class="language-ts"><span class="hljs-keyword">const</span> versions = <span class="hljs-keyword">await</span> walletV6.<span class="hljs-title function_">supportedWalletApi</span>(wallet)
+<span class="hljs-keyword">const</span> supported = versions.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">v</span>) =&gt;</span> <span class="hljs-title function_">compareVersions</span>(v, <span class="hljs-string">"0.10.3"</span>) &gt;= <span class="hljs-number">0</span>)
+</code></pre><h2 id="shield-separately-from-the-transfer">Shield separately from the transfer</h2>
+<p>Bundling the shield into the same transaction as the private transfer costs one
+click and one fee instead of two, and it defeats the purpose. A deposit is a
+public leg that names the tipper, so an observer who sees both in one
+transaction correlates the two ends.</p>
+<p>Shielding as its own earlier transaction is what breaks the link, because the
+later transfer carries no public leg at all. The extra transaction, the extra
+pool fee, and the maturity wait are the cost of unlinkability.</p>
+<p>A flow may still bundle them for UX reasons, but state what that costs so the
+choice is deliberate.</p>
+<h2 id="what-to-keep-in-mind">What to keep in mind</h2>
 <ul>
-<li><strong>A shield is two prompts.</strong> The ERC-20 <code>approve</code> must land on-chain before
-the deposit can be proven against it, so the wallet asks twice on a token&#39;s
-first shield. Say so before they click.</li>
-<li><strong>Notes mature.</strong> Roughly 10 blocks, after a shield <strong>and</strong> after a swap,
-since a swap credits a new note too. Show a countdown rather than letting a
-button fail silently.</li>
+<li><strong>A first shield is two prompts.</strong> The ERC-20 <code>approve</code> must land onchain
+before the deposit can be proven against it, so the wallet asks twice on a
+token&#39;s first shield. Tell the user in advance.</li>
+<li><strong>Notes mature before they can be spent.</strong> Roughly 10 blocks, after a shield
+and after a swap, since a swap credits a new note too. Show the wait rather
+than letting an action fail.</li>
 <li><strong>A flat pool fee applies per operation.</strong> Read it with <code>get_fee_amount</code>
-rather than hardcoding it, and have any "MAX" shortcut reserve it — otherwise
-the transaction fails after the user has already signed.</li>
-<li><strong>Private actions emit no events.</strong> There is nothing for an activity feed to
-display, so say that explicitly; silence should not read as failure.</li>
+rather than hardcoding it, and reserve it in any "max amount" shortcut, or the
+operation fails after the user has signed.</li>
+<li><strong>Private actions emit no events.</strong> An activity feed has nothing to display,
+so say so explicitly rather than leaving the silence unexplained.</li>
 <li><strong>Read private state only on explicit user action.</strong> Detect capability with
-<code>supportedWalletApi</code>, never with a balance call — every read is a consent
-prompt, and an app that asks constantly trains people to click through
-prompts they should be reading.</li>
+<code>supportedWalletApi</code>, not with a balance call. Every balance read is a consent
+prompt.</li>
+<li><strong>The recipient still sees the sender.</strong> Private transfers run over a
+directional channel, so the creator knows who paid them. No third party does.</li>
 </ul>
-<h2 id="verified-on-mainnet">Verified on mainnet</h2>
-<p>The creator&#39;s wallet received four private transfers totalling <strong>42 STRK</strong>,
-while the jar&#39;s public counter stayed at <strong>3 tips / 3 STRK</strong> and its event wall
-never moved.</p>
-<p>One honest detail: the recipient <strong>can</strong> see who paid them, because private
-transfers run over a directional channel — which is exactly what a tip jar
-wants. What is hidden is that no third party can.</p>
+<h2 id="verified-onchain">Verified onchain</h2>
+<p>The creator&#39;s wallet received four private transfers totalling 42 STRK while the
+jar&#39;s public counter stayed at 3 tips and 3 STRK. The <code>TipJar</code> contract was not
+modified, which the repository leaves checkable through two tags:</p>
+<pre><code class="language-sh">git diff --<span class="hljs-built_in">stat</span> v1-public v2-private -- contracts/src/tipjar.cairo
+</code></pre><p>Full walkthrough, including the integration log and deployment record:
+<a href="https://github.com/starkience/strk20-tipjar-example/blob/main/TUTORIAL.md">TUTORIAL.md</a>
+(MIT).</p>
 <h2 id="read-next">Read next</h2>
 <ul>
-<li><a href="/starknet-wallet-api/overview">Starknet Wallet API overview</a> — the route this
-app uses.</li>
-<li><a href="/starknet-wallet-api/starknet-js">starknet.js</a> — the <code>WalletAccountV6</code> wiring
-behind <code>strk20InvokeTransaction</code>.</li>
-<li><a href="/agent-skill">Agent Skill</a> — the integration in this example was planned and
-built with it.</li>
+<li><a href="/starknet-wallet-api/overview">Starknet Wallet API overview</a></li>
+<li><a href="/starknet-wallet-api/starknet-js">starknet.js</a></li>
+<li><a href="/agent-skill">Agent Skill</a></li>
+<li><a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a></li>
 </ul>
 `
 
