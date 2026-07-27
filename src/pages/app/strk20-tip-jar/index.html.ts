@@ -25,7 +25,7 @@ ordinary tip jar - and adds a private path beside the public one.</p>
 <p>That is the case worth showing: you can add privacy to an app with existing
 users, liquidity, and activity. Nothing migrates, and the deployed contract is
 never touched.</p>
-<p><a href="https://app-chi-three-39.vercel.app">Live demo</a> ·
+<p><a href="https://strk20-tipjar.vercel.app">Live demo</a> ·
 <a href="https://github.com/starkience/strk20-tipjar-example">Repository</a> ·
 <a href="https://github.com/starkience/strk20-tipjar-example/blob/main/TUTORIAL.md">Tutorial</a></p>
 <h2>The two paths</h2>

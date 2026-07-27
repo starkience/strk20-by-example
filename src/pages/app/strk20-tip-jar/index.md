@@ -25,7 +25,7 @@ That is the case worth showing: you can add privacy to an app with existing
 users, liquidity, and activity. Nothing migrates, and the deployed contract is
 never touched.
 
-[Live demo](https://app-chi-three-39.vercel.app) ·
+[Live demo](https://strk20-tipjar.vercel.app) ·
 [Repository](https://github.com/starkience/strk20-tipjar-example) ·
 [Tutorial](https://github.com/starkience/strk20-tipjar-example/blob/main/TUTORIAL.md)
 
