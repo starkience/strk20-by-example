@@ -1,3 +1,4 @@
 src/pages/**/*.cairo
 src/search.json
+src/search-docs.json
 src/keywords.json
