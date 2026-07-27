@@ -26,7 +26,7 @@ key advantage of STRK20 over building a separate private app.
 
 Use it as a reference when you have a live app and want to see which files
 change. The deployed contract is not one of them. The app itself runs at
-[app-chi-three-39.vercel.app](https://app-chi-three-39.vercel.app).
+[strk20-tipjar.vercel.app](https://strk20-tipjar.vercel.app).
 
 ## What the two paths look like
 

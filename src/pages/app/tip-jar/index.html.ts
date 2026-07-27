@@ -27,7 +27,7 @@ privacy to an app with existing users, liquidity, and activity</strong>, which i
 key advantage of STRK20 over building a separate private app.</p>
 <p>Use it as a reference when you have a live app and want to see which files
 change. The deployed contract is not one of them. The app itself runs at
-<a href="https://app-chi-three-39.vercel.app">app-chi-three-39.vercel.app</a>.</p>
+<a href="https://strk20-tipjar.vercel.app">strk20-tipjar.vercel.app</a>.</p>
 <h2 id="what-the-two-paths-look-like">What the two paths look like</h2>
 <p>A tip jar has one onchain action: tip the creator.</p>
 <p>The <strong>public path</strong> calls a <code>TipJar</code> contract, which forwards the token and emits
