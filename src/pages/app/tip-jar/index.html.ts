@@ -65,26 +65,6 @@ later transfer carries no public leg at all. The extra transaction, the extra
 pool fee, and the maturity wait are the cost of unlinkability.</p>
 <p>A flow may still bundle them for UX reasons, but state what that costs so the
 choice is deliberate.</p>
-<h2 id="what-to-keep-in-mind">What to keep in mind</h2>
-<p>A private flow behaves a little differently from a public one. A few things to
-reflect in the UI:</p>
-<ul>
-<li><strong>Fresh notes mature in about 10 blocks</strong> — after a shield or a swap. Show the
-short wait rather than letting the next action fail.</li>
-<li><strong>Each private operation pays a flat pool fee.</strong> Read it from the pool with
-<code>get_fee_amount</code> rather than hardcoding it, and reserve it in any "max"
-shortcut so nothing fails after the user has signed.</li>
-<li><strong>Private actions emit no events</strong> — which is the privacy working. An activity
-feed has nothing to show, so say so rather than leaving the silence
-unexplained.</li>
-<li><strong>Read private balances only when the user asks for them.</strong> Detect capability
-with <code>supportedWalletApi</code>; a balance read is a consent prompt, so keep it
-behind an explicit action.</li>
-<li><strong>Sender and recipient know each other; no one else does.</strong> A private transfer
-runs over a channel between the two parties, so the creator sees who tipped
-them — exactly what a tip jar wants — while no third party can link them or see
-the amount.</li>
-</ul>
 <h2 id="verified-onchain">Verified onchain</h2>
 <p>The creator&#39;s wallet received four private transfers totalling 42 STRK while the
 jar&#39;s public counter stayed at 3 tips and 3 STRK. The <code>TipJar</code> contract was not

@@ -87,27 +87,6 @@ pool fee, and the maturity wait are the cost of unlinkability.
 A flow may still bundle them for UX reasons, but state what that costs so the
 choice is deliberate.
 
-## What to keep in mind
-
-A private flow behaves a little differently from a public one. A few things to
-reflect in the UI:
-
-- **Fresh notes mature in about 10 blocks** — after a shield or a swap. Show the
-  short wait rather than letting the next action fail.
-- **Each private operation pays a flat pool fee.** Read it from the pool with
-  `get_fee_amount` rather than hardcoding it, and reserve it in any "max"
-  shortcut so nothing fails after the user has signed.
-- **Private actions emit no events** — which is the privacy working. An activity
-  feed has nothing to show, so say so rather than leaving the silence
-  unexplained.
-- **Read private balances only when the user asks for them.** Detect capability
-  with `supportedWalletApi`; a balance read is a consent prompt, so keep it
-  behind an explicit action.
-- **Sender and recipient know each other; no one else does.** A private transfer
-  runs over a channel between the two parties, so the creator sees who tipped
-  them — exactly what a tip jar wants — while no third party can link them or see
-  the amount.
-
 ## Verified onchain
 
 The creator's wallet received four private transfers totalling 42 STRK while the
