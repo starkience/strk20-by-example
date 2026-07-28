@@ -66,23 +66,24 @@ pool fee, and the maturity wait are the cost of unlinkability.</p>
 <p>A flow may still bundle them for UX reasons, but state what that costs so the
 choice is deliberate.</p>
 <h2 id="what-to-keep-in-mind">What to keep in mind</h2>
+<p>A private flow behaves a little differently from a public one. A few things to
+reflect in the UI:</p>
 <ul>
-<li><strong>A first shield is two prompts.</strong> The ERC-20 <code>approve</code> must land onchain
-before the deposit can be proven against it, so the wallet asks twice on a
-token&#39;s first shield. Tell the user in advance.</li>
-<li><strong>Notes mature before they can be spent.</strong> Roughly 10 blocks, after a shield
-and after a swap, since a swap credits a new note too. Show the wait rather
-than letting an action fail.</li>
-<li><strong>A flat pool fee applies per operation.</strong> Read it with <code>get_fee_amount</code>
-rather than hardcoding it, and reserve it in any "max amount" shortcut, or the
-operation fails after the user has signed.</li>
-<li><strong>Private actions emit no events.</strong> An activity feed has nothing to display,
-so say so explicitly rather than leaving the silence unexplained.</li>
-<li><strong>Read private state only on explicit user action.</strong> Detect capability with
-<code>supportedWalletApi</code>, not with a balance call. Every balance read is a consent
-prompt.</li>
-<li><strong>The recipient still sees the sender.</strong> Private transfers run over a
-directional channel, so the creator knows who paid them. No third party does.</li>
+<li><strong>Fresh notes mature in about 10 blocks</strong> — after a shield or a swap. Show the
+short wait rather than letting the next action fail.</li>
+<li><strong>Each private operation pays a flat pool fee.</strong> Read it from the pool with
+<code>get_fee_amount</code> rather than hardcoding it, and reserve it in any "max"
+shortcut so nothing fails after the user has signed.</li>
+<li><strong>Private actions emit no events</strong> — which is the privacy working. An activity
+feed has nothing to show, so say so rather than leaving the silence
+unexplained.</li>
+<li><strong>Read private balances only when the user asks for them.</strong> Detect capability
+with <code>supportedWalletApi</code>; a balance read is a consent prompt, so keep it
+behind an explicit action.</li>
+<li><strong>Sender and recipient know each other; no one else does.</strong> A private transfer
+runs over a channel between the two parties, so the creator sees who tipped
+them — exactly what a tip jar wants — while no third party can link them or see
+the amount.</li>
 </ul>
 <h2 id="verified-onchain">Verified onchain</h2>
 <p>The creator&#39;s wallet received four private transfers totalling 42 STRK while the

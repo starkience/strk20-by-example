@@ -89,22 +89,24 @@ choice is deliberate.
 
 ## What to keep in mind
 
-- **A first shield is two prompts.** The ERC-20 `approve` must land onchain
-  before the deposit can be proven against it, so the wallet asks twice on a
-  token's first shield. Tell the user in advance.
-- **Notes mature before they can be spent.** Roughly 10 blocks, after a shield
-  and after a swap, since a swap credits a new note too. Show the wait rather
-  than letting an action fail.
-- **A flat pool fee applies per operation.** Read it with `get_fee_amount`
-  rather than hardcoding it, and reserve it in any "max amount" shortcut, or the
-  operation fails after the user has signed.
-- **Private actions emit no events.** An activity feed has nothing to display,
-  so say so explicitly rather than leaving the silence unexplained.
-- **Read private state only on explicit user action.** Detect capability with
-  `supportedWalletApi`, not with a balance call. Every balance read is a consent
-  prompt.
-- **The recipient still sees the sender.** Private transfers run over a
-  directional channel, so the creator knows who paid them. No third party does.
+A private flow behaves a little differently from a public one. A few things to
+reflect in the UI:
+
+- **Fresh notes mature in about 10 blocks** — after a shield or a swap. Show the
+  short wait rather than letting the next action fail.
+- **Each private operation pays a flat pool fee.** Read it from the pool with
+  `get_fee_amount` rather than hardcoding it, and reserve it in any "max"
+  shortcut so nothing fails after the user has signed.
+- **Private actions emit no events** — which is the privacy working. An activity
+  feed has nothing to show, so say so rather than leaving the silence
+  unexplained.
+- **Read private balances only when the user asks for them.** Detect capability
+  with `supportedWalletApi`; a balance read is a consent prompt, so keep it
+  behind an explicit action.
+- **Sender and recipient know each other; no one else does.** A private transfer
+  runs over a channel between the two parties, so the creator sees who tipped
+  them — exactly what a tip jar wants — while no third party can link them or see
+  the amount.
 
 ## Verified onchain
 
