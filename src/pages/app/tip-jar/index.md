@@ -75,17 +75,14 @@ const supported = versions.some((v) => compareVersions(v, "0.10.3") >= 0)
 
 ## Shield separately from the transfer
 
-Bundling the shield into the same transaction as the private transfer costs one
-click and one fee instead of two, and it defeats the purpose. A deposit is a
-public leg that names the tipper, so an observer who sees both in one
-transaction correlates the two ends.
+Shielding is its own step, done ahead of time — and that is what makes the tip
+unlinkable. A deposit into the pool is public and names the depositor, while a
+private transfer has no public leg at all. Because the two are separate
+transactions, nothing on-chain ties the deposit to the payment, and no observer
+can connect the tipper to the creator.
 
-Shielding as its own earlier transaction is what breaks the link, because the
-later transfer carries no public leg at all. The extra transaction, the extra
-pool fee, and the maturity wait are the cost of unlinkability.
-
-A flow may still bundle them for UX reasons, but state what that costs so the
-choice is deliberate.
+Shield ahead of time, tip later. The note matures in the meantime, and the
+transfer that follows leaves no public trace.
 
 ## Verified onchain
 

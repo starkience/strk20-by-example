@@ -56,15 +56,13 @@ keys, discovers the notes, generates the proof, and submits.</p>
 <pre><code class="language-ts"><span class="hljs-keyword">const</span> versions = <span class="hljs-keyword">await</span> walletV6.<span class="hljs-title function_">supportedWalletApi</span>(wallet)
 <span class="hljs-keyword">const</span> supported = versions.<span class="hljs-title function_">some</span>(<span class="hljs-function">(<span class="hljs-params">v</span>) =&gt;</span> <span class="hljs-title function_">compareVersions</span>(v, <span class="hljs-string">"0.10.3"</span>) &gt;= <span class="hljs-number">0</span>)
 </code></pre><h2 id="shield-separately-from-the-transfer">Shield separately from the transfer</h2>
-<p>Bundling the shield into the same transaction as the private transfer costs one
-click and one fee instead of two, and it defeats the purpose. A deposit is a
-public leg that names the tipper, so an observer who sees both in one
-transaction correlates the two ends.</p>
-<p>Shielding as its own earlier transaction is what breaks the link, because the
-later transfer carries no public leg at all. The extra transaction, the extra
-pool fee, and the maturity wait are the cost of unlinkability.</p>
-<p>A flow may still bundle them for UX reasons, but state what that costs so the
-choice is deliberate.</p>
+<p>Shielding is its own step, done ahead of time — and that is what makes the tip
+unlinkable. A deposit into the pool is public and names the depositor, while a
+private transfer has no public leg at all. Because the two are separate
+transactions, nothing on-chain ties the deposit to the payment, and no observer
+can connect the tipper to the creator.</p>
+<p>Shield ahead of time, tip later. The note matures in the meantime, and the
+transfer that follows leaves no public trace.</p>
 <h2 id="verified-onchain">Verified onchain</h2>
 <p>The creator&#39;s wallet received four private transfers totalling 42 STRK while the
 jar&#39;s public counter stayed at 3 tips and 3 STRK. The <code>TipJar</code> contract was not
