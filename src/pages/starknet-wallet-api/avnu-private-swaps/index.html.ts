@@ -39,7 +39,9 @@ it cannot shield for you.</li>
   <span class="hljs-attr">feeMode</span>: { <span class="hljs-attr">poolFeeToken</span>: quote.<span class="hljs-property">sellTokenAddress</span> }, <span class="hljs-comment">// tip?: "slow" | "normal" | "fast", defaults to "normal"</span>
   prover,
 })
-</code></pre><p>AVNU&#39;s paymaster relays the transaction, so the submitting address is not the
+</code></pre><p><code>PRIVACY_POOL_ADDRESS</code> targets <strong>mainnet</strong>; for Sepolia testing, AVNU also
+exports <code>SEPOLIA_PRIVACY_POOL_ADDRESS</code>.</p>
+<p>AVNU&#39;s paymaster relays the transaction, so the submitting address is not the
 user&#39;s.</p>
 <p>If a paymaster API key is required (the <code>sponsored_private</code> fee mode), keep
 that call server-side — passing the key from a browser leaks it. Browser

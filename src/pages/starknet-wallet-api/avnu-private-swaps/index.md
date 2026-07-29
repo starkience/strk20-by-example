@@ -43,6 +43,9 @@ const { transactionHash } = await executePrivateSwap({
 })
 ```
 
+`PRIVACY_POOL_ADDRESS` targets **mainnet**; for Sepolia testing, AVNU also
+exports `SEPOLIA_PRIVACY_POOL_ADDRESS`.
+
 AVNU's paymaster relays the transaction, so the submitting address is not the
 user's.
 
