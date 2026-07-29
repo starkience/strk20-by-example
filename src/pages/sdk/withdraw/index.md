@@ -43,7 +43,8 @@ await provider.waitForTransaction(tx.transaction_hash)
   pool is a single withdraw.
 - **Note maturity applies to the inputs.** A note created fewer than 10
   blocks ago cannot be spent; the SDK will happily build the proof, but the
-  contract rejects it with `Note not mature`. Proving against
+  transaction fails. Maturity is a client-side rule — compare `note.created`
+  against the current block. Proving against
   `currentBlock - 10` guarantees every note in your registry has matured at
   the proof base.
 - The change (`70n` here) stays in the pool as a fresh private note via

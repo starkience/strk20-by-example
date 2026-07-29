@@ -42,8 +42,9 @@ back off from the head:
    to `proof_validity_blocks` old (currently 450), so ten blocks back is a
    comfortable, still-fresh margin.
 
-Omitting it works _most_ of the time - with intermittent `Note not mature`
-failures and worse proving-service cache hits. Just always pass it. And when
+Omitting it works _most_ of the time - with intermittent failures on
+insufficiently mature notes and worse proving-service cache hits. Just always
+pass it. And when
 chaining transactions (approve then deposit), re-fetch it after each
 `waitForTransaction`.
 
@@ -88,12 +89,12 @@ in the [Cairo CoreStars Telegram](https://t.me/sncorestars).
 
 ## Common failures
 
-| Symptom                             | Cause                           | Fix                                 |
-| ----------------------------------- | ------------------------------- | ----------------------------------- |
-| `Note not mature`                   | `provingBlockId` not backed off | Use `currentBlock - 10`             |
-| `Cannot mix BigInt and other types` | Missing `tip`                   | Add `tip: 0n`                       |
-| Revert with `INVALID_PROOF_FACTS`   | Passed `proofFacts: []`         | Conditional spread                  |
-| `INVALID_NONCE` on retry            | Stale cached pool nonce         | `invalidateProofNonceCache()` first |
+| Symptom                                | Cause                           | Fix                                 |
+| -------------------------------------- | ------------------------------- | ----------------------------------- |
+| Spend fails on a recently created note | `provingBlockId` not backed off | Use `currentBlock - 10`             |
+| `Cannot mix BigInt and other types`    | Missing `tip`                   | Add `tip: 0n`                       |
+| Revert with `INVALID_PROOF_FACTS`      | Passed `proofFacts: []`         | Conditional spread                  |
+| `INVALID_NONCE` on retry               | Stale cached pool nonce         | `invalidateProofNonceCache()` first |
 
 This is the last page of the series - head back to
 [Getting Started](/sdk/getting-started) to revisit the wiring.

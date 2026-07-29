@@ -59,8 +59,10 @@ to deposit-and-transfer on the next page.</li>
 <li>Amounts are <strong>bigint literals</strong> (<code>100n</code>) in the token&#39;s smallest unit.</li>
 <li><code>autoSetup: true</code> opens your self-channel and the token subchannel if they
 do not exist yet - a first deposit needs both.</li>
-<li>The new note <strong>matures 10 blocks after creation</strong>. Spending it earlier
-produces a proof the contract rejects with <code>Note not mature</code>.</li>
+<li>The new note <strong>matures 10 blocks after creation</strong>. Maturity is enforced
+client-side: check <code>note.created</code> against the current block before spending.
+Spending earlier produces a proof built against a state where the note is not
+yet spendable, and the transaction fails.</li>
 <li><strong>Every deposit is screened.</strong> FPI (the screening provider) screens the
 depositing address and signs each deposit, and the pool verifies that
 signature onchain - enforcement is part of the protocol since the v0.14.3

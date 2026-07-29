@@ -50,7 +50,8 @@ It can be anyone, not just yourself - paying a merchant directly from the
 pool is a single withdraw.</li>
 <li><strong>Note maturity applies to the inputs.</strong> A note created fewer than 10
 blocks ago cannot be spent; the SDK will happily build the proof, but the
-contract rejects it with <code>Note not mature</code>. Proving against
+transaction fails. Maturity is a client-side rule — compare <code>note.created</code>
+against the current block. Proving against
 <code>currentBlock - 10</code> guarantees every note in your registry has matured at
 the proof base.</li>
 <li>The change (<code>70n</code> here) stays in the pool as a fresh private note via

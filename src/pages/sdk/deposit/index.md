@@ -59,8 +59,10 @@ await provider.waitForTransaction(tx.transaction_hash)
 - Amounts are **bigint literals** (`100n`) in the token's smallest unit.
 - `autoSetup: true` opens your self-channel and the token subchannel if they
   do not exist yet - a first deposit needs both.
-- The new note **matures 10 blocks after creation**. Spending it earlier
-  produces a proof the contract rejects with `Note not mature`.
+- The new note **matures 10 blocks after creation**. Maturity is enforced
+  client-side: check `note.created` against the current block before spending.
+  Spending earlier produces a proof built against a state where the note is not
+  yet spendable, and the transaction fails.
 - **Every deposit is screened.** FPI (the screening provider) screens the
   depositing address and signs each deposit, and the pool verifies that
   signature onchain - enforcement is part of the protocol since the v0.14.3

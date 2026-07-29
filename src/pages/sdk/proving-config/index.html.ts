@@ -45,8 +45,9 @@ an L2 reorg before the transaction lands. The contract allows proofs up
 to <code>proof_validity_blocks</code> old (currently 450), so ten blocks back is a
 comfortable, still-fresh margin.</li>
 </ol>
-<p>Omitting it works <em>most</em> of the time - with intermittent <code>Note not mature</code>
-failures and worse proving-service cache hits. Just always pass it. And when
+<p>Omitting it works <em>most</em> of the time - with intermittent failures on
+insufficiently mature notes and worse proving-service cache hits. Just always
+pass it. And when
 chaining transactions (approve then deposit), re-fetch it after each
 <code>waitForTransaction</code>.</p>
 <h2 id="proofdetails---conditional-never-empty"><code>proofDetails</code> - conditional, never empty</h2>
@@ -85,7 +86,7 @@ in the <a href="https://t.me/sncorestars">Cairo CoreStars Telegram</a>.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>Note not mature</code></td>
+<td>Spend fails on a recently created note</td>
 <td><code>provingBlockId</code> not backed off</td>
 <td>Use <code>currentBlock - 10</code></td>
 </tr>
