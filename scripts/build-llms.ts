@@ -9,11 +9,10 @@
 
 import fs from "fs"
 import path from "path"
-import mustache from "mustache"
-import { parseYaml } from "./lib"
+import { parseYaml, renderPageMarkdown } from "./lib"
 import { ROUTES_BY_CATEGORY } from "../src/nav"
 
-const { writeFile, mkdir, readFile, readdir } = fs.promises
+const { writeFile, mkdir } = fs.promises
 
 const SITE = "https://strk20-by-example.org"
 const PAGES_DIR = path.join(__dirname, "..", "src/pages")
@@ -38,22 +37,6 @@ interface Section {
   entries: Entry[]
 }
 
-// Load the sibling .cairo sources for a page, keyed by basename - the same
-// map md-to-react.ts builds. Without this the {{{ContractName}}} placeholders
-// survive into the .md mirrors and agents get pages with no contract source.
-async function loadCodes(dir: string): Promise<Record<string, string>> {
-  const codes: Record<string, string> = {}
-  if (!fs.existsSync(dir)) {
-    return codes
-  }
-  for (const file of await readdir(dir)) {
-    if (file.endsWith(".cairo")) {
-      codes[file.replace(/\.cairo$/, "")] = (await readFile(path.join(dir, file))).toString()
-    }
-  }
-  return codes
-}
-
 async function loadEntry(route: string, navTitle: string): Promise<Entry | null> {
   const parts = route.split("/").filter(Boolean)
   const dir = path.join(PAGES_DIR, ...parts)
@@ -64,27 +47,12 @@ async function loadEntry(route: string, navTitle: string): Promise<Entry | null>
   }
 
   const { metadata, content } = await parseYaml(mdPath)
-  const codes = await loadCodes(dir)
-
-  // Fail loudly rather than letting Mustache render an unknown key as "",
-  // which would silently drop a contract from the agent-facing output.
-  // Note: scripts/tsconfig.json sets lib ES2015, so no String.matchAll here.
-  const placeholder = /\{\{\{(\w+)\}\}\}/g
-  let match: RegExpExecArray | null
-  while ((match = placeholder.exec(content)) !== null) {
-    const name = match[1]
-    if (!(name in codes)) {
-      throw new Error(
-        `build-llms: ${route} references {{{${name}}}} but ${name}.cairo is not in ${dir}`,
-      )
-    }
-  }
 
   return {
     title: metadata.title || navTitle,
     route,
     description: metadata.description,
-    body: mustache.render(content, codes).trim(),
+    body: (await renderPageMarkdown(dir, route, content)).trim(),
   }
 }
 

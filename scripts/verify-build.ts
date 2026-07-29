@@ -32,8 +32,12 @@ async function checkProtocolRelativeHrefs(htmlFiles: string[]) {
 }
 
 async function checkNoPlaceholders() {
+  // Includes the bundled search index: it embeds page Markdown, so an
+  // unsubstituted placeholder lands there too and makes contract source
+  // unsearchable.
   const textFiles = [
     ...(await getFiles(BUILD_DIR, /\.md$/)),
+    ...(await getFiles(path.join(BUILD_DIR, "assets"), /\.js$/)),
     path.join(BUILD_DIR, "llms.txt"),
     path.join(BUILD_DIR, "llms-full.txt"),
   ]

@@ -83,6 +83,46 @@ export async function getFiles(root: string, reg_exp: RegExp): Promise<string[]>
   return files
 }
 
+/**
+ * Render a page's Markdown, substituting {{{ContractName}}} placeholders with
+ * the sibling <ContractName>.cairo source. Every generator that reads page
+ * Markdown must go through this - skipping it ships raw placeholders to
+ * whatever consumes the output (agent .md mirrors, the search index).
+ *
+ * Throws when a placeholder has no matching .cairo, because Mustache renders
+ * an unknown key as "" and would silently drop the contract instead.
+ */
+export async function renderPageMarkdown(
+  dir: string,
+  route: string,
+  content: string
+): Promise<string> {
+  const codes: { [key: string]: string } = {}
+  if (fs.existsSync(dir)) {
+    for (const file of await fs.promises.readdir(dir)) {
+      if (file.endsWith(".cairo")) {
+        codes[file.replace(/\.cairo$/, "")] = (
+          await fs.promises.readFile(path.join(dir, file))
+        ).toString()
+      }
+    }
+  }
+
+  // lib ES2015: no String.matchAll here.
+  const placeholder = /\{\{\{(\w+)\}\}\}/g
+  let match: RegExpExecArray | null
+  while ((match = placeholder.exec(content)) !== null) {
+    const name = match[1]
+    if (!(name in codes)) {
+      throw new Error(
+        `renderPageMarkdown: ${route} references {{{${name}}}} but ${name}.cairo is not in ${dir}`
+      )
+    }
+  }
+
+  return mustache.render(content, codes)
+}
+
 // yaml
 export interface Metadata {
   title: string

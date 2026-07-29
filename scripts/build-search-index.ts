@@ -7,7 +7,7 @@
 
 import fs from "fs"
 import path from "path"
-import { parseYaml, splitSections } from "./lib"
+import { parseYaml, renderPageMarkdown, splitSections } from "./lib"
 import { ROUTES_BY_CATEGORY } from "../src/nav"
 
 const { writeFile } = fs.promises
@@ -63,7 +63,11 @@ async function loadDocs(
   const { metadata, content } = await parseYaml(mdPath)
   const title = metadata.title || navTitle
 
-  const docs = splitSections(content).map((section) => ({
+  // Substitute contract source before splitting, so Cairo API names are
+  // searchable - the whole reason code blocks stay in the body.
+  const rendered = await renderPageMarkdown(path.dirname(mdPath), route, content)
+
+  const docs = splitSections(rendered).map((section) => ({
     id: section.anchor ? `${route}#${section.anchor}` : route,
     route,
     anchor: section.anchor,
