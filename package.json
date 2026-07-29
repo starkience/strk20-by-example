@@ -9,7 +9,7 @@
     "clean": "rm -rf build",
     "prebuild": "npm run clean",
     "build": "tsc && vite build",
-    "postbuild": "npm run lint && npm run prerender && npm run llms",
+    "postbuild": "npm run lint && npm run prerender && npm run llms && npm run verify",
     "llms": "ts-node --project ./scripts/tsconfig.json scripts/build-llms.ts",
     "verify": "ts-node --project ./scripts/tsconfig.json scripts/verify-build.ts",
     "prerender": "ts-node --project ./scripts/tsconfig.json scripts/prerender.ts",
