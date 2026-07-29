@@ -34,17 +34,17 @@ failures.</p>
 </code></pre><h2 id="provingblockid---always-currentblock---10"><code>provingBlockId</code> - always <code>currentBlock - 10</code></h2>
 <pre><code class="language-typescript"><span class="hljs-keyword">const</span> provingBlockId = (<span class="hljs-keyword">await</span> provider.<span class="hljs-title function_">getBlockNumber</span>()) - <span class="hljs-number">10</span>
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> transfers.<span class="hljs-title function_">build</span>().<span class="hljs-comment">/* ... */</span>.<span class="hljs-title function_">execute</span>({ provingBlockId })
-</code></pre><p>The proof is generated against the state at <code>provingBlockId</code>. Two reasons to
+</code></pre><p>The proof is generated against the state at <code>provingBlockId</code>. Three reasons to
 back off from the head:</p>
 <ol>
 <li><strong>Note maturity</strong> - notes mature 10 blocks after creation. Proving at
 <code>currentBlock - 10</code> guarantees every unspent note in your registry has
 matured at the proof base.</li>
 <li><strong>Reorg buffer</strong> - a proof based on the chain head can be invalidated by
-an L2 reorg before the transaction lands. The contract allows proofs up
-to <code>proof_validity_blocks</code> old (default 450, ~15 min at 2s/block; it is
-governance-settable), so ten blocks back is a
-comfortable, still-fresh margin.</li>
+an L2 reorg before the transaction lands. The contract allows proofs up to
+<code>proof_validity_blocks</code> old (default 450, ~15 min at 2s/block; it is
+governance-settable), so ten blocks back is a comfortable, still-fresh
+margin.</li>
 <li><strong>Consistent state</strong> - the SDK forwards <code>provingBlockId</code> to <code>discoverNotes</code>
 and <code>discoverChannels</code>, so discovery and proving see the same block. Without
 it the two can disagree, and a note selected from a newer state can fail to

@@ -31,17 +31,17 @@ const provingBlockId = (await provider.getBlockNumber()) - 10
 const result = await transfers.build()./* ... */.execute({ provingBlockId })
 ```
 
-The proof is generated against the state at `provingBlockId`. Two reasons to
+The proof is generated against the state at `provingBlockId`. Three reasons to
 back off from the head:
 
 1. **Note maturity** - notes mature 10 blocks after creation. Proving at
    `currentBlock - 10` guarantees every unspent note in your registry has
    matured at the proof base.
 2. **Reorg buffer** - a proof based on the chain head can be invalidated by
-   an L2 reorg before the transaction lands. The contract allows proofs up
-   to `proof_validity_blocks` old (default 450, ~15 min at 2s/block; it is
-   governance-settable), so ten blocks back is a
-   comfortable, still-fresh margin.
+   an L2 reorg before the transaction lands. The contract allows proofs up to
+   `proof_validity_blocks` old (default 450, ~15 min at 2s/block; it is
+   governance-settable), so ten blocks back is a comfortable, still-fresh
+   margin.
 3. **Consistent state** - the SDK forwards `provingBlockId` to `discoverNotes`
    and `discoverChannels`, so discovery and proving see the same block. Without
    it the two can disagree, and a note selected from a newer state can fail to
