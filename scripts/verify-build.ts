@@ -8,16 +8,29 @@ import path from "path"
 import { getFiles } from "./lib"
 
 const BUILD_DIR = path.join(__dirname, "..", "build")
+const SITE = "https://strk20-by-example.org"
 const errors: string[] = []
 
 function rel(file: string): string {
   return path.relative(BUILD_DIR, file)
 }
 
-// Links we never resolve against the filesystem: off-site, in-page anchors,
-// and non-http schemes.
-function isExternal(href: string): boolean {
-  return /^(https?:)?\/\//.test(href) || /^(#|mailto:|tel:)/.test(href)
+// Resolve an href to a site-relative path if it points at this site, or null
+// if it is off-site, an in-page anchor, or a non-http scheme - those we never
+// resolve against the filesystem.
+//
+// The prerenderer stamps every canonical, og:url, and rel="alternate" link as
+// an absolute `https://strk20-by-example.org/...` URL, not a root-relative
+// one. Treating those as "external" (matching `^(https?:)?//`) left the
+// site's own self-links entirely unchecked - which is how a dead
+// rel="alternate" shipped through a green verify. Both forms are internal.
+function internalPath(href: string): string | null {
+  if (/^(#|mailto:|tel:)/.test(href)) return null
+  if (href === SITE) return "/"
+  if (href.startsWith(`${SITE}/`)) return href.slice(SITE.length)
+  if (/^(https?:)?\/\//.test(href)) return null
+  if (href.startsWith("/")) return href
+  return null
 }
 
 async function checkProtocolRelativeHrefs(htmlFiles: string[]) {
@@ -35,9 +48,14 @@ async function checkNoPlaceholders() {
   // Includes the bundled search index: it embeds page Markdown, so an
   // unsubstituted placeholder lands there too and makes contract source
   // unsearchable.
+  const assetsDir = path.join(BUILD_DIR, "assets")
   const textFiles = [
     ...(await getFiles(BUILD_DIR, /\.md$/)),
-    ...(await getFiles(path.join(BUILD_DIR, "assets"), /\.js$/)),
+    // getFiles() has no existence guard (see scripts/lib.ts) - build/assets/
+    // should always exist post-vite-build, but guard it anyway so a missing
+    // directory here fails with the error list below, not an unhandled
+    // rejection.
+    ...(fs.existsSync(assetsDir) ? await getFiles(assetsDir, /\.js$/) : []),
     path.join(BUILD_DIR, "llms.txt"),
     path.join(BUILD_DIR, "llms-full.txt"),
   ]
@@ -72,8 +90,9 @@ async function checkInternalLinks(htmlFiles: string[]) {
     const html = fs.readFileSync(file).toString()
     for (const match of html.match(/href="([^"]+)"/g) ?? []) {
       const href = match.slice(6, -1)
-      if (isExternal(href) || !href.startsWith("/")) continue
-      if (!resolves(href)) {
+      const target = internalPath(href)
+      if (target === null) continue
+      if (!resolves(target)) {
         errors.push(`${rel(file)}: dead internal link ${href}`)
       }
     }
@@ -99,4 +118,7 @@ async function main() {
   console.log(`verify: OK (${htmlFiles.length} html files checked)`)
 }
 
-main()
+main().catch((error) => {
+  console.error(`verify: crashed - ${error instanceof Error ? error.stack : error}`)
+  process.exit(1)
+})
