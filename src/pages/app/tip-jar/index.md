@@ -46,6 +46,9 @@ The **private path** calls no contract at all:
 Both paths deliver the same value to the creator. The private one leaves no
 public link between the two.
 
+The snippets below need `starknet@^10.4.0` — STRK20 support is on the npm `next`
+tag, and `latest` (10.0.x) has none of it.
+
 ## How it works in code
 
 The private tip is a single action handed to the wallet:

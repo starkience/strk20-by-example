@@ -30,6 +30,12 @@ submission.</p>
 wallets. If you are building the wallet itself, use the
 <a href="/sdk/getting-started">Build Privacy Wallets</a>. If your app needs private DeFi,
 pair this route with an <a href="/helpers/privacy-invoke">Anonymizer Contract</a>.</p>
+<h2 id="install">Install</h2>
+<pre><code class="language-shell">npm install starknet@^10.4.0
+</code></pre><p><strong>Pin the version.</strong> STRK20 support landed in starknet.js 10.4.0 and ships on the
+npm <code>next</code> tag. A bare <code>npm install starknet</code> resolves to <code>latest</code>, which is
+still 10.0.x and contains none of the STRK20 API — <code>WalletAccountV6</code>,
+<code>strk20InvokeTransaction</code>, and <code>STRK20_ACTION</code> will all be missing.</p>
 <h2 id="why-most-dapps-want-this-route">Why most dapps want this route</h2>
 <ul>
 <li><strong>No viewing keys in your app.</strong> The wallet holds the user&#39;s viewing key; your

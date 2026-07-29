@@ -42,6 +42,8 @@ the pool.</li>
 </ol>
 <p>Both paths deliver the same value to the creator. The private one leaves no
 public link between the two.</p>
+<p>The snippets below need <code>starknet@^10.4.0</code> — STRK20 support is on the npm <code>next</code>
+tag, and <code>latest</code> (10.0.x) has none of it.</p>
 <h2 id="how-it-works-in-code">How it works in code</h2>
 <p>The private tip is a single action handed to the wallet:</p>
 <pre><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-attr">actions</span>: <span class="hljs-title class_">STRK20</span>_ACTION[] = [

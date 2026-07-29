@@ -21,6 +21,17 @@ The **`starknet.js` `WalletAccountV6` API** is the direct way to reach the
 **outside React**, or when you need **finer control over connection and proof
 handling** than the React hooks provide.
 
+## Install
+
+```shell
+npm install starknet@^10.4.0
+```
+
+**Pin the version.** STRK20 support landed in starknet.js 10.4.0 and ships on the
+npm `next` tag. A bare `npm install starknet` resolves to `latest`, which is
+still 10.0.x and contains none of the STRK20 API — `WalletAccountV6`,
+`strk20InvokeTransaction`, and `STRK20_ACTION` will all be missing.
+
 ## When to use this
 
 Reach for `WalletAccountV6` directly when a React convenience layer does not fit -

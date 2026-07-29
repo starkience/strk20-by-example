@@ -22,6 +22,12 @@ const html = `<p>The <strong><code>starknet.js</code> <code>WalletAccountV6</cod
 <a href="/starknet-wallet-api/overview">Starknet Wallet API</a>. Use it when you are working
 <strong>outside React</strong>, or when you need <strong>finer control over connection and proof
 handling</strong> than the React hooks provide.</p>
+<h2 id="install">Install</h2>
+<pre><code class="language-shell">npm install starknet@^10.4.0
+</code></pre><p><strong>Pin the version.</strong> STRK20 support landed in starknet.js 10.4.0 and ships on the
+npm <code>next</code> tag. A bare <code>npm install starknet</code> resolves to <code>latest</code>, which is
+still 10.0.x and contains none of the STRK20 API — <code>WalletAccountV6</code>,
+<code>strk20InvokeTransaction</code>, and <code>STRK20_ACTION</code> will all be missing.</p>
 <h2 id="when-to-use-this">When to use this</h2>
 <p>Reach for <code>WalletAccountV6</code> directly when a React convenience layer does not fit -
 for example non-React frontends, scripts, or flows where you manage wallet
