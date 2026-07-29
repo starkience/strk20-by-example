@@ -47,14 +47,19 @@ async function checkNoPlaceholders() {
 }
 
 // A built route lives at build/<route>/index.html; static assets are plain files.
+// Must test for a FILE, not mere existence: build/sdk/ is a directory with no
+// index.html of its own, so an existsSync check would call /sdk resolved when
+// it 404s in production.
+function isFile(p: string): boolean {
+  return fs.existsSync(p) && fs.statSync(p).isFile()
+}
+
 function resolves(href: string): boolean {
   const clean = href.split("#")[0].split("?")[0]
   if (clean === "" || clean === "/") return true
   const target = path.join(BUILD_DIR, clean)
   return (
-    fs.existsSync(target) ||
-    fs.existsSync(path.join(target, "index.html")) ||
-    fs.existsSync(`${target}.html`)
+    isFile(target) || isFile(path.join(target, "index.html")) || isFile(`${target}.html`)
   )
 }
 
