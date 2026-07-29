@@ -25,14 +25,32 @@ npm install @avnu/avnu-sdk@^4.2.0 starknet@^10.4.0
 ## The call
 
 ```ts
-import { executePrivateSwap, createStrk20WalletProver } from "@avnu/avnu-sdk"
+import {
+  createStrk20WalletProver,
+  executePrivateSwap,
+  PRIVACY_POOL_ADDRESS,
+} from "@avnu/avnu-sdk"
 
 const prover = createStrk20WalletProver(walletAccount)
-const result = await executePrivateSwap(quote, { prover })
+
+const { transactionHash } = await executePrivateSwap({
+  quote, // from AVNU's quote endpoint
+  slippage: 0.01, // 1%
+  takerAddress: walletAccount.address,
+  poolAddress: PRIVACY_POOL_ADDRESS,
+  feeMode: { poolFeeToken: quote.sellTokenAddress }, // tip?: "slow" | "normal" | "fast", defaults to "normal"
+  prover,
+})
 ```
 
 AVNU's paymaster relays the transaction, so the submitting address is not the
 user's.
+
+If a paymaster API key is required (the `sponsored_private` fee mode), keep
+that call server-side — passing the key from a browser leaks it. Browser
+dapps should split the flow instead: call `buildPrivateSwapFee` and
+`submitPrivateSwap` from a server endpoint, and run only the `prover` step
+client-side with the user's wallet.
 
 ## When to use a helper instead
 
