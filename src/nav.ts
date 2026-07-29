@@ -129,14 +129,13 @@ export const HELPER_ROUTES: Route[] = [
   },
 ]
 
+// Anonymous Airdrop is drafted but has no body content yet - keep it out of the
+// nav until it does, so no link leads to an empty page. The page and its route
+// still build; it is simply unlisted.
 export const APP_ROUTES: Route[] = [
   {
     path: "tip-jar",
     title: "Tip Jar",
-  },
-  {
-    path: "anonymous-airdrop",
-    title: "Anonymous Airdrop",
   },
 ]
 
