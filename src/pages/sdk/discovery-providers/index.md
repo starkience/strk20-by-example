@@ -1,8 +1,8 @@
 ---
 title: Discovery Providers
 version: 0.14.3
-description: Choose between IndexerDiscoveryProvider and ContractDiscoveryProvider
-keywords: [discovery, indexer, contract, provider, rate limit, deep import]
+description: IndexerDiscoveryProvider is the discovery backend the SDK exports; ContractDiscoveryProvider exists in source but is not yet reachable
+keywords: [discovery, indexer, contract, provider, ohttp, exports]
 githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md
 ---
 
@@ -14,54 +14,58 @@ two implementations.
 | Provider                    | Backend                        | Use for                                                         |
 | --------------------------- | ------------------------------ | --------------------------------------------------------------- |
 | `IndexerDiscoveryProvider`  | Discovery service over HTTP    | Production - pagination and reorg detection handled server-side |
-| `ContractDiscoveryProvider` | Pool contract via Starknet RPC | Development, testing, no-extra-infra setups                     |
+| `ContractDiscoveryProvider` | Pool contract via Starknet RPC | Not yet exported from the published package - see below         |
 
 ## IndexerDiscoveryProvider
 
+The default. Passing a config object to `createPrivateTransfers` constructs one
+for you:
+
 ```typescript
-// Deep import - the package-root export's TypeScript declaration does not
-// currently satisfy DiscoveryProviderInterface at v0.14.2.
-// @ts-expect-error
-import { IndexerDiscoveryProvider } from "@starkware-libs/starknet-privacy-sdk/dist/internal/indexer-discovery.js"
+discoveryProvider: {
+  url: process.env.INDEXER_URL!
+}
+```
+
+Construct it directly only when you need constructor options the config object
+does not expose — for example OHTTP envelope encryption:
+
+```typescript
+import { IndexerDiscoveryProvider } from "@starkware-libs/starknet-privacy-sdk"
 
 const discoveryProvider = new IndexerDiscoveryProvider(
   process.env.INDEXER_URL!,
   process.env.POOL_ADDRESS!, // hex string, like everywhere else
+  { ohttp: true },
 )
 ```
 
-The deep import is a temporary workaround, not a style choice: importing
-from the package root type-errors even though it works at runtime. When the
-SDK ships type-clean exports, drop the deep path and the `@ts-expect-error`
-in the same change.
+Import it from the package root. Deep paths into `dist/internal/` are blocked by
+the package's `exports` map and fail at runtime with
+`ERR_PACKAGE_PATH_NOT_EXPORTED`.
 
 ## ContractDiscoveryProvider
 
-```typescript
-import { ContractDiscoveryProvider } from "@starkware-libs/starknet-privacy-sdk"
+Replays pool events by querying the contract over RPC, with no indexer to run.
+It exists in the SDK source but is **not currently reachable from the published
+package** — it is not exported from the package root, and the `exports` map
+blocks every deep path, so `import { ContractDiscoveryProvider } from
+"@starkware-libs/starknet-privacy-sdk"` fails with
+`TS2305: has no exported member`.
 
-const discoveryProvider = new ContractDiscoveryProvider(poolContract, {
-  rateLimit: { maxConcurrent: 4, minDelay: 100 },
-})
-```
-
-It replays pool events by querying the contract directly - every scan is a
-burst of RPC calls. The `rateLimit` option (max concurrent requests plus a
-minimum delay between them) keeps you under public-RPC rate limits; without
-it, a full scan against a free endpoint gets you HTTP 429s mid-discovery.
+Until it is exported, use `IndexerDiscoveryProvider` against a development
+indexer. Track
+[starkware-libs/starknet-privacy](https://github.com/starkware-libs/starknet-privacy)
+for the export.
 
 ## Things to notice
 
-- Both satisfy the same `DiscoveryProviderInterface` - swap them behind an
-  environment variable and no other code changes.
-- Contract-based discovery cost grows with pool history. Fine on a devnet or
-  a young Sepolia deployment; painful on a busy pool. The indexer does the
-  scanning once, server-side.
-- Reorg handling: the indexer detects L2 reorgs and repairs its cursor. With
-  the contract provider you inherit whatever your RPC node reports - one
-  more reason it is the development option.
-- Cursors are provider-specific opaque values. Do not persist a cursor from
-  one provider and feed it to the other.
+- Reorg handling: the indexer detects L2 reorgs and repairs its cursor
+  automatically. You do not need to write reorg-handling logic against
+  `IndexerDiscoveryProvider`.
+- Discovery cost does not grow with pool history from your app's
+  perspective - the indexer scans the pool once, server-side, for every
+  consumer.
 
 Next: [Proving Configuration](/sdk/proving-config) - the proving side of the
 same wiring.
