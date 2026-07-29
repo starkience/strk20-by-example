@@ -21,6 +21,17 @@ The **`useStrk20` hooks** from
 are a convenience wrapper over the [Starknet Wallet API](/starknet-wallet-api/overview).
 They are the recommended starting point for **React dapps**.
 
+## Install
+
+```shell
+npm install starknet@^10.4.0
+```
+
+**Pin the version.** STRK20 support landed in starknet.js 10.4.0 and ships on the
+npm `next` tag. A bare `npm install starknet` resolves to `latest`, which is
+still 10.0.x and contains none of the STRK20 API — `WalletAccountV6`,
+`strk20InvokeTransaction`, and `STRK20_ACTION` will all be missing.
+
 ## When to use this
 
 Use the hooks when you are building a **React dapp** on top of an existing
@@ -49,4 +60,5 @@ state, ZK proof, and signature wallet-side.
 
 - [Starknet Wallet API overview](/starknet-wallet-api/overview)
 - [starknet.js](/starknet-wallet-api/starknet-js)
+- [Private DeFi End to End](/starknet-wallet-api/private-defi)
 - [Anonymizer Contract Anatomy](/helpers/privacy-invoke)

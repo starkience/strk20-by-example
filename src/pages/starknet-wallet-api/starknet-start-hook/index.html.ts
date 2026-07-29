@@ -22,6 +22,12 @@ const html = `<p>The <strong><code>useStrk20</code> hooks</strong> from
 <a href="https://starknet-innovation.github.io/starknet-start/docs/hooks/use-strk20/#hooks">Starknet Start</a>
 are a convenience wrapper over the <a href="/starknet-wallet-api/overview">Starknet Wallet API</a>.
 They are the recommended starting point for <strong>React dapps</strong>.</p>
+<h2 id="install">Install</h2>
+<pre><code class="language-shell">npm install starknet@^10.4.0
+</code></pre><p><strong>Pin the version.</strong> STRK20 support landed in starknet.js 10.4.0 and ships on the
+npm <code>next</code> tag. A bare <code>npm install starknet</code> resolves to <code>latest</code>, which is
+still 10.0.x and contains none of the STRK20 API — <code>WalletAccountV6</code>,
+<code>strk20InvokeTransaction</code>, and <code>STRK20_ACTION</code> will all be missing.</p>
 <h2 id="when-to-use-this">When to use this</h2>
 <p>Use the hooks when you are building a <strong>React dapp</strong> on top of an existing
 privacy-enabled wallet and want to request STRK20 actions without wiring each
@@ -46,6 +52,7 @@ the
 <ul>
 <li><a href="/starknet-wallet-api/overview">Starknet Wallet API overview</a></li>
 <li><a href="/starknet-wallet-api/starknet-js">starknet.js</a></li>
+<li><a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a></li>
 <li><a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a></li>
 </ul>
 `
