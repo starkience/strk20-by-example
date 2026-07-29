@@ -23,7 +23,7 @@ never go backwards:
 The fixed ordering removes state-machine ambiguity: there is exactly one way to
 encode a given semantic operation, which closes whole classes of ordering bugs.
 `InvokeExternal` is the composability hook - it calls an anonymizer contract
-(escrow, DEX adapter, lending) at most once per transaction.
+(DEX adapter, lending vault) at most once per transaction.
 
 ## The balance invariant
 

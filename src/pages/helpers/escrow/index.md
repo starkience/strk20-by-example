@@ -10,6 +10,13 @@ who has not registered a viewing key yet. Instead, you **escrow the funds behind
 secret**, share the secret off-chain (a claim link), and the recipient claims the
 funds into their own note once they are registered.
 
+> **Unofficial example.** Unlike the Ekubo and Vesu helpers, this contract is
+> not shipped in the
+> [starknet-privacy](https://github.com/starkware-libs/starknet-privacy) monorepo
+> and has no SDK helper functions. It is a worked illustration of a stateful
+> `privacy_invoke` helper - read it for the pattern, and own the review and audit
+> if you build on it.
+
 It is a two-operation state machine driven by `privacy_invoke`:
 
 - **Deposit** - the pool withdraws tokens to the escrow, which stores a
@@ -35,7 +42,3 @@ It is a two-operation state machine driven by `privacy_invoke`:
   parameter is ignored on claim; only the preimage matters.
 - **Double-claim protection** - the `claimed` flag flips exactly once; a second
   claim hits `ALREADY_CLAIMED`.
-
-The SDK pairs with this contract through `computeCommitmentHash`,
-`generateEscrowSecret`, `buildDepositInvoke`, `buildClaimInvoke` and
-`buildClaimUrl` - see [Build Privacy Wallets](/sdk/getting-started) for the TypeScript side of this flow.

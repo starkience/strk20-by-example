@@ -26,6 +26,14 @@ const html = `<p>The escrow helper solves a real problem: you cannot privately t
 who has not registered a viewing key yet. Instead, you <strong>escrow the funds behind a
 secret</strong>, share the secret off-chain (a claim link), and the recipient claims the
 funds into their own note once they are registered.</p>
+<blockquote>
+<p><strong>Unofficial example.</strong> Unlike the Ekubo and Vesu helpers, this contract is
+not shipped in the
+<a href="https://github.com/starkware-libs/starknet-privacy">starknet-privacy</a> monorepo
+and has no SDK helper functions. It is a worked illustration of a stateful
+<code>privacy_invoke</code> helper - read it for the pattern, and own the review and audit
+if you build on it.</p>
+</blockquote>
 <p>It is a two-operation state machine driven by <code>privacy_invoke</code>:</p>
 <ul>
 <li><strong>Deposit</strong> - the pool withdraws tokens to the escrow, which stores a
@@ -201,9 +209,6 @@ parameter is ignored on claim; only the preimage matters.</li>
 <li><strong>Double-claim protection</strong> - the <code>claimed</code> flag flips exactly once; a second
 claim hits <code>ALREADY_CLAIMED</code>.</li>
 </ul>
-<p>The SDK pairs with this contract through <code>computeCommitmentHash</code>,
-<code>generateEscrowSecret</code>, <code>buildDepositInvoke</code>, <code>buildClaimInvoke</code> and
-<code>buildClaimUrl</code> - see <a href="/sdk/getting-started">Build Privacy Wallets</a> for the TypeScript side of this flow.</p>
 `
 
 export default html

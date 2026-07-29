@@ -42,4 +42,5 @@ accrues to a position nobody can attribute to you.
 - **`u256` assets, `u128` note amounts** - vault math is `u256`; the credited
   delta must fit a note's 128-bit amount or the call reverts.
 
-Next: the Escrow helper - a stateful helper with its own commitment scheme.
+Next: [Escrow](/helpers/escrow) - an unofficial worked example of a _stateful_
+helper with its own commitment scheme.
