@@ -11,6 +11,7 @@
     "build": "tsc && vite build",
     "postbuild": "npm run lint && npm run prerender && npm run llms",
     "llms": "ts-node --project ./scripts/tsconfig.json scripts/build-llms.ts",
+    "verify": "ts-node --project ./scripts/tsconfig.json scripts/verify-build.ts",
     "prerender": "ts-node --project ./scripts/tsconfig.json scripts/prerender.ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
