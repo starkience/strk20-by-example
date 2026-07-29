@@ -95,8 +95,9 @@ calldata in, <code>Span&lt;OpenNoteDeposit&gt;</code> out.</p>
 trailing garbage) makes the pool reject the call.</li>
 <li><strong>Approve, don&#39;t transfer</strong> - the helper approves the pool to pull the output;
 the pool executes the pull itself when applying the deposits.</li>
-<li><strong>An empty span is valid</strong> - it means "credit nothing" (the escrow&#39;s Deposit
-operation uses this: funds stay parked in the helper).</li>
+<li><strong>An empty span is valid</strong> - it means "credit nothing" for a step that should
+not release funds yet, such as a stateful helper parking funds until a later
+claim (see <a href="/helpers/escrow">Escrow</a>).</li>
 <li><strong>Measure output by balance delta</strong> - real helpers record the output token
 balance before and after the external call, so the credited amount is exactly
 what arrived, whatever the external protocol did.</li>
