@@ -64,6 +64,10 @@ export const STARKNET_WALLET_API_ROUTES: Route[] = [
     path: "private-defi",
     title: "Private DeFi End to End",
   },
+  {
+    path: "avnu-private-swaps",
+    title: "AVNU Private Swaps",
+  },
 ]
 
 // Build Privacy Wallets - the low-level SDK route for wallet builders and advanced integrators.

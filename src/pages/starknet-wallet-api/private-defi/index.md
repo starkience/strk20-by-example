@@ -87,3 +87,4 @@ measured at execution time. Deposits and withdrawals remain public legs.
 
 - [Anonymizer Contract Anatomy](/helpers/privacy-invoke)
 - [Swap Helper](/helpers/swap-helper)
+- [AVNU Private Swaps](/starknet-wallet-api/avnu-private-swaps) - swaps without writing a helper at all
