@@ -7,7 +7,7 @@
     "start": "vite",
     "preview": "vite preview",
     "clean": "rm -rf build",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && npm run pages:all && npm run search",
     "build": "tsc && vite build",
     "postbuild": "npm run lint && npm run prerender && npm run llms && npm run verify",
     "llms": "ts-node --project ./scripts/tsconfig.json scripts/build-llms.ts",
