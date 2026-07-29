@@ -60,6 +60,10 @@ export const STARKNET_WALLET_API_ROUTES: Route[] = [
     path: "starknet-js",
     title: "starknet.js",
   },
+  {
+    path: "private-defi",
+    title: "Private DeFi End to End",
+  },
 ]
 
 // Build Privacy Wallets - the low-level SDK route for wallet builders and advanced integrators.

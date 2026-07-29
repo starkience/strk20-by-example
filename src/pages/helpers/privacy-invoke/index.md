@@ -69,4 +69,5 @@ calldata in, `Span<OpenNoteDeposit>` out.
   invoke per pool transaction.
 
 The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
-lending integration.
+lending integration. To call one of them from a dapp, see
+[Private DeFi End to End](/starknet-wallet-api/private-defi).

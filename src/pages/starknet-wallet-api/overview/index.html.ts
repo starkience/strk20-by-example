@@ -74,7 +74,8 @@ the ZK proofs and signatures are managed wallet-side.</p>
 <li><strong>Swap</strong> - where the connected wallet supports it.</li>
 </ul>
 <p>Broader DeFi actions (lending, staking, custom flows) pair the Starknet Wallet
-API with an app-specific anonymizer contract that the pool invokes atomically.</p>
+API with an app-specific anonymizer contract that the pool invokes atomically —
+see <a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a> for the wiring.</p>
 <h2 id="what-to-keep-in-mind">What to keep in mind</h2>
 <ul>
 <li><strong>Wallet support varies.</strong> Available actions depend on the connected wallet;

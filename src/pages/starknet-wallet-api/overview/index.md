@@ -82,7 +82,8 @@ Without writing any privacy cryptography, a dapp can ask the wallet to:
 - **Swap** - where the connected wallet supports it.
 
 Broader DeFi actions (lending, staking, custom flows) pair the Starknet Wallet
-API with an app-specific anonymizer contract that the pool invokes atomically.
+API with an app-specific anonymizer contract that the pool invokes atomically —
+see [Private DeFi End to End](/starknet-wallet-api/private-defi) for the wiring.
 
 ## What to keep in mind
 

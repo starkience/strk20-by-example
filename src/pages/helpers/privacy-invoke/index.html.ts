@@ -104,7 +104,8 @@ what arrived, whatever the external protocol did.</li>
 invoke per pool transaction.</li>
 </ul>
 <p>The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
-lending integration.</p>
+lending integration. To call one of them from a dapp, see
+<a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a>.</p>
 `
 
 export default html
