@@ -28,7 +28,8 @@ keys inside the wallet. Everything here goes through one factory:
 <code>createPrivateTransfers</code>.</p>
 <h2 id="install">Install</h2>
 <pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk
-</code></pre><p><strong>Getting a 404?</strong> Known temporary issue - the package is not on npmjs.com yet
+</code></pre><p>The SDK requires <strong>Node.js &gt;= 24</strong> (its <code>ohttp-ts</code> dependency needs modern WebCrypto).</p>
+<p><strong>Getting a 404?</strong> Known temporary issue - the package is not on npmjs.com yet
 while StarkWare restores access to its npm org. Until then it is published to
 <a href="https://github.com/starkware-libs/starknet-privacy/pkgs/npm/starknet-privacy-sdk">GitHub Packages</a>,
 which needs a GitHub token even for public packages. With the
@@ -41,18 +42,12 @@ npm install @starkware-libs/starknet-privacy-sdk
 </code></pre><p>Or skip the registry entirely and install from git at a specific commit:</p>
 <pre><code class="language-shell">npm install "starkware-libs/starknet-privacy#&lt;commit-sha&gt;"
 </code></pre><h2 id="wire-it-up">Wire it up</h2>
-<p>The factory needs a Starknet account plus three providers: a <strong>viewing key
-provider</strong> (your privacy key), a <strong>proving provider</strong> (generates validity proofs)
-and a <strong>discovery provider</strong> (finds your notes and channels).</p>
+<p>The factory needs a Starknet account plus three things: a <strong>viewing key</strong>
+(your privacy key), a <strong>proving service</strong> (generates validity proofs) and a
+<strong>discovery service</strong> (finds your notes and channels). Pass the last two as
+plain config objects and the SDK constructs the production providers for you.</p>
 <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Account</span>, <span class="hljs-title class_">RpcProvider</span>, constants } <span class="hljs-keyword">from</span> <span class="hljs-string">"starknet"</span>
-<span class="hljs-keyword">import</span> {
-  createPrivateTransfers,
-  <span class="hljs-title class_">ProvingServiceProofProvider</span>,
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"@starkware-libs/starknet-privacy-sdk"</span>
-<span class="hljs-comment">// Deep import - the root export&#x27;s type does not currently match the</span>
-<span class="hljs-comment">// interface the factory expects.</span>
-<span class="hljs-comment">// @ts-expect-error</span>
-<span class="hljs-keyword">import</span> { <span class="hljs-title class_">IndexerDiscoveryProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">"@starkware-libs/starknet-privacy-sdk/dist/internal/indexer-discovery.js"</span>
+<span class="hljs-keyword">import</span> { createPrivateTransfers } <span class="hljs-keyword">from</span> <span class="hljs-string">"@starkware-libs/starknet-privacy-sdk"</span>
 
 <span class="hljs-keyword">const</span> provider = <span class="hljs-keyword">new</span> <span class="hljs-title class_">RpcProvider</span>({ <span class="hljs-attr">nodeUrl</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">RPC_URL</span>! })
 
@@ -71,18 +66,24 @@ and a <strong>discovery provider</strong> (finds your notes and channels).</p>
   <span class="hljs-attr">viewingKeyProvider</span>: {
     <span class="hljs-attr">getViewingKey</span>: <span class="hljs-title function_">async</span> () =&gt; <span class="hljs-title class_">BigInt</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">VIEWING_KEY</span>!),
   },
-  <span class="hljs-attr">provingProvider</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProvingServiceProofProvider</span>(
-    process.<span class="hljs-property">env</span>.<span class="hljs-property">PROVING_SERVICE_URL</span>!,
-    constants.<span class="hljs-property">StarknetChainId</span>.<span class="hljs-property">SN_SEPOLIA</span>,
-  ),
-  <span class="hljs-attr">discoveryProvider</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">IndexerDiscoveryProvider</span>(
-    process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>!,
-    process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!,
-  ),
+  <span class="hljs-attr">provingProvider</span>: {
+    <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">PROVING_SERVICE_URL</span>!,
+    <span class="hljs-attr">chainId</span>: constants.<span class="hljs-property">StarknetChainId</span>.<span class="hljs-property">SN_SEPOLIA</span>,
+  },
+  <span class="hljs-attr">discoveryProvider</span>: { <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>! },
   <span class="hljs-attr">poolContractAddress</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!,
 })
-</code></pre><p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
+</code></pre><p>If you need to configure a provider beyond what the config object exposes, both
+production implementations are exported from the package root and can be passed
+as instances instead — see <a href="/sdk/discovery-providers">Discovery Providers</a>.</p>
+<p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
 <a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.</p>
+<h2 id="going-deeper">Going deeper</h2>
+<p>The SDK is open source (Apache 2.0):
+<a href="https://github.com/starkware-libs/starknet-privacy">starkware-libs/starknet-privacy</a>.
+Its <a href="https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md"><code>sdk/README.md</code></a>
+covers material these pages do not — transaction sequencing against finalized
+state, the <code>Open</code> note API, and <code>classifyTransaction</code> for reading history.</p>
 <h2 id="your-first-transaction">Your first transaction</h2>
 <p>Every operation follows the same shape: <code>build()</code> a batch of operations, then
 <code>execute()</code> it and submit the resulting call.</p>

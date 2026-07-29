@@ -29,6 +29,8 @@ keys inside the wallet. Everything here goes through one factory:
 npm install @starkware-libs/starknet-privacy-sdk
 ```
 
+The SDK requires **Node.js >= 24** (its `ohttp-ts` dependency needs modern WebCrypto).
+
 **Getting a 404?** Known temporary issue - the package is not on npmjs.com yet
 while StarkWare restores access to its npm org. Until then it is published to
 [GitHub Packages](https://github.com/starkware-libs/starknet-privacy/pkgs/npm/starknet-privacy-sdk),
@@ -51,20 +53,14 @@ npm install "starkware-libs/starknet-privacy#<commit-sha>"
 
 ## Wire it up
 
-The factory needs a Starknet account plus three providers: a **viewing key
-provider** (your privacy key), a **proving provider** (generates validity proofs)
-and a **discovery provider** (finds your notes and channels).
+The factory needs a Starknet account plus three things: a **viewing key**
+(your privacy key), a **proving service** (generates validity proofs) and a
+**discovery service** (finds your notes and channels). Pass the last two as
+plain config objects and the SDK constructs the production providers for you.
 
 ```typescript
 import { Account, RpcProvider, constants } from "starknet"
-import {
-  createPrivateTransfers,
-  ProvingServiceProofProvider,
-} from "@starkware-libs/starknet-privacy-sdk"
-// Deep import - the root export's type does not currently match the
-// interface the factory expects.
-// @ts-expect-error
-import { IndexerDiscoveryProvider } from "@starkware-libs/starknet-privacy-sdk/dist/internal/indexer-discovery.js"
+import { createPrivateTransfers } from "@starkware-libs/starknet-privacy-sdk"
 
 const provider = new RpcProvider({ nodeUrl: process.env.RPC_URL! })
 
@@ -83,20 +79,29 @@ const transfers = createPrivateTransfers({
   viewingKeyProvider: {
     getViewingKey: async () => BigInt(process.env.VIEWING_KEY!),
   },
-  provingProvider: new ProvingServiceProofProvider(
-    process.env.PROVING_SERVICE_URL!,
-    constants.StarknetChainId.SN_SEPOLIA,
-  ),
-  discoveryProvider: new IndexerDiscoveryProvider(
-    process.env.INDEXER_URL!,
-    process.env.POOL_ADDRESS!,
-  ),
+  provingProvider: {
+    url: process.env.PROVING_SERVICE_URL!,
+    chainId: constants.StarknetChainId.SN_SEPOLIA,
+  },
+  discoveryProvider: { url: process.env.INDEXER_URL! },
   poolContractAddress: process.env.POOL_ADDRESS!,
 })
 ```
 
+If you need to configure a provider beyond what the config object exposes, both
+production implementations are exported from the package root and can be passed
+as instances instead — see [Discovery Providers](/sdk/discovery-providers).
+
 On Sepolia, `POOL_ADDRESS` is the privacy pool (v2.0) deployed at
 [`0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91`](https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91).
+
+## Going deeper
+
+The SDK is open source (Apache 2.0):
+[starkware-libs/starknet-privacy](https://github.com/starkware-libs/starknet-privacy).
+Its [`sdk/README.md`](https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md)
+covers material these pages do not — transaction sequencing against finalized
+state, the `Open` note API, and `classifyTransaction` for reading history.
 
 ## Your first transaction
 
