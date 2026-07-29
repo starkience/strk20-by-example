@@ -1,4 +1,6 @@
-// Adapted from starknet-privacy packages/escrow/src/escrow.cairo (Apache-2.0, StarkWare)
+// Original example written for strk20-by-example. Unlike the other helpers here,
+// this is NOT adapted from the starknet-privacy monorepo - that repo ships no
+// escrow package. Unofficial, and not reviewed or audited by StarkWare.
 use privacy::objects::OpenNoteDeposit;
 use starknet::ContractAddress;
 
