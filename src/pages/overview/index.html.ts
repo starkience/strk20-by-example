@@ -56,7 +56,9 @@ signatures.</li>
 <li><strong>Anonymizer contracts:</strong> app-specific <code>privacy_invoke</code> adapters for DeFi. The pool
 calls the helper atomically, then credits the result back into private notes.</li>
 <li><strong>Privacy SDK:</strong> the low-level route for wallets and advanced integrations that
-need direct control over registration, channels, note discovery, and proving.</li>
+need direct control over registration, channels, note discovery, and proving.
+Open source (Apache 2.0): <a href="https://github.com/starkware-libs/starknet-privacy">starkware-libs/starknet-privacy</a>,
+quickstart in <a href="https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md"><code>sdk/README.md</code></a>.</li>
 <li><strong>Private sub-accounts:</strong> an advanced account-privacy route for hiding the
 public link between a user&#39;s main wallet and app activity. The SDK route ships
 in Privacy SDK <code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps
@@ -77,6 +79,8 @@ then swap the <code>DEMO</code>-labelled defaults for your own token and helper.
 <ul>
 <li><a href="/helpers/privacy-invoke">Anonymizer Contracts</a></li>
 <li><a href="/starknet-wallet-api/overview">Starknet Wallet API</a></li>
+<li><a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a></li>
+<li><a href="/starknet-wallet-api/avnu-private-swaps">AVNU Private Swaps</a></li>
 <li><a href="/sdk/getting-started">Build Privacy Wallets</a></li>
 </ul>
 `

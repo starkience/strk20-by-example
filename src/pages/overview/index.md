@@ -39,6 +39,8 @@ route that fits your product, and only move lower when you need more control.
   calls the helper atomically, then credits the result back into private notes.
 - **Privacy SDK:** the low-level route for wallets and advanced integrations that
   need direct control over registration, channels, note discovery, and proving.
+  Open source (Apache 2.0): [starkware-libs/starknet-privacy](https://github.com/starkware-libs/starknet-privacy),
+  quickstart in [`sdk/README.md`](https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md).
 - **Private sub-accounts:** an advanced account-privacy route for hiding the
   public link between a user's main wallet and app activity. The SDK route ships
   in Privacy SDK `0.14.3-rc.4`; the Wallet API route is still pending, so dapps
@@ -63,4 +65,6 @@ then swap the `DEMO`-labelled defaults for your own token and helper.
 
 - [Anonymizer Contracts](/helpers/privacy-invoke)
 - [Starknet Wallet API](/starknet-wallet-api/overview)
+- [Private DeFi End to End](/starknet-wallet-api/private-defi)
+- [AVNU Private Swaps](/starknet-wallet-api/avnu-private-swaps)
 - [Build Privacy Wallets](/sdk/getting-started)
