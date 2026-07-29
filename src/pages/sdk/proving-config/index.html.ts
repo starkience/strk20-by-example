@@ -42,8 +42,13 @@ back off from the head:</p>
 matured at the proof base.</li>
 <li><strong>Reorg buffer</strong> - a proof based on the chain head can be invalidated by
 an L2 reorg before the transaction lands. The contract allows proofs up
-to <code>proof_validity_blocks</code> old (currently 450), so ten blocks back is a
+to <code>proof_validity_blocks</code> old (default 450, ~15 min at 2s/block; it is
+governance-settable), so ten blocks back is a
 comfortable, still-fresh margin.</li>
+<li><strong>Consistent state</strong> - the SDK forwards <code>provingBlockId</code> to <code>discoverNotes</code>
+and <code>discoverChannels</code>, so discovery and proving see the same block. Without
+it the two can disagree, and a note selected from a newer state can fail to
+prove.</li>
 </ol>
 <p>Omitting it works <em>most</em> of the time - with intermittent failures on
 insufficiently mature notes and worse proving-service cache hits. Just always
