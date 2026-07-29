@@ -55,11 +55,13 @@ is confidential rather than fully private: the link to the user is hidden,
 but the app-side action and amounts can still be public.</li>
 <li><strong>Withdraw</strong> - move tokens back out of the pool to a public address.</li>
 </ol>
-<p>Upcoming <strong>private sub-accounts</strong> (coming soon) will widen the DeFi leg:
-account-based flows such as borrowing and staking will run through real
-Starknet accounts that carry no public onchain link back to the user&#39;s main
-wallet, and using fresh sub-accounts per app fragments the trail further. The
-same caveat applies - app-side activity and amounts can still be public.</p>
+<p><strong>Private sub-accounts</strong> widen the DeFi leg: account-based flows such as
+borrowing and staking run through real Starknet accounts that carry no public
+onchain link back to the user&#39;s main wallet, and using fresh sub-accounts per
+app fragments the trail further. The same caveat applies - app-side activity
+and amounts can still be public. The SDK route ships as of Privacy SDK
+<code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps relying on the
+user&#39;s wallet cannot use them yet.</p>
 <h2 id="what-makes-it-different">What makes it different</h2>
 <ul>
 <li><strong>Native to Starknet</strong> - no separate chain or bridge. It runs as a contract on

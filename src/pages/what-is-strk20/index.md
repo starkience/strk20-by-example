@@ -44,11 +44,13 @@ exist rather than a separate ecosystem.
    but the app-side action and amounts can still be public.
 4. **Withdraw** - move tokens back out of the pool to a public address.
 
-Upcoming **private sub-accounts** (coming soon) will widen the DeFi leg:
-account-based flows such as borrowing and staking will run through real
-Starknet accounts that carry no public onchain link back to the user's main
-wallet, and using fresh sub-accounts per app fragments the trail further. The
-same caveat applies - app-side activity and amounts can still be public.
+**Private sub-accounts** widen the DeFi leg: account-based flows such as
+borrowing and staking run through real Starknet accounts that carry no public
+onchain link back to the user's main wallet, and using fresh sub-accounts per
+app fragments the trail further. The same caveat applies - app-side activity
+and amounts can still be public. The SDK route ships as of Privacy SDK
+`0.14.3-rc.4`; the Wallet API route is still pending, so dapps relying on the
+user's wallet cannot use them yet.
 
 ## What makes it different
 
