@@ -73,9 +73,10 @@ plain config objects and the SDK constructs the production providers for you.</p
   <span class="hljs-attr">discoveryProvider</span>: { <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>! },
   <span class="hljs-attr">poolContractAddress</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!,
 })
-</code></pre><p>If you need to configure a provider beyond what the config object exposes, both
-production implementations are exported from the package root and can be passed
-as instances instead — see <a href="/sdk/discovery-providers">Discovery Providers</a>.</p>
+</code></pre><p>If you need to configure a provider beyond what the config object exposes,
+<code>ProvingServiceProofProvider</code> and <code>IndexerDiscoveryProvider</code> are both exported
+from the package root and can be passed as instances instead — see
+<a href="/sdk/discovery-providers">Discovery Providers</a>.</p>
 <p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
 <a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.</p>
 <h2 id="going-deeper">Going deeper</h2>
@@ -125,7 +126,7 @@ following pages. We will not repeat the explanation, just the code.</p>
 </tr>
 <tr>
 <td><code>discoveryProvider</code></td>
-<td>Scans your channels for incoming notes. <code>IndexerDiscoveryProvider</code> (HTTP service, production) or <code>ContractDiscoveryProvider</code> (direct RPC, development)</td>
+<td>Scans your channels for incoming notes. Backed by <code>IndexerDiscoveryProvider</code> (HTTP discovery service)</td>
 </tr>
 </tbody></table>
 <p>Next: register your viewing key so you can receive private transfers.</p>

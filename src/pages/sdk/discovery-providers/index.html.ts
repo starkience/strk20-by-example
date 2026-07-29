@@ -20,8 +20,9 @@ export const codes = []
 
 const html = `<p>Everything on the previous page - <code>discoverNotes</code>, <code>discoverChannels</code>,
 <code>discoverRequirement</code>, the <code>autoDiscover</code> options - is served by the
-<code>discoveryProvider</code> you wired into <code>createPrivateTransfers</code>. The SDK ships
-two implementations.</p>
+<code>discoveryProvider</code> you wired into <code>createPrivateTransfers</code>. The SDK source
+contains two implementations, but only one is currently reachable from the
+published package.</p>
 <table>
 <thead>
 <tr>
@@ -44,7 +45,9 @@ two implementations.</p>
 <h2 id="indexerdiscoveryprovider">IndexerDiscoveryProvider</h2>
 <p>The default. Passing a config object to <code>createPrivateTransfers</code> constructs one
 for you:</p>
-<pre><code class="language-typescript"><span class="hljs-attr">discoveryProvider</span>: { <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>! }
+<pre><code class="language-typescript"><span class="hljs-attr">discoveryProvider</span>: {
+  <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>!
+}
 </code></pre><p>Construct it directly only when you need constructor options the config object
 does not expose — for example OHTTP envelope encryption:</p>
 <pre><code class="language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">IndexerDiscoveryProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">"@starkware-libs/starknet-privacy-sdk"</span>

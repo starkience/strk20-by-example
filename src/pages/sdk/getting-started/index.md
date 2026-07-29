@@ -88,9 +88,10 @@ const transfers = createPrivateTransfers({
 })
 ```
 
-If you need to configure a provider beyond what the config object exposes, both
-production implementations are exported from the package root and can be passed
-as instances instead — see [Discovery Providers](/sdk/discovery-providers).
+If you need to configure a provider beyond what the config object exposes,
+`ProvingServiceProofProvider` and `IndexerDiscoveryProvider` are both exported
+from the package root and can be passed as instances instead — see
+[Discovery Providers](/sdk/discovery-providers).
 
 On Sepolia, `POOL_ADDRESS` is the privacy pool (v2.0) deployed at
 [`0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91`](https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91).
@@ -134,10 +135,10 @@ following pages. We will not repeat the explanation, just the code.
 
 ## What each provider does
 
-| Provider             | Role                                                                                                                                                   |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `viewingKeyProvider` | Supplies the private viewing key `k` used to decrypt notes and derive nullifiers                                                                       |
-| `provingProvider`    | Sends your signed invocation to a proving service, which executes it in a virtual Starknet environment and returns a STARK proof                       |
-| `discoveryProvider`  | Scans your channels for incoming notes. `IndexerDiscoveryProvider` (HTTP service, production) or `ContractDiscoveryProvider` (direct RPC, development) |
+| Provider             | Role                                                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `viewingKeyProvider` | Supplies the private viewing key `k` used to decrypt notes and derive nullifiers                                                 |
+| `provingProvider`    | Sends your signed invocation to a proving service, which executes it in a virtual Starknet environment and returns a STARK proof |
+| `discoveryProvider`  | Scans your channels for incoming notes. Backed by `IndexerDiscoveryProvider` (HTTP discovery service)                            |
 
 Next: register your viewing key so you can receive private transfers.

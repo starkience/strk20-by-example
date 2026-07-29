@@ -8,8 +8,9 @@ githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/REA
 
 Everything on the previous page - `discoverNotes`, `discoverChannels`,
 `discoverRequirement`, the `autoDiscover` options - is served by the
-`discoveryProvider` you wired into `createPrivateTransfers`. The SDK ships
-two implementations.
+`discoveryProvider` you wired into `createPrivateTransfers`. The SDK source
+contains two implementations, but only one is currently reachable from the
+published package.
 
 | Provider                    | Backend                        | Use for                                                         |
 | --------------------------- | ------------------------------ | --------------------------------------------------------------- |
