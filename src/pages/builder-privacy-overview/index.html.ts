@@ -50,8 +50,8 @@ lower-level route when your product needs more control.</p>
 </tr>
 <tr>
 <td>Hide the link between a user&#39;s main wallet and app activity</td>
-<td>Private sub-accounts (coming soon)</td>
-<td>Advanced account-based privacy route; verify wallet and API support before relying on it.</td>
+<td>Private sub-accounts (SDK route available; Wallet API pending)</td>
+<td>Advanced account-based privacy route; SDK-route teams can start today, dapps relying on the user&#39;s wallet must wait.</td>
 </tr>
 </tbody></table>
 <h2 id="core-surfaces">Core surfaces</h2>
@@ -79,11 +79,17 @@ focus for <strong>core builders shipping private dapps</strong>. See
 integrators. Use it when you need to
 manage registration, channels, note discovery, transaction construction, and
 proving providers yourself. See <a href="/sdk/getting-started">Build Privacy Wallets</a>.</p>
-<h3 id="private-sub-accounts-coming-soon">Private sub-accounts (coming soon)</h3>
+<h3 id="private-sub-accounts">Private sub-accounts</h3>
 <p>Private sub-accounts are for account-based app activity where the user does not
-want a public onchain link to their main wallet. Treat this as an advanced route:
-confirm wallet, SDK, API, and audit readiness before building a production flow
-around it.</p>
+want a public onchain link to their main wallet.</p>
+<p><strong>Status is split.</strong> The <strong>SDK route is available</strong> as of Privacy SDK
+<code>0.14.3-rc.4</code>: <code>transfers.build().subaccounts(dappName).invoke(...)</code>, backed by
+the <code>sub_account_anonymizer</code> contract package. The <strong>Wallet API route is not</strong> —
+no sub-account method is exposed by <code>@starknet-io/types-js</code> 0.10.3 or
+starknet.js, so a dapp relying on the user&#39;s wallet cannot use them yet.</p>
+<p>If you build the account yourself (a wallet, or a backend holding its own keys),
+you can start now. If you rely on the user&#39;s wallet, wait for the Wallet API
+call. Confirm audit readiness either way.</p>
 <h3 id="prover-backend">Prover backend</h3>
 <p>Most dapps do not need to operate proving infrastructure. Wallets,
 infrastructure teams, and advanced integrators may run their own prover when

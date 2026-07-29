@@ -65,10 +65,13 @@ never go backwards:</p>
 </tr>
 <tr>
 <td>7</td>
-<td><code>InvokeExternal</code> (at most once)</td>
+<td><code>InvokeExternal</code> / <code>ComputeAndInvoke</code> (at most one)</td>
 <td>-</td>
 </tr>
 </tbody></table>
+<p><code>ComputeAndInvoke</code> is the sub-account path: it runs <code>privacy_compute</code> client-side
+and forwards the result as a server-side invoke. It shares phase 7 with
+<code>InvokeExternal</code>, and the "at most once" rule covers the two jointly.</p>
 <p>The fixed ordering removes state-machine ambiguity: there is exactly one way to
 encode a given semantic operation, which closes whole classes of ordering bugs.
 <code>InvokeExternal</code> is the composability hook - it calls an anonymizer contract

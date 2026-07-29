@@ -43,7 +43,7 @@ route that fits your product, and only move lower when you need more control.</p
 </tr>
 <tr>
 <td>Hide a user&#39;s main-wallet link during account-based app activity</td>
-<td>Private sub-accounts (coming soon)</td>
+<td>Private sub-accounts (SDK route available; Wallet API pending)</td>
 </tr>
 </tbody></table>
 <h2 id="core-pieces">Core pieces</h2>
@@ -57,8 +57,10 @@ signatures.</li>
 calls the helper atomically, then credits the result back into private notes.</li>
 <li><strong>Privacy SDK:</strong> the low-level route for wallets and advanced integrations that
 need direct control over registration, channels, note discovery, and proving.</li>
-<li><strong>Private sub-accounts (coming soon):</strong> an advanced account-privacy route for hiding the public
-link between a user&#39;s main wallet and app activity.</li>
+<li><strong>Private sub-accounts:</strong> an advanced account-privacy route for hiding the
+public link between a user&#39;s main wallet and app activity. The SDK route ships
+in Privacy SDK <code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps
+relying on the user&#39;s wallet cannot use them yet.</li>
 <li><strong>Prover backend:</strong> infrastructure for teams that need to operate their own proof
 generation.</li>
 </ul>

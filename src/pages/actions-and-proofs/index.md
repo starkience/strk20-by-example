@@ -9,16 +9,20 @@ Every pool transaction is a batch of **client actions**. Actions are grouped
 into phases with a fixed ordering - a transaction may skip phases, but must
 never go backwards:
 
-| Phase | Action                             | Effect on temp balance |
-| ----- | ---------------------------------- | ---------------------- |
-| 0     | `SetViewingKey`                    | -                      |
-| 1     | `OpenChannel`                      | -                      |
-| 2     | `OpenSubchannel`                   | -                      |
-| 3     | `Deposit`                          | + amount               |
-| 4     | `UseNote`                          | + note amount          |
-| 5     | `CreateEncNote` / `CreateOpenNote` | − amount               |
-| 6     | `Withdraw`                         | − amount               |
-| 7     | `InvokeExternal` (at most once)    | -                      |
+| Phase | Action                                              | Effect on temp balance |
+| ----- | --------------------------------------------------- | ---------------------- |
+| 0     | `SetViewingKey`                                     | -                      |
+| 1     | `OpenChannel`                                       | -                      |
+| 2     | `OpenSubchannel`                                    | -                      |
+| 3     | `Deposit`                                           | + amount               |
+| 4     | `UseNote`                                           | + note amount          |
+| 5     | `CreateEncNote` / `CreateOpenNote`                  | − amount               |
+| 6     | `Withdraw`                                          | − amount               |
+| 7     | `InvokeExternal` / `ComputeAndInvoke` (at most one) | -                      |
+
+`ComputeAndInvoke` is the sub-account path: it runs `privacy_compute` client-side
+and forwards the result as a server-side invoke. It shares phase 7 with
+`InvokeExternal`, and the "at most once" rule covers the two jointly.
 
 The fixed ordering removes state-machine ambiguity: there is exactly one way to
 encode a given semantic operation, which closes whole classes of ordering bugs.

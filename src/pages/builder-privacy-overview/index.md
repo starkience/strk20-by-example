@@ -28,7 +28,7 @@ lower-level route when your product needs more control.
 | Build a private dapp anywhere from private DeFi, private consumer apps, private games, etc. | [Anonymizer contracts](/helpers/privacy-invoke) and [Starknet Wallet API](/starknet-wallet-api/overview) | The wallet manages viewing keys, notes, proving, and submission; for DeFi, the pool calls your `privacy_invoke` adapter atomically, then credits the result back into private notes. |
 | Build a privacy wallet on Starknet                                                          | [Build Privacy Wallets](/sdk/getting-started)                                                            | Direct access to registration, channels, note discovery, transaction building, and proving configuration.                                                                            |
 | Operate proving infrastructure yourself                                                     | Prover backend                                                                                           | For wallets and infrastructure teams that need control over proof generation.                                                                                                        |
-| Hide the link between a user's main wallet and app activity                                 | Private sub-accounts (coming soon)                                                                       | Advanced account-based privacy route; verify wallet and API support before relying on it.                                                                                            |
+| Hide the link between a user's main wallet and app activity                                 | Private sub-accounts (SDK route available; Wallet API pending)                                           | Advanced account-based privacy route; SDK-route teams can start today, dapps relying on the user's wallet must wait.                                                                 |
 
 ## Core surfaces
 
@@ -64,12 +64,20 @@ integrators. Use it when you need to
 manage registration, channels, note discovery, transaction construction, and
 proving providers yourself. See [Build Privacy Wallets](/sdk/getting-started).
 
-### Private sub-accounts (coming soon)
+### Private sub-accounts
 
 Private sub-accounts are for account-based app activity where the user does not
-want a public onchain link to their main wallet. Treat this as an advanced route:
-confirm wallet, SDK, API, and audit readiness before building a production flow
-around it.
+want a public onchain link to their main wallet.
+
+**Status is split.** The **SDK route is available** as of Privacy SDK
+`0.14.3-rc.4`: `transfers.build().subaccounts(dappName).invoke(...)`, backed by
+the `sub_account_anonymizer` contract package. The **Wallet API route is not** —
+no sub-account method is exposed by `@starknet-io/types-js` 0.10.3 or
+starknet.js, so a dapp relying on the user's wallet cannot use them yet.
+
+If you build the account yourself (a wallet, or a backend holding its own keys),
+you can start now. If you rely on the user's wallet, wait for the Wallet API
+call. Confirm audit readiness either way.
 
 ### Prover backend
 
