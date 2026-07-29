@@ -1,6 +1,6 @@
 // Script to make the site agent/LLM-crawlable.
-// The SPA ships content inside a JS bundle, so crawlers fetching a route get an
-// empty HTML shell. This emits, into build/:
+// Routes are prerendered (see prerender.ts), so crawlers do get HTML - but
+// agents are better served plain Markdown. This emits, into build/:
 //   - <route>.md        raw Markdown mirror of every page
 //   - llms.txt          llms.txt-style index pointing at the .md mirrors
 //   - llms-full.txt     the whole site as one Markdown file
