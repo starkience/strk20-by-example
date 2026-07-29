@@ -18,8 +18,7 @@
 
 import fs from "fs"
 import path from "path"
-import { getFiles } from "./lib"
-import { ROUTES_BY_CATEGORY, Route, RouteGroup } from "../src/nav"
+import { ROUTES, ROUTES_BY_CATEGORY, Route, RouteGroup } from "../src/nav"
 
 const { readFile, writeFile } = fs.promises
 
@@ -159,18 +158,15 @@ function homeContent(): string {
   )
 }
 
+// Route list must come from the same source as build-llms.ts (ROUTES_BY_CATEGORY,
+// via its ROUTES flattening) rather than a filesystem glob of index.tsx. A page
+// can exist on disk (build-able, kept in the repo) without being listed in the
+// nav - see the anonymous-airdrop comment in src/nav.ts - and such a page must
+// not be prerendered, linked as rel="alternate", or added to the sitemap while
+// it carries no content. Globbing the filesystem prerendered it anyway, which
+// is exactly the drift this fixes.
 async function collectRoutes(): Promise<string[][]> {
-  const files = await getFiles(PAGES_DIR, new RegExp("index.tsx"))
-  const routes: string[][] = []
-  for (const file of files) {
-    const parts = file.split(path.sep).reverse()
-    const i = parts.findIndex((p) => p === "pages")
-    const route = parts.slice(1, i).reverse()
-    if (route.length > 0) {
-      routes.push(route)
-    }
-  }
-  return routes
+  return ROUTES.map((route) => route.path.split("/").filter(Boolean))
 }
 
 async function main() {
