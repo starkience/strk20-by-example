@@ -134,10 +134,11 @@ function pageContent(meta: PageMeta): string {
 // Homepage: no index.html.ts, so render the nav as a linked table of contents.
 function homeContent(): string {
   const sections = ROUTES_BY_CATEGORY.map((category) => {
+    // r.path already carries its leading slash (see prefixRoutes in src/nav.ts).
+    // Prepending another produced "//route", which the browser resolves as a
+    // protocol-relative URL pointing at the host "route".
     const routeList = (routes: Route[]) =>
-      routes
-        .map((r) => `<li><a href="/${r.path}">${escapeHtml(r.title)}</a></li>`)
-        .join("")
+      routes.map((r) => `<li><a href="${r.path}">${escapeHtml(r.title)}</a></li>`).join("")
     const groups = (category.groups ?? [])
       .map(
         (g: RouteGroup) =>
