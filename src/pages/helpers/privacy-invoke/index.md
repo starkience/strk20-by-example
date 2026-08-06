@@ -72,3 +72,11 @@ calldata in, `Span<OpenNoteDeposit>` out.
 The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
 lending integration. To call one of them from a dapp, see
 [Private DeFi End to End](/starknet-wallet-api/private-defi).
+
+For a helper pair that crosses chains rather than protocols, read the
+`OutboundAnonymizer` and `InboundAnonymizer` contracts in
+[starkware-libs/privacy-bridge](https://github.com/starkware-libs/privacy-bridge):
+they move USDC between the pool and EVM chains over Circle's CCTP, and the
+inbound side pairs `privacy_invoke` with the pool's `privacy_compute` mechanism
+so the attested cross-chain message and the private note are bound in a single
+transaction.

@@ -53,6 +53,11 @@ lower-level route when your product needs more control.</p>
 <td>Private sub-accounts (SDK route available; Wallet API pending)</td>
 <td>Advanced account-based privacy route; SDK-route teams can start today, dapps relying on the user&#39;s wallet must wait.</td>
 </tr>
+<tr>
+<td>Let users fund a private balance from an EVM wallet and withdraw it back to one</td>
+<td><a href="https://github.com/starkware-libs/privacy-bridge">Privacy Bridge</a></td>
+<td>Moves USDC between EVM chains and the pool over Circle CCTP, with its own inbound/outbound anonymizer contracts, so the two sides are not linked onchain.</td>
+</tr>
 </tbody></table>
 <h2 id="core-surfaces">Core surfaces</h2>
 <h3 id="strk20-pool">STRK20 pool</h3>
@@ -73,6 +78,21 @@ adapters for private DeFi. The pool withdraws tokens to the helper, calls its
 instructions for whatever should be credited back into private notes. This is the
 focus for <strong>core builders shipping private dapps</strong>. See
 <a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a>.</p>
+<h3 id="privacy-bridge-evm-to-pool">Privacy Bridge (EVM to pool)</h3>
+<p>Most users hold their USDC on an EVM chain, not on Starknet. The
+<a href="https://github.com/starkware-libs/privacy-bridge">Privacy Bridge</a> is a
+value-movement engine for exactly that gap: it takes USDC from an EVM wallet and
+deposits it into the pool as a private note, and moves value back out to an EVM
+chain, using Circle&#39;s CCTP for the cross-chain leg. Both directions run through
+its own Cairo anonymizer contracts - <code>OutboundAnonymizer</code> on the way out,
+<code>InboundAnonymizer</code> on the way back in - so the deposit side and the withdrawal
+side cannot be linked onchain. All client-side key material is derived from a
+single wallet signature; only the read-only viewing key may be persisted.</p>
+<p>The repository is open source (Apache 2.0) and ships three parts: the
+<code>bridge-anonymizers</code> Cairo contracts, the framework-agnostic
+<code>@starkware-libs/starknet-privacy-bridge</code> TypeScript engine with optional React
+hooks, and a demo web app. It is early and moving fast - read its README before
+planning around it.</p>
 <h3 id="build-privacy-wallets">Build Privacy Wallets</h3>
 <p>The Build Privacy Wallets section is the lower-level SDK route for teams building
 <strong>privacy wallets on Starknet</strong>, account-controlled backends, and advanced

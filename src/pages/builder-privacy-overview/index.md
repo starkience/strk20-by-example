@@ -29,6 +29,7 @@ lower-level route when your product needs more control.
 | Build a privacy wallet on Starknet                                                          | [Build Privacy Wallets](/sdk/getting-started)                                                            | Direct access to registration, channels, note discovery, transaction building, and proving configuration.                                                                            |
 | Operate proving infrastructure yourself                                                     | Prover backend                                                                                           | For wallets and infrastructure teams that need control over proof generation.                                                                                                        |
 | Hide the link between a user's main wallet and app activity                                 | Private sub-accounts (SDK route available; Wallet API pending)                                           | Advanced account-based privacy route; SDK-route teams can start today, dapps relying on the user's wallet must wait.                                                                 |
+| Let users fund a private balance from an EVM wallet and withdraw it back to one             | [Privacy Bridge](https://github.com/starkware-libs/privacy-bridge)                                       | Moves USDC between EVM chains and the pool over Circle CCTP, with its own inbound/outbound anonymizer contracts, so the two sides are not linked onchain.                            |
 
 ## Core surfaces
 
@@ -55,6 +56,24 @@ adapters for private DeFi. The pool withdraws tokens to the helper, calls its
 instructions for whatever should be credited back into private notes. This is the
 focus for **core builders shipping private dapps**. See
 [Anonymizer Contract Anatomy](/helpers/privacy-invoke).
+
+### Privacy Bridge (EVM to pool)
+
+Most users hold their USDC on an EVM chain, not on Starknet. The
+[Privacy Bridge](https://github.com/starkware-libs/privacy-bridge) is a
+value-movement engine for exactly that gap: it takes USDC from an EVM wallet and
+deposits it into the pool as a private note, and moves value back out to an EVM
+chain, using Circle's CCTP for the cross-chain leg. Both directions run through
+its own Cairo anonymizer contracts - `OutboundAnonymizer` on the way out,
+`InboundAnonymizer` on the way back in - so the deposit side and the withdrawal
+side cannot be linked onchain. All client-side key material is derived from a
+single wallet signature; only the read-only viewing key may be persisted.
+
+The repository is open source (Apache 2.0) and ships three parts: the
+`bridge-anonymizers` Cairo contracts, the framework-agnostic
+`@starkware-libs/starknet-privacy-bridge` TypeScript engine with optional React
+hooks, and a demo web app. It is early and moving fast - read its README before
+planning around it.
 
 ### Build Privacy Wallets
 

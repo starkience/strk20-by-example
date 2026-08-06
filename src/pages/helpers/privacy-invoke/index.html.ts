@@ -107,6 +107,13 @@ invoke per pool transaction.</li>
 <p>The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
 lending integration. To call one of them from a dapp, see
 <a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a>.</p>
+<p>For a helper pair that crosses chains rather than protocols, read the
+<code>OutboundAnonymizer</code> and <code>InboundAnonymizer</code> contracts in
+<a href="https://github.com/starkware-libs/privacy-bridge">starkware-libs/privacy-bridge</a>:
+they move USDC between the pool and EVM chains over Circle&#39;s CCTP, and the
+inbound side pairs <code>privacy_invoke</code> with the pool&#39;s <code>privacy_compute</code> mechanism
+so the attested cross-chain message and the private note are bound in a single
+transaction.</p>
 `
 
 export default html

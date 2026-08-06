@@ -45,6 +45,10 @@ route that fits your product, and only move lower when you need more control.</p
 <td>Hide a user&#39;s main-wallet link during account-based app activity</td>
 <td>Private sub-accounts (SDK route available; Wallet API pending)</td>
 </tr>
+<tr>
+<td>Fund a private balance from an EVM wallet, or withdraw it back to one</td>
+<td><a href="https://github.com/starkware-libs/privacy-bridge">Privacy Bridge</a></td>
+</tr>
 </tbody></table>
 <h2 id="core-pieces">Core pieces</h2>
 <ul>
@@ -59,6 +63,12 @@ calls the helper atomically, then credits the result back into private notes.</l
 need direct control over registration, channels, note discovery, and proving.
 Open source (Apache 2.0): <a href="https://github.com/starkware-libs/starknet-privacy">starkware-libs/starknet-privacy</a>,
 quickstart in <a href="https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/README.md"><code>sdk/README.md</code></a>.</li>
+<li><strong>Privacy Bridge:</strong> a value-movement engine that moves USDC between EVM
+wallets/chains and the pool over Circle CCTP, so the funding side and the
+withdrawal side are not linked onchain. It ships its own <code>OutboundAnonymizer</code>
+and <code>InboundAnonymizer</code> Cairo contracts plus a TypeScript engine with React
+hooks. Open source (Apache 2.0), early:
+<a href="https://github.com/starkware-libs/privacy-bridge">starkware-libs/privacy-bridge</a>.</li>
 <li><strong>Private sub-accounts:</strong> an advanced account-privacy route for hiding the
 public link between a user&#39;s main wallet and app activity. The SDK route ships
 in Privacy SDK <code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps
