@@ -1,6 +1,5 @@
 import component_actions_and_proofs from "./pages/actions-and-proofs"
 import component_agent_skill from "./pages/agent-skill"
-import component_app_tip_jar from "./pages/app/tip-jar"
 import component_app_anonymous_airdrop from "./pages/app/anonymous-airdrop"
 import component_builder_privacy_overview from "./pages/builder-privacy-overview"
 import component_channels_and_subchannels from "./pages/channels-and-subchannels"
@@ -53,10 +52,6 @@ const routes: Route[] = [
   {
     path: "/agent-skill",
     component: component_agent_skill,
-  },
-  {
-    path: "/app/tip-jar",
-    component: component_app_tip_jar,
   },
   {
     path: "/app/anonymous-airdrop",

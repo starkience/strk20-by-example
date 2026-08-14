@@ -139,13 +139,8 @@ export const HELPER_ROUTES: Route[] = [
 
 // Anonymous Airdrop is drafted but has no body content yet - keep it out of the
 // nav until it does, so no link leads to an empty page. The page and its route
-// still build; it is simply unlisted.
-export const APP_ROUTES: Route[] = [
-  {
-    path: "tip-jar",
-    title: "Tip Jar",
-  },
-]
+// still build; it is simply unlisted. It is the only page left under /app, so
+// there is no Applications section in the nav right now.
 
 function prefixRoutes(prefix: string, routes: Route[]): Route[] {
   return routes.map((route) => ({
@@ -181,10 +176,6 @@ export const ROUTES_BY_CATEGORY: RouteCategory[] = [
   {
     title: "Build Privacy Wallets",
     routes: prefixRoutes("/sdk", BUILD_PRIVACY_WALLET_ROUTES),
-  },
-  {
-    title: "Applications",
-    routes: prefixRoutes("/app", APP_ROUTES),
   },
   {
     title: "Agent Tooling",
