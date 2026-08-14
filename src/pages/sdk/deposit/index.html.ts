@@ -12,9 +12,9 @@ export const keywords = ["deposit", "erc20", "approve", "surplusTo", "note", "ma
 export const codes = []
 
 const html = `<p>A deposit moves public ERC-20 tokens into the pool and mints a private note.
-The pool pulls tokens with <code>transfer_from</code> while the proof executes, so the
-ERC-20 <code>approve</code> must already be visible on-chain - it is a <strong>separate
-transaction</strong>, submitted and waited on first.</p>
+The pool pulls the tokens with <code>transfer_from</code>, so it needs an ERC-20 allowance
+from you. In the flow below the <code>approve</code> is its own transaction, submitted and
+waited on first.</p>
 <p>Snippets assume <code>transfers</code>, <code>account</code> and <code>provider</code> from
 <a href="/sdk/getting-started">Getting Started</a>.</p>
 <pre><code class="language-typescript"><span class="hljs-keyword">const</span> poolAddress = process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!
@@ -50,9 +50,6 @@ transaction</strong>, submitted and waited on first.</p>
 <span class="hljs-keyword">await</span> provider.<span class="hljs-title function_">waitForTransaction</span>(tx.<span class="hljs-property">transaction_hash</span>)
 </code></pre><h2 id="things-to-notice">Things to notice</h2>
 <ul>
-<li><strong>Two transactions, never one.</strong> The pool&#39;s <code>apply_actions</code> entrypoint is
-reentrancy-guarded against sharing a transaction with other calls, so you
-cannot batch <code>approve</code> and the deposit into a single <code>account.execute</code>.</li>
 <li>The deposit omits <code>recipient</code>; <code>surplusTo(account.address)</code> directs the
 unassigned amount into a note owned by you. This is the shape that scales
 to deposit-and-transfer on the next page.</li>
