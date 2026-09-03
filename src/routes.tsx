@@ -4,6 +4,7 @@ import component_app_anonymous_airdrop from "./pages/app/anonymous-airdrop"
 import component_builder_privacy_overview from "./pages/builder-privacy-overview"
 import component_channels_and_subchannels from "./pages/channels-and-subchannels"
 import component_compliance from "./pages/compliance"
+import component_contract_addresses from "./pages/contract-addresses"
 import component_helpers_escrow from "./pages/helpers/escrow"
 import component_helpers_privacy_invoke from "./pages/helpers/privacy-invoke"
 import component_helpers_swap_helper from "./pages/helpers/swap-helper"
@@ -68,6 +69,10 @@ const routes: Route[] = [
   {
     path: "/compliance",
     component: component_compliance,
+  },
+  {
+    path: "/contract-addresses",
+    component: component_contract_addresses,
   },
   {
     path: "/helpers/escrow",

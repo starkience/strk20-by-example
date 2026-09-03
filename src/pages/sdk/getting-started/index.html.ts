@@ -78,7 +78,9 @@ plain config objects and the SDK constructs the production providers for you.</p
 from the package root and can be passed as instances instead — see
 <a href="/sdk/discovery-providers">Discovery Providers</a>.</p>
 <p>On Sepolia, <code>POOL_ADDRESS</code> is the privacy pool (v2.0) deployed at
-<a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.</p>
+<a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.
+See <a href="/contract-addresses">Deployed Contract Addresses</a> for the Mainnet pool and
+the verified anonymizer deployments on both networks.</p>
 <h2 id="going-deeper">Going deeper</h2>
 <p>The SDK is open source (Apache 2.0):
 <a href="https://github.com/starkware-libs/starknet-privacy">starkware-libs/starknet-privacy</a>.

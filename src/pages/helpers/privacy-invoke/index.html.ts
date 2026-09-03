@@ -107,6 +107,8 @@ invoke per pool transaction.</li>
 <p>The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
 lending integration. To call one of them from a dapp, see
 <a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a>.</p>
+<p>For the public pool and helper deployments currently verified on Mainnet and
+Sepolia, see <a href="/contract-addresses">Deployed Contract Addresses</a>.</p>
 <p>For a helper pair that crosses chains rather than protocols, read the
 <code>OutboundAnonymizer</code> and <code>InboundAnonymizer</code> contracts in
 <a href="https://github.com/starkware-libs/privacy-bridge">starkware-libs/privacy-bridge</a>:

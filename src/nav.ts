@@ -25,6 +25,10 @@ export const CONCEPT_ROUTES: Route[] = [
     title: "Builder Privacy Overview",
   },
   {
+    path: "contract-addresses",
+    title: "Deployed Contracts",
+  },
+  {
     path: "notes-and-nullifiers",
     title: "Notes & Nullifiers",
   },

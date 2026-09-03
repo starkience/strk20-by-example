@@ -73,6 +73,9 @@ The next two pages build real helpers on this skeleton: a DEX swap and a Vesu
 lending integration. To call one of them from a dapp, see
 [Private DeFi End to End](/starknet-wallet-api/private-defi).
 
+For the public pool and helper deployments currently verified on Mainnet and
+Sepolia, see [Deployed Contract Addresses](/contract-addresses).
+
 For a helper pair that crosses chains rather than protocols, read the
 `OutboundAnonymizer` and `InboundAnonymizer` contracts in
 [starkware-libs/privacy-bridge](https://github.com/starkware-libs/privacy-bridge):

@@ -41,6 +41,9 @@ it cannot shield for you.</li>
 })
 </code></pre><p><code>PRIVACY_POOL_ADDRESS</code> targets <strong>mainnet</strong>; for Sepolia testing, AVNU also
 exports <code>SEPOLIA_PRIVACY_POOL_ADDRESS</code>.</p>
+<p>The currently verified AVNU executor and both pool addresses are listed under
+<a href="/contract-addresses">Deployed Contract Addresses</a>. The executor address is
+also returned with each private quote; use that response at runtime.</p>
 <p>AVNU&#39;s paymaster relays the transaction, so the submitting address is not the
 user&#39;s.</p>
 <p>If a paymaster API key is required (the <code>sponsored_private</code> fee mode), keep

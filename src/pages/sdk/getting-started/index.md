@@ -95,6 +95,8 @@ from the package root and can be passed as instances instead — see
 
 On Sepolia, `POOL_ADDRESS` is the privacy pool (v2.0) deployed at
 [`0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91`](https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91).
+See [Deployed Contract Addresses](/contract-addresses) for the Mainnet pool and
+the verified anonymizer deployments on both networks.
 
 ## Going deeper
 

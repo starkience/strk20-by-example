@@ -46,6 +46,10 @@ const { transactionHash } = await executePrivateSwap({
 `PRIVACY_POOL_ADDRESS` targets **mainnet**; for Sepolia testing, AVNU also
 exports `SEPOLIA_PRIVACY_POOL_ADDRESS`.
 
+The currently verified AVNU executor and both pool addresses are listed under
+[Deployed Contract Addresses](/contract-addresses). The executor address is
+also returned with each private quote; use that response at runtime.
+
 AVNU's paymaster relays the transaction, so the submitting address is not the
 user's.
 
