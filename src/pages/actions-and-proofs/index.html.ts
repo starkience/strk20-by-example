@@ -69,9 +69,12 @@ never go backwards:</p>
 <td>-</td>
 </tr>
 </tbody></table>
-<p><code>ComputeAndInvoke</code> is the sub-account path: it runs <code>privacy_compute</code> client-side
-and forwards the result as a server-side invoke. It shares phase 7 with
-<code>InvokeExternal</code>, and the "at most once" rule covers the two jointly.</p>
+<p><code>ComputeAndInvoke</code> is the path used by
+<a href="/sdk/shadow-accounts">shadow accounts</a>. During proving, the pool calls the
+<code>ShadowAccountAnonymizer</code>&#39;s <code>privacy_compute</code> with the derived identity key,
+dapp name, and nonce, then passes that result into
+<code>privacy_invoke_with_computation</code>. It shares phase 7 with <code>InvokeExternal</code>, and
+the "at most once" rule covers the two jointly.</p>
 <p>The fixed ordering removes state-machine ambiguity: there is exactly one way to
 encode a given semantic operation, which closes whole classes of ordering bugs.
 <code>InvokeExternal</code> is the composability hook - it calls an anonymizer contract

@@ -55,13 +55,13 @@ is confidential rather than fully private: the link to the user is hidden,
 but the app-side action and amounts can still be public.</li>
 <li><strong>Withdraw</strong> - move tokens back out of the pool to a public address.</li>
 </ol>
-<p><strong>Private sub-accounts</strong> widen the DeFi leg: account-based flows such as
-borrowing and staking run through real Starknet accounts that carry no public
-onchain link back to the user&#39;s main wallet, and using fresh sub-accounts per
-app fragments the trail further. The same caveat applies - app-side activity
-and amounts can still be public. The SDK route ships as of Privacy SDK
-<code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps relying on the
-user&#39;s wallet cannot use them yet.</p>
+<p><strong>Shadow accounts</strong> widen the DeFi leg: account-based flows such as borrowing
+and staking run through persistent, deterministic addresses with no public
+onchain link back to the user&#39;s main wallet. Each dapp and nonce can use a
+different identity. The shadow account&#39;s balances, calls, and positions remain
+public; its privacy comes from unlinkability. Shadow accounts are available
+through both the <a href="/starknet-wallet-api/shadow-accounts">Starknet Wallet API</a> and
+the <a href="/sdk/shadow-accounts">Privacy SDK</a>.</p>
 <h2 id="what-makes-it-different">What makes it different</h2>
 <ul>
 <li><strong>Native to Starknet</strong> - no separate chain or bridge. It runs as a contract on
@@ -102,6 +102,10 @@ exposing unrelated users.</li>
 <tr>
 <td>Anonymizer contract</td>
 <td>Small adapter that lets pool funds interact with external DeFi</td>
+</tr>
+<tr>
+<td>Shadow account</td>
+<td>Persistent per-dapp address that is not publicly linked to the user&#39;s main wallet</td>
 </tr>
 <tr>
 <td>Deposit screening</td>

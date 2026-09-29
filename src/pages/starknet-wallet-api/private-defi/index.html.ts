@@ -20,7 +20,7 @@ const html = `<p>The <a href="/helpers/privacy-invoke">anonymizer contract pages
 This page covers the other half: how a dapp actually reaches that contract
 through the <a href="/starknet-wallet-api/overview">Starknet Wallet API</a>, without ever
 touching a viewing key.</p>
-<p>Requires <code>starknet@^10.4.0</code> and a wallet supporting Wallet API <code>0.10.3</code>.</p>
+<p>Requires <code>starknet@^10.8.0</code> and a wallet supporting Wallet API <code>0.10.4</code>.</p>
 <h2 id="the-two-actions">The two actions</h2>
 <p>A private DeFi call is <strong>one</strong> STRK20 transaction carrying two actions:</p>
 <ol>
@@ -49,7 +49,7 @@ after the helper runs on-chain.</li>
 <p>That indirection is what lets you reference a note that does not exist yet at
 the time you build the calldata.</p>
 <h2 id="a-private-swap">A private swap</h2>
-<pre><code class="language-ts"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">STRK20</span>_ACTION } <span class="hljs-keyword">from</span> <span class="hljs-string">"@starknet-io/types-js"</span>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">STRK20</span>_ACTION } <span class="hljs-keyword">from</span> <span class="hljs-string">"starknet"</span>
 
 <span class="hljs-keyword">const</span> <span class="hljs-attr">actions</span>: <span class="hljs-title class_">STRK20</span>_ACTION[] = [
   <span class="hljs-comment">// 1. Open the note the swap output will be credited into.</span>
@@ -70,6 +70,11 @@ atomically. Observers see pool → helper → AMM → helper. They do not see wh
 initiated it.</p>
 <p>Match the calldata order to your helper&#39;s <code>privacy_invoke</code> signature; the pool
 deserializes it directly into that function&#39;s parameters.</p>
+<p>Use a helper <code>invoke</code> for a shared, stateless operation such as an atomic swap.
+Use <a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a> when the protocol
+needs a stable pseudonymous caller or a position that persists across
+transactions. The two routes share the transaction&#39;s single invoke-phase slot,
+so they cannot be combined in one STRK20 transaction.</p>
 <h2 id="dry-run-first">Dry-run first</h2>
 <p><code>strk20PrepareInvoke</code> builds and proves the same actions without submitting,
 which is the cheapest way to catch a calldata-shape mistake:</p>
@@ -87,6 +92,7 @@ measured at execution time. Deposits and withdrawals remain public legs.</p>
 <li><a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a></li>
 <li><a href="/helpers/swap-helper">Swap Helper</a></li>
 <li><a href="/starknet-wallet-api/avnu-private-swaps">AVNU Private Swaps</a> - swaps without writing a helper at all</li>
+<li><a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a> - persistent per-dapp identity</li>
 </ul>
 `
 

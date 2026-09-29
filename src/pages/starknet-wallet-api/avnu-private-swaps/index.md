@@ -13,12 +13,12 @@ dapp can offer private swaps with **no Cairo to write, review, or audit**.
 ## Install
 
 ```shell
-npm install @avnu/avnu-sdk@^4.2.0 starknet@^10.4.0
+npm install @avnu/avnu-sdk@^4.2.0 starknet@^10.8.0
 ```
 
 ## What you need
 
-- A STRK20-capable wallet (Wallet API `>= 0.10.3`).
+- A STRK20-capable wallet (Wallet API `>= 0.10.4`).
 - The sell token **already shielded** — the swap moves value inside the pool, so
   it cannot shield for you.
 

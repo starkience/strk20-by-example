@@ -16,6 +16,7 @@ export const keywords = [
   "shield",
   "private transfer",
   "withdraw",
+  "shadow account",
   "privacy wallet",
 ]
 
@@ -31,11 +32,11 @@ wallets. If you are building the wallet itself, use the
 <a href="/sdk/getting-started">Build Privacy Wallets</a>. If your app needs private DeFi,
 pair this route with an <a href="/helpers/privacy-invoke">Anonymizer Contract</a>.</p>
 <h2 id="install">Install</h2>
-<pre><code class="language-shell">npm install starknet@^10.4.0
-</code></pre><p><strong>Pin the version.</strong> STRK20 support landed in starknet.js 10.4.0 and ships on the
-npm <code>next</code> tag. A bare <code>npm install starknet</code> resolves to <code>latest</code>, which is
-still 10.0.x and contains none of the STRK20 API — <code>WalletAccountV6</code>,
-<code>strk20InvokeTransaction</code>, and <code>STRK20_ACTION</code> will all be missing.</p>
+<pre><code class="language-shell">npm install starknet@^10.8.0
+</code></pre><p><strong>Pin the version.</strong> starknet.js <code>10.8.0</code> is the current stable release and
+includes Wallet API <code>0.10.4</code>, including shadow accounts. The <code>11.x</code> line is
+published on the npm <code>next</code> tag; use it only when your app has completed the
+<a href="https://starknet-js.com/docs/guides/migrate/">v10 to v11 migration</a>.</p>
 <h2 id="why-most-dapps-want-this-route">Why most dapps want this route</h2>
 <ul>
 <li><strong>No viewing keys in your app.</strong> The wallet holds the user&#39;s viewing key; your
@@ -71,11 +72,15 @@ the ZK proofs and signatures are managed wallet-side.</p>
 <li><strong>Shield</strong> - deposit public ERC-20 tokens into the pool.</li>
 <li><strong>Private transfer</strong> - move value privately between registered users.</li>
 <li><strong>Withdraw (unshield)</strong> - move tokens back out to a public address.</li>
+<li><strong>Use a shadow account</strong> - act through a persistent per-dapp address that is
+not publicly linked to the user&#39;s main wallet.</li>
 <li><strong>Swap</strong> - where the connected wallet supports it.</li>
 </ul>
 <p>Broader DeFi actions (lending, staking, custom flows) pair the Starknet Wallet
 API with an app-specific anonymizer contract that the pool invokes atomically —
-see <a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a> for the wiring.</p>
+see <a href="/starknet-wallet-api/private-defi">Private DeFi End to End</a> for the wiring.
+For positions that need a stable pseudonymous caller, use
+<a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a> instead.</p>
 <h2 id="what-to-keep-in-mind">What to keep in mind</h2>
 <ul>
 <li><strong>Wallet support varies.</strong> Available actions depend on the connected wallet;
@@ -106,6 +111,7 @@ contract details for your target network before launch.</li>
 <ul>
 <li><a href="/starknet-wallet-api/starknet-start-hook">starknet-start</a></li>
 <li><a href="/starknet-wallet-api/starknet-js">starknet.js</a></li>
+<li><a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a></li>
 <li><a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a></li>
 <li><a href="/sdk/getting-started">Build Privacy Wallets</a></li>
 </ul>

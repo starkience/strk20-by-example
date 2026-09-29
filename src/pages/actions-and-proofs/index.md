@@ -20,9 +20,12 @@ never go backwards:
 | 6     | `Withdraw`                                          | − amount               |
 | 7     | `InvokeExternal` / `ComputeAndInvoke` (at most one) | -                      |
 
-`ComputeAndInvoke` is the sub-account path: it runs `privacy_compute` client-side
-and forwards the result as a server-side invoke. It shares phase 7 with
-`InvokeExternal`, and the "at most once" rule covers the two jointly.
+`ComputeAndInvoke` is the path used by
+[shadow accounts](/sdk/shadow-accounts). During proving, the pool calls the
+`ShadowAccountAnonymizer`'s `privacy_compute` with the derived identity key,
+dapp name, and nonce, then passes that result into
+`privacy_invoke_with_computation`. It shares phase 7 with `InvokeExternal`, and
+the "at most once" rule covers the two jointly.
 
 The fixed ordering removes state-machine ambiguity: there is exactly one way to
 encode a given semantic operation, which closes whole classes of ordering bugs.

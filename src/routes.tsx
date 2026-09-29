@@ -20,9 +20,13 @@ import component_sdk_note_discovery from "./pages/sdk/note-discovery"
 import component_sdk_proving_config from "./pages/sdk/proving-config"
 import component_sdk_register from "./pages/sdk/register"
 import component_sdk_setup_requirements from "./pages/sdk/setup-requirements"
+import component_sdk_shadow_accounts from "./pages/sdk/shadow-accounts"
 import component_sdk_transfer from "./pages/sdk/transfer"
 import component_sdk_withdraw from "./pages/sdk/withdraw"
+import component_starknet_wallet_api_avnu_private_swaps from "./pages/starknet-wallet-api/avnu-private-swaps"
 import component_starknet_wallet_api_overview from "./pages/starknet-wallet-api/overview"
+import component_starknet_wallet_api_private_defi from "./pages/starknet-wallet-api/private-defi"
+import component_starknet_wallet_api_shadow_accounts from "./pages/starknet-wallet-api/shadow-accounts"
 import component_starknet_wallet_api_starknet_js from "./pages/starknet-wallet-api/starknet-js"
 import component_starknet_wallet_api_starknet_start_hook from "./pages/starknet-wallet-api/starknet-start-hook"
 import component_viewing_keys from "./pages/viewing-keys"
@@ -135,6 +139,10 @@ const routes: Route[] = [
     component: component_sdk_setup_requirements,
   },
   {
+    path: "/sdk/shadow-accounts",
+    component: component_sdk_shadow_accounts,
+  },
+  {
     path: "/sdk/transfer",
     component: component_sdk_transfer,
   },
@@ -143,8 +151,20 @@ const routes: Route[] = [
     component: component_sdk_withdraw,
   },
   {
+    path: "/starknet-wallet-api/avnu-private-swaps",
+    component: component_starknet_wallet_api_avnu_private_swaps,
+  },
+  {
     path: "/starknet-wallet-api/overview",
     component: component_starknet_wallet_api_overview,
+  },
+  {
+    path: "/starknet-wallet-api/private-defi",
+    component: component_starknet_wallet_api_private_defi,
+  },
+  {
+    path: "/starknet-wallet-api/shadow-accounts",
+    component: component_starknet_wallet_api_shadow_accounts,
   },
   {
     path: "/starknet-wallet-api/starknet-js",

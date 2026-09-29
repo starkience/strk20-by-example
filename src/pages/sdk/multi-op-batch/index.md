@@ -60,9 +60,9 @@ const { callAndProof } = await transfers
 - Balance-sheet rule holds **per token**: inputs + deposits must cover
   transfers + withdrawals; `surplusTo` takes each token's remainder. A
   per-token override exists too: `t.surplusTo(...)` inside the block.
-- At most **one `invoke()` per transaction** - the pool contract enforces a
-  single external call per `apply_actions`. The builder errors if you chain
-  two.
+- At most **one invoke-phase action per transaction** - a normal `invoke()` and
+  a [shadow-account invocation](/sdk/shadow-accounts) share the same slot. The
+  builder errors if you chain two.
 - Larger batches mean larger proofs. Very large recipient lists can hit
   proof-size limits; wrap the batch in a try/catch and fall back to
   per-recipient transactions, waiting out the 10-block change-note maturity

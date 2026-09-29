@@ -2,7 +2,7 @@
 export const version = "0.14.3"
 export const title = "Deployed Contract Addresses"
 export const description =
-  "Verified Starknet Mainnet and Sepolia addresses for the STRK20 privacy pool and deployed anonymizer contracts"
+  "Current Starknet Mainnet and Sepolia addresses for the STRK20 privacy pool, shadow accounts, and deployed anonymizer contracts"
 export const githubLink = ""
 export const githubLabel = ""
 
@@ -13,6 +13,7 @@ export const keywords = [
   "mainnet",
   "sepolia",
   "privacy pool",
+  "shadow account",
   "anonymizer",
   "avnu",
   "offmarket",
@@ -21,7 +22,8 @@ export const keywords = [
 
 export const codes = []
 
-const html = `<p>These are the public STRK20 pool and anonymizer deployments verified on <strong>3
+const html = `<p>These are the public STRK20 pool and anonymizer deployments checked against
+their current package configuration or integration documentation on <strong>29
 September 2026</strong>. Use the address for the network your wallet or backend is
 connected to; Mainnet and Sepolia contracts are not interchangeable.</p>
 <h2 id="starknet-mainnet">Starknet Mainnet</h2>
@@ -37,6 +39,11 @@ connected to; Mainnet and Sepolia contracts are not interchangeable.</p>
 <td>STRK20 Privacy Pool</td>
 <td>Holds shielded ERC-20 notes and verifies private actions</td>
 <td><a href="https://voyager.online/contract/0x040337b1af3c663e86e333bab5a4b28da8d4652a15a69beee2b677776ffe812a"><code>0x040337b1af3c663e86e333bab5a4b28da8d4652a15a69beee2b677776ffe812a</code></a></td>
+</tr>
+<tr>
+<td><code>ShadowAccountAnonymizer</code></td>
+<td>Deploys and drives per-dapp shadow accounts through the pool</td>
+<td><a href="https://voyager.online/contract/0x04f33230dc57855c6e7eabe66dfa0fde82c5458fd0e54827cdb7cb4c474888a7"><code>0x04f33230dc57855c6e7eabe66dfa0fde82c5458fd0e54827cdb7cb4c474888a7</code></a></td>
 </tr>
 <tr>
 <td>AVNU <code>PrivacySwapHelper</code></td>
@@ -77,6 +84,11 @@ change.</p>
 <td><a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a></td>
 </tr>
 <tr>
+<td><code>ShadowAccountAnonymizer</code></td>
+<td>Testnet shadow-account infrastructure</td>
+<td><a href="https://sepolia.voyager.online/contract/0x010a2285310c107c731d997afc147afb7495daff6397c2d242133d9fe8d9b147"><code>0x010a2285310c107c731d997afc147afb7495daff6397c2d242133d9fe8d9b147</code></a></td>
+</tr>
+<tr>
 <td>Privacy Bridge / OFFMARKET <code>OutboundAnonymizer</code></td>
 <td>Testnet outbound CCTP helper</td>
 <td><a href="https://sepolia.voyager.online/contract/0x05b85f2ae4d47c1e661533d5832fe3e4afd4c6a9b52e54b7f873a00c9b285f4e"><code>0x05b85f2ae4d47c1e661533d5832fe3e4afd4c6a9b52e54b7f873a00c9b285f4e</code></a></td>
@@ -90,8 +102,7 @@ change.</p>
 <p>No public Sepolia deployment was confirmed for the AVNU or Endur helpers, so
 their Mainnet addresses must not be reused on Sepolia.</p>
 <h2 id="what-is-not-in-the-list">What is not in the list</h2>
-<p><code>EkuboSwapAnonymizer</code>, <code>VesuLendingAnonymizer</code>, and
-<code>ShadowAccountAnonymizer</code> are reference packages in the
+<p><code>EkuboSwapAnonymizer</code> and <code>VesuLendingAnonymizer</code> are reference packages in the
 <a href="https://github.com/starkware-libs/starknet-privacy">starknet-privacy monorepo</a>,
 but that repository does not currently publish canonical Mainnet or Sepolia
 deployment addresses for them. The swap helper and escrow elsewhere on this
@@ -104,8 +115,10 @@ addresses are intentionally excluded.</p>
 <code>PRIVACY_POOL_ADDRESS</code> and <code>SEPOLIA_PRIVACY_POOL_ADDRESS</code>.</li>
 <li>The pool and Privacy Bridge defaults are pinned per network in the
 <a href="https://github.com/starkware-libs/privacy-bridge/blob/main/packages/bridge-core/src/core/config.ts">bridge-core configuration</a>.</li>
-<li>Every address above was checked against its network&#39;s current on-chain class.
-The helper ABIs identify <code>PrivacySwapHelperImpl</code>,
+<li>The shadow-account deployments are published in the current
+<a href="https://starknet-js.com/docs/guides/account/walletAccount/#address-of-a-shadow-account">starknet.js WalletAccount guide</a>.</li>
+<li>The previously listed helper addresses were checked against their network&#39;s
+on-chain classes. Their ABIs identify <code>PrivacySwapHelperImpl</code>,
 <code>OutboundAnonymizerImpl</code>, <code>InboundAnonymizerImpl</code>, and
 <code>EndurDepositAnonymizerImpl</code> respectively.</li>
 </ul>

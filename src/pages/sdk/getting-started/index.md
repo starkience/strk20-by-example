@@ -26,7 +26,7 @@ keys inside the wallet. Everything here goes through one factory:
 ## Install
 
 ```shell
-npm install @starkware-libs/starknet-privacy-sdk
+npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 ```
 
 The SDK requires **Node.js >= 24** (its `ohttp-ts` dependency needs modern WebCrypto).
@@ -42,7 +42,7 @@ gh auth refresh -h github.com -s read:packages
 npm config set @starkware-libs:registry https://npm.pkg.github.com
 npm config set '//npm.pkg.github.com/:_authToken' "$(gh auth token)"
 
-npm install @starkware-libs/starknet-privacy-sdk
+npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 ```
 
 Or skip the registry entirely and install from git at a specific commit:
@@ -85,6 +85,8 @@ const transfers = createPrivateTransfers({
   },
   discoveryProvider: { url: process.env.INDEXER_URL! },
   poolContractAddress: process.env.POOL_ADDRESS!,
+  // Required only when using transfers.build().shadowAccounts(...).
+  shadowAccountAnonymizerAddress: process.env.SHADOW_ACCOUNT_ANONYMIZER_ADDRESS,
 })
 ```
 
@@ -97,6 +99,10 @@ On Sepolia, `POOL_ADDRESS` is the privacy pool (v2.0) deployed at
 [`0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91`](https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91).
 See [Deployed Contract Addresses](/contract-addresses) for the Mainnet pool and
 the verified anonymizer deployments on both networks.
+
+If you configured `shadowAccountAnonymizerAddress`, continue with
+[Shadow Accounts](/sdk/shadow-accounts) for commitment derivation and
+invocation.
 
 ## Going deeper
 

@@ -27,7 +27,7 @@ If you are building a private dapp on top of an existing wallet, use the
 keys inside the wallet. Everything here goes through one factory:
 <code>createPrivateTransfers</code>.</p>
 <h2 id="install">Install</h2>
-<pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk
+<pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 </code></pre><p>The SDK requires <strong>Node.js &gt;= 24</strong> (its <code>ohttp-ts</code> dependency needs modern WebCrypto).</p>
 <p><strong>Getting a 404?</strong> Known temporary issue - the package is not on npmjs.com yet
 while StarkWare restores access to its npm org. Until then it is published to
@@ -38,7 +38,7 @@ which needs a GitHub token even for public packages. With the
 npm config set @starkware-libs:registry https://npm.pkg.github.com
 npm config set &#x27;//npm.pkg.github.com/:_authToken&#x27; "$(gh auth token)"
 
-npm install @starkware-libs/starknet-privacy-sdk
+npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 </code></pre><p>Or skip the registry entirely and install from git at a specific commit:</p>
 <pre><code class="language-shell">npm install "starkware-libs/starknet-privacy#&lt;commit-sha&gt;"
 </code></pre><h2 id="wire-it-up">Wire it up</h2>
@@ -72,6 +72,8 @@ plain config objects and the SDK constructs the production providers for you.</p
   },
   <span class="hljs-attr">discoveryProvider</span>: { <span class="hljs-attr">url</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">INDEXER_URL</span>! },
   <span class="hljs-attr">poolContractAddress</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">POOL_ADDRESS</span>!,
+  <span class="hljs-comment">// Required only when using transfers.build().shadowAccounts(...).</span>
+  <span class="hljs-attr">shadowAccountAnonymizerAddress</span>: process.<span class="hljs-property">env</span>.<span class="hljs-property">SHADOW_ACCOUNT_ANONYMIZER_ADDRESS</span>,
 })
 </code></pre><p>If you need to configure a provider beyond what the config object exposes,
 <code>ProvingServiceProofProvider</code> and <code>IndexerDiscoveryProvider</code> are both exported
@@ -81,6 +83,9 @@ from the package root and can be passed as instances instead — see
 <a href="https://sepolia.voyager.online/contract/0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91"><code>0x0254a6b2997ef52e9f830ce1f543f6b29768295e8d17e2267d672c552cfe0d91</code></a>.
 See <a href="/contract-addresses">Deployed Contract Addresses</a> for the Mainnet pool and
 the verified anonymizer deployments on both networks.</p>
+<p>If you configured <code>shadowAccountAnonymizerAddress</code>, continue with
+<a href="/sdk/shadow-accounts">Shadow Accounts</a> for commitment derivation and
+invocation.</p>
 <h2 id="going-deeper">Going deeper</h2>
 <p>The SDK is open source (Apache 2.0):
 <a href="https://github.com/starkware-libs/starknet-privacy">starkware-libs/starknet-privacy</a>.

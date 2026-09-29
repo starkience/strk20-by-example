@@ -43,7 +43,7 @@ route that fits your product, and only move lower when you need more control.</p
 </tr>
 <tr>
 <td>Hide a user&#39;s main-wallet link during account-based app activity</td>
-<td>Private sub-accounts (SDK route available; Wallet API pending)</td>
+<td><a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a></td>
 </tr>
 <tr>
 <td>Fund a private balance from an EVM wallet, or withdraw it back to one</td>
@@ -69,10 +69,10 @@ withdrawal side are not linked onchain. It ships its own <code>OutboundAnonymize
 and <code>InboundAnonymizer</code> Cairo contracts plus a TypeScript engine with React
 hooks. Open source (Apache 2.0), early:
 <a href="https://github.com/starkware-libs/privacy-bridge">starkware-libs/privacy-bridge</a>.</li>
-<li><strong>Private sub-accounts:</strong> an advanced account-privacy route for hiding the
-public link between a user&#39;s main wallet and app activity. The SDK route ships
-in Privacy SDK <code>0.14.3-rc.4</code>; the Wallet API route is still pending, so dapps
-relying on the user&#39;s wallet cannot use them yet.</li>
+<li><strong>Shadow accounts:</strong> persistent, pseudonymous per-dapp identities that hide
+the public link to a user&#39;s main wallet. They are available through Wallet API
+<code>0.10.4</code> with starknet.js <code>10.8.0</code>, and through Privacy SDK <code>0.14.3-rc.8</code>.
+The shadow account&#39;s own balances and calls remain public.</li>
 <li><strong>Prover backend:</strong> infrastructure for teams that need to operate their own proof
 generation.</li>
 </ul>

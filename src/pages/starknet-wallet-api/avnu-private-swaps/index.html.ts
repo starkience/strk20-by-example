@@ -15,10 +15,10 @@ const html = `<p>Most private DeFi needs an app-specific
 <a href="https://docs.avnu.fi/docs/privacy">AVNU</a> has deployed its own executor, so a
 dapp can offer private swaps with <strong>no Cairo to write, review, or audit</strong>.</p>
 <h2 id="install">Install</h2>
-<pre><code class="language-shell">npm install @avnu/avnu-sdk@^4.2.0 starknet@^10.4.0
+<pre><code class="language-shell">npm install @avnu/avnu-sdk@^4.2.0 starknet@^10.8.0
 </code></pre><h2 id="what-you-need">What you need</h2>
 <ul>
-<li>A STRK20-capable wallet (Wallet API <code>&gt;= 0.10.3</code>).</li>
+<li>A STRK20-capable wallet (Wallet API <code>&gt;= 0.10.4</code>).</li>
 <li>The sell token <strong>already shielded</strong> — the swap moves value inside the pool, so
 it cannot shield for you.</li>
 </ul>

@@ -14,6 +14,7 @@ export const keywords = [
   "private dapp",
   "proof handling",
   "connection",
+  "shadow account",
 ]
 
 export const codes = []
@@ -23,11 +24,11 @@ const html = `<p>The <strong><code>starknet.js</code> <code>WalletAccountV6</cod
 <strong>outside React</strong>, or when you need <strong>finer control over connection and proof
 handling</strong> than the React hooks provide.</p>
 <h2 id="install">Install</h2>
-<pre><code class="language-shell">npm install starknet@^10.4.0
-</code></pre><p><strong>Pin the version.</strong> STRK20 support landed in starknet.js 10.4.0 and ships on the
-npm <code>next</code> tag. A bare <code>npm install starknet</code> resolves to <code>latest</code>, which is
-still 10.0.x and contains none of the STRK20 API — <code>WalletAccountV6</code>,
-<code>strk20InvokeTransaction</code>, and <code>STRK20_ACTION</code> will all be missing.</p>
+<pre><code class="language-shell">npm install starknet@^10.8.0
+</code></pre><p><strong>Pin the version.</strong> starknet.js <code>10.8.0</code> is the current stable release and
+includes Wallet API <code>0.10.4</code>, including shadow accounts. The <code>11.x</code> line is
+published on the npm <code>next</code> tag; use it only when your app has completed the
+<a href="https://starknet-js.com/docs/guides/migrate/">v10 to v11 migration</a>.</p>
 <h2 id="when-to-use-this">When to use this</h2>
 <p>Reach for <code>WalletAccountV6</code> directly when a React convenience layer does not fit -
 for example non-React frontends, scripts, or flows where you manage wallet
@@ -38,6 +39,11 @@ this same API for you.</p>
 <p>Your app connects to the user&#39;s privacy-enabled wallet through <code>starknet.js</code>, then
 issues STRK20 actions through the Wallet API. The wallet manages the private
 state, ZK proof, and signature wallet-side.</p>
+<p><code>STRK20_ACTION</code> now has five variants: <code>deposit</code>, <code>withdraw</code>, <code>transfer</code>,
+<code>invoke</code>, and <code>shadow_account_invoke</code>. The last route executes standard
+starknet.js <code>Call</code> objects through a persistent per-dapp identity. See
+<a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a> for the action shape,
+commitments, address resolution, and collection policies.</p>
 <h2 id="what-to-keep-in-mind">What to keep in mind</h2>
 <ul>
 <li><strong>Wallet support is required.</strong> The connected wallet must support the STRK20
@@ -46,12 +52,13 @@ wallet API methods, since the ZK proofs and signatures are managed wallet-side.<
 handling explicitly.</li>
 <li><strong>Follow the upstream docs.</strong> For connecting with get-starknet v6 and the
 <code>WalletAccountV6</code> API, see the
-<a href="https://starknet-js.com/docs/next/guides/account/walletAccount/#with-get-starknet-v6">starknet.js WalletAccount guide</a>.</li>
+<a href="https://starknet-js.com/docs/guides/account/walletAccount/#with-get-starknet-v6">starknet.js WalletAccount guide</a>.</li>
 </ul>
 <h2 id="read-next">Read next</h2>
 <ul>
 <li><a href="/starknet-wallet-api/overview">Starknet Wallet API overview</a></li>
 <li><a href="/starknet-wallet-api/starknet-start-hook">starknet-start</a></li>
+<li><a href="/starknet-wallet-api/shadow-accounts">Shadow Accounts</a></li>
 <li><a href="/sdk/getting-started">Build Privacy Wallets</a></li>
 </ul>
 `

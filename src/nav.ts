@@ -65,6 +65,10 @@ export const STARKNET_WALLET_API_ROUTES: Route[] = [
     title: "starknet.js",
   },
   {
+    path: "shadow-accounts",
+    title: "Shadow Accounts",
+  },
+  {
     path: "private-defi",
     title: "Private DeFi End to End",
   },
@@ -103,6 +107,10 @@ export const BUILD_PRIVACY_WALLET_ROUTES: Route[] = [
   {
     path: "multi-op-batch",
     title: "Multi-Operation Batches",
+  },
+  {
+    path: "shadow-accounts",
+    title: "Shadow Accounts",
   },
   {
     path: "setup-requirements",

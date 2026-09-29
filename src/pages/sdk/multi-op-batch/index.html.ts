@@ -60,9 +60,9 @@ covers all of them.</p>
 <li>Balance-sheet rule holds <strong>per token</strong>: inputs + deposits must cover
 transfers + withdrawals; <code>surplusTo</code> takes each token&#39;s remainder. A
 per-token override exists too: <code>t.surplusTo(...)</code> inside the block.</li>
-<li>At most <strong>one <code>invoke()</code> per transaction</strong> - the pool contract enforces a
-single external call per <code>apply_actions</code>. The builder errors if you chain
-two.</li>
+<li>At most <strong>one invoke-phase action per transaction</strong> - a normal <code>invoke()</code> and
+a <a href="/sdk/shadow-accounts">shadow-account invocation</a> share the same slot. The
+builder errors if you chain two.</li>
 <li>Larger batches mean larger proofs. Very large recipient lists can hit
 proof-size limits; wrap the batch in a try/catch and fall back to
 per-recipient transactions, waiting out the 10-block change-note maturity
