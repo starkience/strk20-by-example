@@ -109,7 +109,7 @@ exposing unrelated users.</li>
 </tr>
 <tr>
 <td>Deposit screening</td>
-<td>Every deposit is screened and signed by FPI; the pool verifies the signature onchain</td>
+<td>Elliptic screens each deposit; an FPI-managed signer attests allowed results for onchain verification</td>
 </tr>
 </tbody></table>
 <p>Each of these has its own page in the Concepts section - read them in order and

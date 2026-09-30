@@ -60,12 +60,15 @@ do not exist yet - a first deposit needs both.</li>
 client-side: check <code>note.created</code> against the current block before spending.
 Spending earlier produces a proof built against a state where the note is not
 yet spendable, and the transaction fails.</li>
-<li><strong>Every deposit is screened.</strong> FPI (the screening provider) screens the
-depositing address and signs each deposit, and the pool verifies that
-signature onchain - enforcement is part of the protocol since the v0.14.3
-upgrade. Wallet and hosted-proving flows handle this step for you; if a
+<li><strong>Every deposit is screened.</strong> Elliptic evaluates the depositing address. An
+FPI-managed attestation signer signs an allowed result, and the pool verifies
+that signature onchain - enforcement is part of the protocol since the
+v0.14.3 upgrade. Wallet and hosted-proving flows handle this step for you. A
+self-hosted prover can handle operations that need no screening attestation,
+but a direct deposit also needs a configured screening path. If a
 structurally valid deposit reverts, screening is the first thing to check.
-See <a href="/compliance">Compliance &amp; Auditing</a>.</li>
+See <a href="/sdk/proving-config">Proving Configuration</a> and
+<a href="/compliance">Compliance &amp; Auditing</a>.</li>
 </ul>
 <p>Next: <a href="/sdk/transfer">Transfer</a> a note privately to another account.</p>
 `

@@ -21,20 +21,20 @@ on two mechanisms: every deposit is screened before it enters the pool, and
 selective disclosure is available after the fact through a single ciphertext
 created at registration.</p>
 <h2 id="onchain-deposit-screening">Onchain deposit screening</h2>
-<p>Every deposit into the pool is screened. FPI (the screening provider) screens
-the address that shields tokens and signs every deposit; the pool verifies
-FPI&#39;s signature onchain before accepting the deposit. Since the v0.14.3
-upgrade this enforcement lives in the protocol itself, so it applies on every
-route into the pool - wallet flows, SDK integrations, and self-hosted provers
-alike. Running your own prover is not a way around screening: any other pool
-action can be proven with any prover, but a deposit without a valid screening
-signature is rejected onchain.</p>
+<p>Every deposit into the pool is screened. Elliptic evaluates the address that
+shields tokens. When the result is allowed, an FPI-managed attestation signer
+signs it and the pool verifies that signature onchain before accepting the
+deposit. Since the v0.14.3 upgrade this enforcement lives in the protocol
+itself, so it applies on every route into the pool - wallet flows, SDK
+integrations, and self-hosted provers alike. Running your own prover is not a
+way around screening: a deposit without a valid screening signature is
+rejected onchain.</p>
 <h2 id="the-escrowed-viewing-key">The escrowed viewing key</h2>
 <p>When a user registers (<code>SetViewingKey</code>), their <strong>private viewing key is
 encrypted to the auditor&#39;s public key</strong> - using the same ephemeral ECDH scheme
-as channels - and stored on-chain. The auditor&#39;s public key is set by
-governance, and the scheme supports <strong>threshold keys</strong>, so decryption need
-not rest with a single party.</p>
+as channels - and stored on-chain. FPI operates the auditor role in the current
+production setup. The auditor&#39;s public key is set by governance, and the scheme
+supports <strong>threshold keys</strong>, so decryption need not rest with a single party.</p>
 <p>Disclosure is <strong>selective</strong>: the auditor decrypts only the viewing keys of
 users subject to a lawful request. Everyone else&#39;s transaction graph stays
 encrypted - there is no bulk-surveillance mode.</p>

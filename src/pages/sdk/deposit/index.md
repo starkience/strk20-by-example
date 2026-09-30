@@ -60,11 +60,14 @@ await provider.waitForTransaction(tx.transaction_hash)
   client-side: check `note.created` against the current block before spending.
   Spending earlier produces a proof built against a state where the note is not
   yet spendable, and the transaction fails.
-- **Every deposit is screened.** FPI (the screening provider) screens the
-  depositing address and signs each deposit, and the pool verifies that
-  signature onchain - enforcement is part of the protocol since the v0.14.3
-  upgrade. Wallet and hosted-proving flows handle this step for you; if a
+- **Every deposit is screened.** Elliptic evaluates the depositing address. An
+  FPI-managed attestation signer signs an allowed result, and the pool verifies
+  that signature onchain - enforcement is part of the protocol since the
+  v0.14.3 upgrade. Wallet and hosted-proving flows handle this step for you. A
+  self-hosted prover can handle operations that need no screening attestation,
+  but a direct deposit also needs a configured screening path. If a
   structurally valid deposit reverts, screening is the first thing to check.
-  See [Compliance & Auditing](/compliance).
+  See [Proving Configuration](/sdk/proving-config) and
+  [Compliance & Auditing](/compliance).
 
 Next: [Transfer](/sdk/transfer) a note privately to another account.

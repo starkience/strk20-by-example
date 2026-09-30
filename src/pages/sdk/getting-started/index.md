@@ -31,8 +31,8 @@ npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 
 The SDK requires **Node.js >= 24** (its `ohttp-ts` dependency needs modern WebCrypto).
 
-**Getting a 404?** Known temporary issue - the package is not on npmjs.com yet
-while StarkWare restores access to its npm org. Until then it is published to
+**Getting a 404?** The package is not published on npmjs.com yet. Until npm
+publication is live, install it from
 [GitHub Packages](https://github.com/starkware-libs/starknet-privacy/pkgs/npm/starknet-privacy-sdk),
 which needs a GitHub token even for public packages. With the
 [GitHub CLI](https://cli.github.com):

@@ -12,22 +12,22 @@ created at registration.
 
 ## Onchain deposit screening
 
-Every deposit into the pool is screened. FPI (the screening provider) screens
-the address that shields tokens and signs every deposit; the pool verifies
-FPI's signature onchain before accepting the deposit. Since the v0.14.3
-upgrade this enforcement lives in the protocol itself, so it applies on every
-route into the pool - wallet flows, SDK integrations, and self-hosted provers
-alike. Running your own prover is not a way around screening: any other pool
-action can be proven with any prover, but a deposit without a valid screening
-signature is rejected onchain.
+Every deposit into the pool is screened. Elliptic evaluates the address that
+shields tokens. When the result is allowed, an FPI-managed attestation signer
+signs it and the pool verifies that signature onchain before accepting the
+deposit. Since the v0.14.3 upgrade this enforcement lives in the protocol
+itself, so it applies on every route into the pool - wallet flows, SDK
+integrations, and self-hosted provers alike. Running your own prover is not a
+way around screening: a deposit without a valid screening signature is
+rejected onchain.
 
 ## The escrowed viewing key
 
 When a user registers (`SetViewingKey`), their **private viewing key is
 encrypted to the auditor's public key** - using the same ephemeral ECDH scheme
-as channels - and stored on-chain. The auditor's public key is set by
-governance, and the scheme supports **threshold keys**, so decryption need
-not rest with a single party.
+as channels - and stored on-chain. FPI operates the auditor role in the current
+production setup. The auditor's public key is set by governance, and the scheme
+supports **threshold keys**, so decryption need not rest with a single party.
 
 Disclosure is **selective**: the auditor decrypts only the viewing keys of
 users subject to a lawful request. Everyone else's transaction graph stays

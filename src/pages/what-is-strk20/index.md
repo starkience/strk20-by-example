@@ -67,15 +67,15 @@ the [Privacy SDK](/sdk/shadow-accounts).
 
 ## The building blocks
 
-| Concept             | What it is                                                                           |
-| ------------------- | ------------------------------------------------------------------------------------ |
-| Note                | Immutable record of ownership of an amount of a token                                |
-| Nullifier           | One-time value revealed when spending a note (prevents double-spend)                 |
-| Viewing key         | Keypair used to encrypt/decrypt note data and derive nullifiers                      |
-| Channel             | Unidirectional sender → recipient lane where notes are stored                        |
-| Anonymizer contract | Small adapter that lets pool funds interact with external DeFi                       |
-| Shadow account      | Persistent per-dapp address that is not publicly linked to the user's main wallet    |
-| Deposit screening   | Every deposit is screened and signed by FPI; the pool verifies the signature onchain |
+| Concept             | What it is                                                                                            |
+| ------------------- | ----------------------------------------------------------------------------------------------------- |
+| Note                | Immutable record of ownership of an amount of a token                                                 |
+| Nullifier           | One-time value revealed when spending a note (prevents double-spend)                                  |
+| Viewing key         | Keypair used to encrypt/decrypt note data and derive nullifiers                                       |
+| Channel             | Unidirectional sender → recipient lane where notes are stored                                         |
+| Anonymizer contract | Small adapter that lets pool funds interact with external DeFi                                        |
+| Shadow account      | Persistent per-dapp address that is not publicly linked to the user's main wallet                     |
+| Deposit screening   | Elliptic screens each deposit; an FPI-managed signer attests allowed results for onchain verification |
 
 Each of these has its own page in the Concepts section - read them in order and
 you will have the full mental model.

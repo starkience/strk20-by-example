@@ -73,14 +73,23 @@ is stale, and retrying loops on proofs the chain keeps rejecting:</p>
 <pre><code class="language-typescript">transfers.<span class="hljs-title function_">invalidateProofNonceCache</span>()
 <span class="hljs-comment">// ...then rebuild and resubmit</span>
 </code></pre><h2 id="deposits-are-screened-on-every-proving-route">Deposits are screened on every proving route</h2>
-<p>A custom or self-hosted proving backend can prove every pool action, but a
-deposit is only accepted with a screening signature: FPI screens the
-depositing address and signs the deposit, and the pool verifies that
-signature onchain. Self-hosting is not a route around screening.</p>
-<p>Teams running their own prover typically shield through a privacy-enabled
-wallet (Ready or Xverse) and then transfer privately to the account their
-integration controls. If your production flow needs direct deposits, raise it
-in the <a href="https://t.me/sncorestars">Cairo CoreStars Telegram</a>.</p>
+<p>A custom or self-hosted backend can generate proofs without an Elliptic or FPI
+credential. Registration, private transfers, withdrawals, and other operations
+with no screened subject can therefore run entirely through a local prover.</p>
+<p>A deposit is different: Elliptic evaluates the depositing address, an
+FPI-managed attestation signer signs an allowed result, and the pool verifies
+that signature onchain. A screening-enabled pool may apply the same requirement
+to other configured subjects, such as an invoke or shadow-account address.
+Self-hosting the prover does not bypass that policy; the proof flow must also
+obtain the required attestation.</p>
+<p>For most builders, the starting route for screening access is Starkscan rather
+than requesting direct Elliptic partner credentials. Hosted wallet and prover
+flows handle the screening round-trip for you. If you operate your own prover,
+deploy the official
+<a href="https://github.com/starkware-libs/starknet-privacy/tree/main/proof-interceptor">proof interceptor</a>
+alongside it and confirm the current Starkscan onboarding and screening
+credentials before production. The public SDK does not contain a reusable
+screening secret.</p>
 <h2 id="common-failures">Common failures</h2>
 <table>
 <thead>

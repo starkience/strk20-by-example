@@ -104,10 +104,12 @@ keys; only the `ShadowAccountAnonymizer` can execute through it.
 
 Most dapps do not need to operate proving infrastructure. Wallets,
 infrastructure teams, and advanced integrators may run their own prover when
-they need operational control over proof generation. Deposit screening applies
-regardless of proving route: FPI screens shielding addresses and signs each
-deposit, and the pool verifies the signature onchain, so a self-hosted prover
-meets the same deposit-screening requirement as hosted services.
+they need operational control over proof generation. Running a prover locally
+does not itself require screening credentials. A transaction that needs a
+screening attestation - most notably a deposit - still has the depositing
+address evaluated by Elliptic. An FPI-managed signer attests an allowed result,
+and the pool verifies that signature onchain, so self-hosting does not bypass
+the deployed screening policy.
 
 ## Builder rules of thumb
 

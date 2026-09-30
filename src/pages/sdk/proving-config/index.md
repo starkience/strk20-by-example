@@ -82,15 +82,25 @@ transfers.invalidateProofNonceCache()
 
 ## Deposits are screened on every proving route
 
-A custom or self-hosted proving backend can prove every pool action, but a
-deposit is only accepted with a screening signature: FPI screens the
-depositing address and signs the deposit, and the pool verifies that
-signature onchain. Self-hosting is not a route around screening.
+A custom or self-hosted backend can generate proofs without an Elliptic or FPI
+credential. Registration, private transfers, withdrawals, and other operations
+with no screened subject can therefore run entirely through a local prover.
 
-Teams running their own prover typically shield through a privacy-enabled
-wallet (Ready or Xverse) and then transfer privately to the account their
-integration controls. If your production flow needs direct deposits, raise it
-in the [Cairo CoreStars Telegram](https://t.me/sncorestars).
+A deposit is different: Elliptic evaluates the depositing address, an
+FPI-managed attestation signer signs an allowed result, and the pool verifies
+that signature onchain. A screening-enabled pool may apply the same requirement
+to other configured subjects, such as an invoke or shadow-account address.
+Self-hosting the prover does not bypass that policy; the proof flow must also
+obtain the required attestation.
+
+For most builders, the starting route for screening access is Starkscan rather
+than requesting direct Elliptic partner credentials. Hosted wallet and prover
+flows handle the screening round-trip for you. If you operate your own prover,
+deploy the official
+[proof interceptor](https://github.com/starkware-libs/starknet-privacy/tree/main/proof-interceptor)
+alongside it and confirm the current Starkscan onboarding and screening
+credentials before production. The public SDK does not contain a reusable
+screening secret.
 
 ## Common failures
 

@@ -29,8 +29,8 @@ keys inside the wallet. Everything here goes through one factory:
 <h2 id="install">Install</h2>
 <pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 </code></pre><p>The SDK requires <strong>Node.js &gt;= 24</strong> (its <code>ohttp-ts</code> dependency needs modern WebCrypto).</p>
-<p><strong>Getting a 404?</strong> Known temporary issue - the package is not on npmjs.com yet
-while StarkWare restores access to its npm org. Until then it is published to
+<p><strong>Getting a 404?</strong> The package is not published on npmjs.com yet. Until npm
+publication is live, install it from
 <a href="https://github.com/starkware-libs/starknet-privacy/pkgs/npm/starknet-privacy-sdk">GitHub Packages</a>,
 which needs a GitHub token even for public packages. With the
 <a href="https://cli.github.com">GitHub CLI</a>:</p>
