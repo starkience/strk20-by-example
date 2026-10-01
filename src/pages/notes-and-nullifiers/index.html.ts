@@ -96,7 +96,8 @@ private viewing key:</p>
 <p>Note the asymmetry: because the nullifier includes the <em>owner&#39;s</em> private
 viewing key, even the sender who created a note cannot compute its nullifier -
 so a sender cannot watch for when their payment gets spent.</p>
-<p>Next: how keys encrypt all of this - <a href="/viewing-keys">Encryption &amp; Viewing Keys</a>.</p>
+<p>Next: how keys encrypt all of this, and how to protect your recovery path -
+<a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
 `
 
 export default html

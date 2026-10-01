@@ -29,6 +29,11 @@ wallets. If you are building the wallet itself, use the
 [Build Privacy Wallets](/sdk/getting-started). If your app needs private DeFi,
 pair this route with an [Anonymizer Contract](/helpers/privacy-invoke).
 
+> **User recovery matters even when the wallet manages the key.** Ready and
+> Xverse users should export a viewing-key backup for every account that holds
+> shielded funds. The key reveals private activity if leaked but cannot authorize
+> spending. See [Viewing Keys & Backups](/viewing-keys).
+
 ## Install
 
 ```shell
@@ -94,6 +99,8 @@ For positions that need a stable pseudonymous caller, use
 
 - **Wallet support varies.** Available actions depend on the connected wallet;
   detect capabilities before offering an action.
+- **Make backup guidance discoverable.** Do not ask users to give your dapp their
+  viewing key. Link them to the wallet's account-specific export flow instead.
 - **Edges stay public.** Deposits and withdrawals expose public ERC-20 legs and
   timing, even though in-pool movement is private.
 - **Verify versions and addresses.** Confirm wallet, `starknet.js`, and pool

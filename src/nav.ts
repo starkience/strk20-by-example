@@ -34,7 +34,7 @@ export const CONCEPT_ROUTES: Route[] = [
   },
   {
     path: "viewing-keys",
-    title: "Encryption & Viewing Keys",
+    title: "Viewing Keys & Backups",
   },
   {
     path: "channels-and-subchannels",

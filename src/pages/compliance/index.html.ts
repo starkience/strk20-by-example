@@ -38,6 +38,9 @@ supports <strong>threshold keys</strong>, so decryption need not rest with a sin
 <p>Disclosure is <strong>selective</strong>: the auditor decrypts only the viewing keys of
 users subject to a lawful request. Everyone else&#39;s transaction graph stays
 encrypted - there is no bulk-surveillance mode.</p>
+<p>This auditor-encrypted copy is not a user backup or self-service recovery path.
+Users should export and protect their own account-specific key as described in
+<a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
 <h2 id="what-a-recovered-viewing-key-reveals">What a recovered viewing key reveals</h2>
 <p>With one user&#39;s private viewing key, an auditor can:</p>
 <ul>

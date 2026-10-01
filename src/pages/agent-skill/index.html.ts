@@ -56,7 +56,8 @@ patterns and the public packages. Learn more about Cairo at
 <a href="https://www.cairo-lang.org/">cairo-lang.org</a> and about anonymizer contracts
 in <a href="/helpers/privacy-invoke">Anonymizer Contract Anatomy</a>.</li>
 <li><strong>Touch key material.</strong> Viewing keys, private keys, and secrets belong in
-env vars, never in files, and never in a prompt.</li>
+protected secret storage, never in source files and never in a prompt. An
+exported viewing-key backup must remain outside agent context.</li>
 </ul>
 <h3 id="check-anything-load-bearing">Check anything load-bearing</h3>
 <p>The skills bundle a snapshot, and versions, wallet support, and feature status

@@ -91,4 +91,5 @@ Note the asymmetry: because the nullifier includes the _owner's_ private
 viewing key, even the sender who created a note cannot compute its nullifier -
 so a sender cannot watch for when their payment gets spent.
 
-Next: how keys encrypt all of this - [Encryption & Viewing Keys](/viewing-keys).
+Next: how keys encrypt all of this, and how to protect your recovery path -
+[Viewing Keys & Backups](/viewing-keys).

@@ -50,7 +50,8 @@ reconstructing it from memory. Codex metadata ships under `agents/openai.yaml`.
   [cairo-lang.org](https://www.cairo-lang.org/) and about anonymizer contracts
   in [Anonymizer Contract Anatomy](/helpers/privacy-invoke).
 - **Touch key material.** Viewing keys, private keys, and secrets belong in
-  env vars, never in files, and never in a prompt.
+  protected secret storage, never in source files and never in a prompt. An
+  exported viewing-key backup must remain outside agent context.
 
 ### Check anything load-bearing
 

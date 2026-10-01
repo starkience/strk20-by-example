@@ -8,6 +8,12 @@ githubLink: https://github.com/starkware-libs/starknet-privacy/blob/main/sdk/REA
 
 Before an account can receive private transfers it must **register**: publish
 its public viewing key on-chain and store the auditor-encrypted private key.
+
+Because the registered public viewing key is immutable, persist and back up the
+matching private viewing key before the account receives meaningful shielded
+funds. Wallet products should expose a per-account export and recovery flow; see
+[Viewing Keys & Backups](/viewing-keys).
+
 This happens once per account per pool deployment.
 
 Snippets assume `transfers`, `account` and `provider` from

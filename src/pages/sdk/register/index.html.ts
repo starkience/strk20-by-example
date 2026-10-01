@@ -18,8 +18,12 @@ export const keywords = [
 export const codes = []
 
 const html = `<p>Before an account can receive private transfers it must <strong>register</strong>: publish
-its public viewing key on-chain and store the auditor-encrypted private key.
-This happens once per account per pool deployment.</p>
+its public viewing key on-chain and store the auditor-encrypted private key.</p>
+<p>Because the registered public viewing key is immutable, persist and back up the
+matching private viewing key before the account receives meaningful shielded
+funds. Wallet products should expose a per-account export and recovery flow; see
+<a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
+<p>This happens once per account per pool deployment.</p>
 <p>Snippets assume <code>transfers</code>, <code>account</code> and <code>provider</code> from
 <a href="/sdk/getting-started">Getting Started</a>.</p>
 <pre><code class="language-typescript"><span class="hljs-keyword">const</span> provingBlockId = (<span class="hljs-keyword">await</span> provider.<span class="hljs-title function_">getBlockNumber</span>()) - <span class="hljs-number">10</span>

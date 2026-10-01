@@ -126,6 +126,8 @@ the deployed screening policy.</p>
 <li>Use the Starknet Wallet API first for user-facing private dapps.</li>
 <li>Use Build Privacy Wallets when you are building the wallet itself or need low-level SDK control.</li>
 <li>Do not ask a normal dapp user for their viewing key.</li>
+<li>Make per-account viewing-key export and recovery guidance easy to find before
+users shield meaningful funds. See <a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</li>
 <li>For private DeFi integrations, expect both a Starknet Wallet API flow and an app-specific anonymizer contract.</li>
 <li>Deposits are screened on every route - self-hosted proving does not bypass onchain screening.</li>
 <li>Be explicit about what remains public: deposits, withdrawals, timing, and some app-side activity may still be visible.</li>

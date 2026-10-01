@@ -26,6 +26,12 @@ If you are building a private dapp on top of an existing wallet, use the
 <a href="/starknet-wallet-api/overview">Starknet Wallet API</a> instead - it keeps viewing
 keys inside the wallet. Everything here goes through one factory:
 <code>createPrivateTransfers</code>.</p>
+<blockquote>
+<p><strong>Key-management requirement:</strong> a production wallet must give users a secure,
+account-specific way to export and recover the viewing key. A seed phrase is
+not a safe substitute unless your recovery design guarantees the exact key
+already registered on-chain. See <a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
+</blockquote>
 <h2 id="install">Install</h2>
 <pre><code class="language-shell">npm install @starkware-libs/starknet-privacy-sdk@0.14.3-rc.8
 </code></pre><p>The SDK requires <strong>Node.js &gt;= 24</strong> (its <code>ohttp-ts</code> dependency needs modern WebCrypto).</p>
@@ -136,6 +142,9 @@ following pages. We will not repeat the explanation, just the code.</p>
 <td>Scans your channels for incoming notes. Backed by <code>IndexerDiscoveryProvider</code> (HTTP discovery service)</td>
 </tr>
 </tbody></table>
+<p>Never log, sync in plaintext, or send a viewing key to analytics or support
+systems. A leak reveals the account&#39;s past and future private activity, although
+the Starknet account signature is still required to spend.</p>
 <p>Next: register your viewing key so you can receive private transfers.</p>
 `
 

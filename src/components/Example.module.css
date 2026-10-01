@@ -20,6 +20,25 @@
 .content h4 {
   max-width: 72ch;
 }
+.content blockquote {
+  margin: 20px 0;
+  padding: 14px 18px;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+}
+.content blockquote p {
+  margin: 0;
+}
+.content img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 380px);
+  height: auto;
+  margin: 18px 0 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
 .sourceLink {
   font-style: italic;
   font-size: 14.5px;

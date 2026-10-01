@@ -19,6 +19,11 @@ Here's everything about getting started with building private applications.
 Starknet privacy has a small set of builder surfaces. Start with the highest-level
 route that fits your product, and only move lower when you need more control.
 
+> **Using shielded funds in Ready or Xverse?** Back up the viewing key for each
+> account before depositing meaningful value. It is separate from the seed
+> phrase. Follow [Viewing Keys & Backups](/viewing-keys) for the Ready and Xverse
+> export steps and screenshots.
+
 ## Choose your integration route
 
 | Builder goal                                                                                | Start with                                                                                               |

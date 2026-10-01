@@ -21,6 +21,12 @@ export const codes = []
 const html = `<p>Here&#39;s everything about getting started with building private applications.</p>
 <p>Starknet privacy has a small set of builder surfaces. Start with the highest-level
 route that fits your product, and only move lower when you need more control.</p>
+<blockquote>
+<p><strong>Using shielded funds in Ready or Xverse?</strong> Back up the viewing key for each
+account before depositing meaningful value. It is separate from the seed
+phrase. Follow <a href="/viewing-keys">Viewing Keys &amp; Backups</a> for the Ready and Xverse
+export steps and screenshots.</p>
+</blockquote>
 <h2 id="choose-your-integration-route">Choose your integration route</h2>
 <table>
 <thead>

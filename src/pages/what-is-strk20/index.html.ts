@@ -43,6 +43,13 @@ from the transaction.</li>
 transparency is required, moving value between public and confidential states on
 the same underlying token.</li>
 </ul>
+<blockquote>
+<p><strong>Before holding shielded funds:</strong> export and securely store the account&#39;s
+viewing key. Ready and Xverse provide an account-specific export; repeat it for
+every account in the wallet. Losing the key can make the shielded funds
+inaccessible, while leaking it exposes private activity but does not let an
+attacker move funds. See <a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
+</blockquote>
 <h2 id="the-lifecycle-public-private-public">The lifecycle: public → private → public</h2>
 <ol>
 <li><strong>Deposit</strong> - move public ERC-20 tokens into the pool. The deposit itself is

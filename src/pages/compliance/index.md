@@ -33,6 +33,10 @@ Disclosure is **selective**: the auditor decrypts only the viewing keys of
 users subject to a lawful request. Everyone else's transaction graph stays
 encrypted - there is no bulk-surveillance mode.
 
+This auditor-encrypted copy is not a user backup or self-service recovery path.
+Users should export and protect their own account-specific key as described in
+[Viewing Keys & Backups](/viewing-keys).
+
 ## What a recovered viewing key reveals
 
 With one user's private viewing key, an auditor can:

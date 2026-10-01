@@ -23,6 +23,11 @@ If you are building a private dapp on top of an existing wallet, use the
 keys inside the wallet. Everything here goes through one factory:
 `createPrivateTransfers`.
 
+> **Key-management requirement:** a production wallet must give users a secure,
+> account-specific way to export and recover the viewing key. A seed phrase is
+> not a safe substitute unless your recovery design guarantees the exact key
+> already registered on-chain. See [Viewing Keys & Backups](/viewing-keys).
+
 ## Install
 
 ```shell
@@ -148,5 +153,9 @@ following pages. We will not repeat the explanation, just the code.
 | `viewingKeyProvider` | Supplies the private viewing key `k` used to decrypt notes and derive nullifiers                                                 |
 | `provingProvider`    | Sends your signed invocation to a proving service, which executes it in a virtual Starknet environment and returns a STARK proof |
 | `discoveryProvider`  | Scans your channels for incoming notes. Backed by `IndexerDiscoveryProvider` (HTTP discovery service)                            |
+
+Never log, sync in plaintext, or send a viewing key to analytics or support
+systems. A leak reveals the account's past and future private activity, although
+the Starknet account signature is still required to spend.
 
 Next: register your viewing key so you can receive private transfers.

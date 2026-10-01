@@ -31,6 +31,12 @@ submission.</p>
 wallets. If you are building the wallet itself, use the
 <a href="/sdk/getting-started">Build Privacy Wallets</a>. If your app needs private DeFi,
 pair this route with an <a href="/helpers/privacy-invoke">Anonymizer Contract</a>.</p>
+<blockquote>
+<p><strong>User recovery matters even when the wallet manages the key.</strong> Ready and
+Xverse users should export a viewing-key backup for every account that holds
+shielded funds. The key reveals private activity if leaked but cannot authorize
+spending. See <a href="/viewing-keys">Viewing Keys &amp; Backups</a>.</p>
+</blockquote>
 <h2 id="install">Install</h2>
 <pre><code class="language-shell">npm install starknet@^10.8.0
 </code></pre><p><strong>Pin the version.</strong> starknet.js <code>10.8.0</code> is the current stable release and
@@ -85,6 +91,8 @@ For positions that need a stable pseudonymous caller, use
 <ul>
 <li><strong>Wallet support varies.</strong> Available actions depend on the connected wallet;
 detect capabilities before offering an action.</li>
+<li><strong>Make backup guidance discoverable.</strong> Do not ask users to give your dapp their
+viewing key. Link them to the wallet&#39;s account-specific export flow instead.</li>
 <li><strong>Edges stay public.</strong> Deposits and withdrawals expose public ERC-20 legs and
 timing, even though in-pool movement is private.</li>
 <li><strong>Verify versions and addresses.</strong> Confirm wallet, <code>starknet.js</code>, and pool
