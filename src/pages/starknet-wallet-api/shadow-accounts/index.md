@@ -26,6 +26,18 @@ the only contract that can execute calls through it.
 Requires `starknet@^10.8.0`, Wallet API `0.10.4`, and a connected wallet that
 supports the STRK20 shadow-account methods.
 
+## Try a working vault integration
+
+The **Shadow Account Vault Demo** compares public and private deposits into the
+existing Vesu Prime STRK vault. In private mode, a shadow account owns the vault
+shares and withdrawals return to the wallet's shielded balance.
+
+[Try demo](https://shadow-account-demo.vercel.app/) ·
+[View source](https://github.com/starkience/shadow-account-demo)
+
+> Public/private Vesu vault integration · Mainnet demo · Real assets.
+> Educational example, not audited production software.
+
 ## What is private
 
 The link to the user's main wallet is hidden. The shadow account itself is
