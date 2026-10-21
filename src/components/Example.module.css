@@ -1,14 +1,18 @@
 .component {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1060px;
 }
 .content {
-  margin: 15px 10px 15px 10px;
+  margin: 0;
 }
 .title {
-  font-size: 34px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-wrap: balance;
   font-weight: 700;
-  margin: 0 0 10px 0;
+  margin: 0 0 28px 0;
 }
 /* Keep prose at a readable measure; code blocks and tables stay wide. */
 .content p,
@@ -24,7 +28,7 @@
   margin: 20px 0;
   padding: 14px 18px;
   border-left: 4px solid var(--accent);
-  border-radius: 8px;
+  border-radius: 3px;
   background: var(--accent-soft);
 }
 .content blockquote p {
@@ -37,11 +41,11 @@
   height: auto;
   margin: 18px 0 8px;
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 4px;
 }
 .sourceLink {
-  font-style: italic;
-  font-size: 14.5px;
+  font-style: normal;
+  font-size: 14px;
   color: var(--color-muted);
   margin-bottom: 6px;
 }
@@ -62,7 +66,7 @@
   gap: 2px;
   padding: 12px 18px;
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 4px;
   text-decoration: none;
   min-width: 180px;
   transition: border-color 0.15s ease;
@@ -88,4 +92,44 @@
   color: var(--link-color);
   font-weight: 500;
   font-size: 15px;
+}
+
+.eyebrow {
+  margin-bottom: 20px;
+  font: 10px/1.6 var(--font-mono);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  margin: 0 10px 3px 0;
+  background: var(--accent);
+}
+.content > :global(.code) > p:first-child {
+  color: #bcbcbc;
+  font-size: 19px;
+  line-height: 1.65;
+}
+.content ul,
+.content ol {
+  color: #c6c6c6;
+}
+.content strong {
+  color: #fafafa;
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 27px;
+    overflow-wrap: anywhere;
+  }
+  .eyebrow {
+    font-size: 9px;
+  }
+  .content > :global(.code) > p:first-child {
+    font-size: 17px;
+  }
 }

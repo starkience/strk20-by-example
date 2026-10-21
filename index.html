@@ -14,8 +14,8 @@
     />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="STRK20 by Example" />
-    <meta property="og:title" content="STRK20 by Example" />
+    <meta property="og:site_name" content="STRK20 Docs" />
+    <meta property="og:title" content="STRK20 Docs" />
     <meta
       property="og:description"
       content="Learn Starknet Privacy (STRK20) with simple examples - privacy pools, notes and nullifiers, viewing keys, the Starknet Wallet API, anonymizer contracts, and wallet-builder SDK flows."
@@ -26,7 +26,7 @@
       content="https://strk20-by-example.org/icon-512.png"
     />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="STRK20 by Example" />
+    <meta name="twitter:title" content="STRK20 Docs" />
     <meta
       name="twitter:description"
       content="Learn Starknet Privacy (STRK20) with simple examples."
@@ -37,16 +37,13 @@
     />
 
     <link rel="manifest" href="/manifest.json" />
-    <title>STRK20 by Example</title>
+    <title>STRK20 Docs</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
-      // This script tag here is, purposefully blocking the 1st render
-      // to avoid background flashes on page load/reload
-      // It does the bare minimum: checking the previous mode in the localStorage
-      const theme = localStorage.getItem("theme") || "light"
-      document.body.classList.add(theme)
+      // Documentation uses the same dark palette as the main STRK20 site.
+      document.body.classList.add("dark")
     </script>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>

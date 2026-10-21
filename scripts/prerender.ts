@@ -23,7 +23,7 @@ import { ROUTES, ROUTES_BY_CATEGORY, Route, RouteGroup } from "../src/nav"
 
 const { readFile, writeFile } = fs.promises
 
-const SITE_TITLE = "STRK20 by Example"
+const SITE_TITLE = "STRK20 Docs"
 const PAGES_DIR = path.join(__dirname, "..", "src/pages")
 
 function escapeHtml(s: string): string {

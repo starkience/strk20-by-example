@@ -3,13 +3,10 @@ import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import SEO from "../components/SEO"
 import SearchBar from "../components/SearchBar"
-import Strk20 from "../components/svg/Strk20"
 import useDebounce from "../hooks/useDebounce"
 import { search } from "../lib/search"
 import styles from "./index.module.css"
 import { ROUTES, ROUTES_BY_CATEGORY } from "../nav"
-
-const UPDATES = ["2026/07/08 - First release"]
 
 export default function HomePage() {
   const [query, setQuery] = useState("")
@@ -111,17 +108,16 @@ export default function HomePage() {
   return (
     <div className={styles.component}>
       <SEO
-        title="STRK20 by Example"
+        title="STRK20 Docs"
         description="Learn Starknet Privacy (STRK20) with simple examples - privacy pools, notes and nullifiers, viewing keys, the Starknet Wallet API, anonymizer contracts, and wallet-builder SDK flows"
       />
       <div className={styles.hero}>
         <h1 className={styles.header}>
           <a href={withBase("/")} className={styles.headerLink}>
-            <Strk20 size={72} className={styles.heroLogo} />
-            <span className={styles.byExample}>by Example</span>
+            <span className={styles.byExample}>STRK20 Docs</span>
           </a>
         </h1>
-        <div className={styles.subHeader}>Starknet Privacy</div>
+        <div className={styles.subHeader}>Build with privacy</div>
         <p className={styles.intro}>
           An introduction to{" "}
           <a href="https://docs.starknet.io/build/starknet-privacy/overview">
@@ -130,12 +126,6 @@ export default function HomePage() {
           with simple examples: private transfers on a public chain, the Starknet Wallet
           API, Cairo anonymizer contracts, and wallet-builder SDK flows.
         </p>
-
-        <div className={styles.updates}>
-          {UPDATES.map((text, i) => (
-            <div key={i}>{text}</div>
-          ))}
-        </div>
 
         <div className={styles.search}>
           <SearchBar value={query} onChange={onChangeSearchQuery} />

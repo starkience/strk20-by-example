@@ -9,7 +9,7 @@ interface State {
 }
 
 const INITIAL_STATE: State = {
-  theme: "light",
+  theme: "dark",
   sideNav: true,
   initialized: false,
 }
@@ -53,11 +53,11 @@ export const Provider: React.FC<Props> = ({ children }) => {
   function init(params: { width: number }) {
     try {
       // @ts-ignore
-      const theme: Theme = localStorage.getItem("theme") || "light"
-      let sideNav = params.width >= 500
+      const theme: Theme = "dark"
+      let sideNav = params.width > 1000
       {
         const val = localStorage.getItem("sideNav")
-        if (val) {
+        if (val && params.width > 1000) {
           sideNav = val == "true"
         }
       }

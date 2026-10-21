@@ -40,11 +40,12 @@ const Example: React.FC<Props> = ({
   return (
     <div className={styles.component}>
       <SEO
-        title={`${title} | STRK20 by Example`}
+        title={`${title} | STRK20 Docs`}
         description={description}
         githubLink={githubLink}
       />
       <div className={styles.content}>
+        <div className={styles.eyebrow}>Starknet privacy / Documentation</div>
         <h1 className={styles.title}>{title}</h1>
 
         {githubLink ? (
