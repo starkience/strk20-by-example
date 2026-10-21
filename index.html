@@ -38,13 +38,18 @@
 
     <link rel="manifest" href="/manifest.json" />
     <title>STRK20 Docs</title>
-  </head>
+  <link rel="stylesheet" href="https://strk20.starknet.io/site-chrome.css" />
+<link rel="preload" href="https://strk20.starknet.io/fonts/GTAmericaMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+</head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
       // Documentation uses the same dark palette as the main STRK20 site.
       document.body.classList.add("dark")
     </script>
+    <a class="strk-promo" href="https://app.avnu.fi/en" target="_blank" rel="noopener noreferrer">Private swaps are now live on <span class="u">AVNU</span>&nbsp;↗</a>
+    <script src="https://strk20.starknet.io/site-chrome.js"></script>
+    <script src="https://strk20.starknet.io/promo.js"></script>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
