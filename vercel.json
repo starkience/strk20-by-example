@@ -4,6 +4,28 @@
   "outputDirectory": "build",
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "strk20-by-example.org"
+        }
+      ],
+      "destination": "https://strk20.starknet.io/docs/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.strk20-by-example.org"
+        }
+      ],
+      "destination": "https://strk20.starknet.io/docs/:path*",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
@@ -11,7 +33,7 @@
           "value": "strk20-by-example.vercel.app"
         }
       ],
-      "destination": "https://strk20-by-example.org/$1",
+      "destination": "https://strk20.starknet.io/docs/$1",
       "permanent": true
     },
     {
@@ -22,7 +44,7 @@
           "value": "strk20-by-example-gray.vercel.app"
         }
       ],
-      "destination": "https://strk20-by-example.org/$1",
+      "destination": "https://strk20.starknet.io/docs/$1",
       "permanent": true
     },
     {
@@ -33,7 +55,7 @@
           "value": "strk20-by-example-starkiences-projects.vercel.app"
         }
       ],
-      "destination": "https://strk20-by-example.org/$1",
+      "destination": "https://strk20.starknet.io/docs/$1",
       "permanent": true
     }
   ],

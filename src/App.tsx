@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useAppContext } from "./contexts/AppContext"
 import Layout from "./components/Layout"
+import SiteNav from "./components/SiteNav"
 import routes from "./routes"
 import { getPrevNextPaths } from "./nav"
 
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <Router basename={import.meta.env.VITE_PUBLIC_URL}>
+      <SiteNav />
       <Layout>
         <Routes>
           {routes.map((route) => {
