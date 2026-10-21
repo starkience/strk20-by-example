@@ -5,24 +5,46 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "strk20-by-example.vercel.app" }],
-      "destination": "https://strk20-by-example.org/$1",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "strk20-by-example-gray.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "strk20-by-example.vercel.app"
+        }
+      ],
       "destination": "https://strk20-by-example.org/$1",
       "permanent": true
     },
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "strk20-by-example-starkiences-projects.vercel.app" }
+        {
+          "type": "host",
+          "value": "strk20-by-example-gray.vercel.app"
+        }
+      ],
+      "destination": "https://strk20-by-example.org/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "strk20-by-example-starkiences-projects.vercel.app"
+        }
       ],
       "destination": "https://strk20-by-example.org/$1",
       "permanent": true
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/docs/:path*",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

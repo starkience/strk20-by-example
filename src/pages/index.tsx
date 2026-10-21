@@ -1,3 +1,4 @@
+import { withBase } from "../lib/url"
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import SEO from "../components/SEO"
@@ -66,7 +67,7 @@ export default function HomePage() {
         <ul className={styles.searchResultList}>
           {ROUTES.filter(({ path }) => searchResults[path]).map(({ path, title }) => (
             <li className={styles.listItem} key={path}>
-              <a href={path}>{title}</a>
+              <a href={withBase(path)}>{title}</a>
             </li>
           ))}
         </ul>
@@ -83,7 +84,7 @@ export default function HomePage() {
               <ul className={styles.list}>
                 {routes.map(({ path, title }) => (
                   <li className={styles.listItem} key={path}>
-                    <a href={path}>{title}</a>
+                    <a href={withBase(path)}>{title}</a>
                   </li>
                 ))}
               </ul>
@@ -95,7 +96,7 @@ export default function HomePage() {
                 <ul className={styles.list}>
                   {group.routes.map(({ path, title }) => (
                     <li className={styles.listItem} key={path}>
-                      <a href={path}>{title}</a>
+                      <a href={withBase(path)}>{title}</a>
                     </li>
                   ))}
                 </ul>
@@ -115,7 +116,7 @@ export default function HomePage() {
       />
       <div className={styles.hero}>
         <h1 className={styles.header}>
-          <a href="/" className={styles.headerLink}>
+          <a href={withBase("/")} className={styles.headerLink}>
             <Strk20 size={72} className={styles.heroLogo} />
             <span className={styles.byExample}>by Example</span>
           </a>

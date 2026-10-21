@@ -1,3 +1,5 @@
+import { ROUTES } from "../src/nav"
+import { SITE, BUILD_DIR, PREFIX } from "./site"
 // Build-output verifier. Runs after prerender + llms generation and fails the
 // build on defects that are invisible in local dev but break real consumers:
 //   1. protocol-relative internal hrefs (//route resolves to an external host)
@@ -7,8 +9,6 @@ import fs from "fs"
 import path from "path"
 import { getFiles } from "./lib"
 
-const BUILD_DIR = path.join(__dirname, "..", "build")
-const SITE = "https://strk20-by-example.org"
 const errors: string[] = []
 
 function rel(file: string): string {
@@ -29,7 +29,12 @@ function internalPath(href: string): string | null {
   if (href === SITE) return "/"
   if (href.startsWith(`${SITE}/`)) return href.slice(SITE.length)
   if (/^(https?:)?\/\//.test(href)) return null
-  if (href.startsWith("/")) return href
+  if (PREFIX && (href === PREFIX || href.startsWith(`${PREFIX}/`)))
+    return href.slice(PREFIX.length) || "/"
+  if (href.startsWith("/")) {
+    if (PREFIX) errors.push(`internal link escapes mount ${PREFIX}: ${href}`)
+    return href
+  }
   return null
 }
 
@@ -63,7 +68,9 @@ async function checkNoPlaceholders() {
     if (!fs.existsSync(file)) continue
     const body = fs.readFileSync(file).toString()
     for (const match of body.match(/\{\{\{[^}]+\}\}\}/g) ?? []) {
-      errors.push(`${rel(file)}: unrendered placeholder ${match} - contract source is missing`)
+      errors.push(
+        `${rel(file)}: unrendered placeholder ${match} - contract source is missing`,
+      )
     }
   }
 }
@@ -81,7 +88,9 @@ function resolves(href: string): boolean {
   if (clean === "" || clean === "/") return true
   const target = path.join(BUILD_DIR, clean)
   return (
-    isFile(target) || isFile(path.join(target, "index.html")) || isFile(`${target}.html`)
+    isFile(target) ||
+    isFile(path.join(target, "index.html")) ||
+    isFile(`${target}.html`)
   )
 }
 
@@ -103,6 +112,14 @@ async function main() {
   if (!fs.existsSync(BUILD_DIR)) {
     console.error("verify: build/ does not exist - run npm run build first")
     process.exit(1)
+  }
+  const clientRoutes = fs.readFileSync(
+    path.join(__dirname, "..", "src/routes.tsx"),
+    "utf8",
+  )
+  for (const route of ROUTES) {
+    if (!clientRoutes.includes(`path: "${route.path}"`))
+      errors.push(`missing client route: ${route.path}`)
   }
   const htmlFiles = await getFiles(BUILD_DIR, /\.html$/)
 

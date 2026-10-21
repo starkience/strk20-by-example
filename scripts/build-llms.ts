@@ -1,3 +1,4 @@
+import { SITE, BUILD_DIR } from "./site"
 // Script to make the site agent/LLM-crawlable.
 // Routes are prerendered (see prerender.ts), so crawlers do get HTML - but
 // agents are better served plain Markdown. This emits, into build/:
@@ -14,9 +15,7 @@ import { ROUTES_BY_CATEGORY } from "../src/nav"
 
 const { writeFile, mkdir } = fs.promises
 
-const SITE = "https://strk20-by-example.org"
 const PAGES_DIR = path.join(__dirname, "..", "src/pages")
-const BUILD_DIR = path.join(__dirname, "..", "build")
 
 const HEADER =
   "> Learn Starknet Privacy (STRK20) with runnable examples - privacy pools, " +

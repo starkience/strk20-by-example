@@ -1,3 +1,4 @@
+import { SITE, BUILD_DIR, PREFIX, mountLinks } from "./site"
 // Prerender: make every route serve real HTML, not an empty SPA shell.
 //
 // After `vite build`, build/index.html is a shell whose <div id="root"> is
@@ -22,10 +23,8 @@ import { ROUTES, ROUTES_BY_CATEGORY, Route, RouteGroup } from "../src/nav"
 
 const { readFile, writeFile } = fs.promises
 
-const SITE = "https://strk20-by-example.org"
 const SITE_TITLE = "STRK20 by Example"
 const PAGES_DIR = path.join(__dirname, "..", "src/pages")
-const BUILD_DIR = path.join(__dirname, "..", "build")
 
 function escapeHtml(s: string): string {
   return s
@@ -37,7 +36,12 @@ function escapeHtml(s: string): string {
 
 // Every replacement asserts it matched - a silent no-op here would quietly
 // ship the wrong metadata on every page.
-function replaceOnce(html: string, pattern: RegExp, replacement: string, what: string): string {
+function replaceOnce(
+  html: string,
+  pattern: RegExp,
+  replacement: string,
+  what: string,
+): string {
   if (!pattern.test(html)) {
     throw new Error(`prerender: could not find ${what} in shell`)
   }
@@ -72,7 +76,12 @@ function renderShell(
   const desc = escapeHtml(meta.description)
 
   let out = shell
-  out = replaceOnce(out, /<title>[^<]*<\/title>/, `<title>${fullTitle}</title>`, "<title>")
+  out = replaceOnce(
+    out,
+    /<title>[^<]*<\/title>/,
+    `<title>${fullTitle}</title>`,
+    "<title>",
+  )
   out = replaceOnce(
     out,
     /(<meta[^>]*name="description"[^>]*content=")[^"]*(")/,
@@ -120,7 +129,7 @@ function renderShell(
   out = replaceOnce(
     out,
     /<div id="root"><\/div>/,
-    `<div id="root">${content}</div>`,
+    `<div id="root">${mountLinks(content)}</div>`,
     'empty <div id="root">',
   )
   return out
@@ -137,7 +146,9 @@ function homeContent(): string {
     // Prepending another produced "//route", which the browser resolves as a
     // protocol-relative URL pointing at the host "route".
     const routeList = (routes: Route[]) =>
-      routes.map((r) => `<li><a href="${r.path}">${escapeHtml(r.title)}</a></li>`).join("")
+      routes
+        .map((r) => `<li><a href="${r.path}">${escapeHtml(r.title)}</a></li>`)
+        .join("")
     const groups = (category.groups ?? [])
       .map(
         (g: RouteGroup) =>
@@ -187,9 +198,7 @@ async function main() {
       fs.mkdirSync(dir, { recursive: true })
     }
 
-    const rendered = page
-      ? renderShell(shell, route, page, pageContent(page))
-      : shell // no index.html.ts (shouldn't happen) - fall back to the shell
+    const rendered = page ? renderShell(shell, route, page, pageContent(page)) : shell // no index.html.ts (shouldn't happen) - fall back to the shell
     await writeFile(path.join(dir, "index.html"), rendered)
     urls.push(`${SITE}/${route}`)
     console.log(`prerender: /${route}${page ? "" : " (shell only)"}`)

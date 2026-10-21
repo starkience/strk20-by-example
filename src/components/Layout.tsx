@@ -1,3 +1,4 @@
+import { withBase } from "../lib/url"
 import React, { useRef, useLayoutEffect } from "react"
 import { useAppContext } from "../contexts/AppContext"
 import styles from "./Layout.module.css"
@@ -21,7 +22,7 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   function onClick(path: string) {
     sessionStorage.setItem("scroll", (ref.current?.scrollTop || 0).toString())
-    window.location.href = path
+    window.location.href = withBase(path)
   }
 
   return (

@@ -1,3 +1,4 @@
+import { withBaseInHtml } from "../lib/url"
 import React, { useEffect } from "react"
 import useCopy from "../hooks/useCopy"
 
@@ -35,7 +36,10 @@ const Html: React.FC<Props> = ({ className = "", html }) => {
   }, [html])
 
   return (
-    <div className={`code ${className}`} dangerouslySetInnerHTML={{ __html: html }} />
+    <div
+      className={`code ${className}`}
+      dangerouslySetInnerHTML={{ __html: withBaseInHtml(html) }}
+    />
   )
 }
 

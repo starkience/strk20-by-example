@@ -1,3 +1,4 @@
+import { withBase } from "../lib/url"
 import React from "react"
 import { useAppContext } from "../contexts/AppContext"
 import Hamburger from "./svg/Hamburger"
@@ -27,11 +28,15 @@ function Header() {
       </button>
       <div className={styles.center}>
         <div className={styles.centerInner}>
-          <a href="/" className={styles.a} aria-label="STRK20 by Example home">
+          <a
+            href={withBase("/")}
+            className={styles.a}
+            aria-label="STRK20 by Example home"
+          >
             <Strk20 className={styles.logo} size={20} />
           </a>
           <span className={styles.header}>
-            <a href="/" className={styles.a}>
+            <a href={withBase("/")} className={styles.a}>
               by Example
             </a>
           </span>
@@ -40,7 +45,7 @@ function Header() {
       <div className={styles.right}>
         <HeaderSearch />
         <a
-          href="/agent-skill"
+          href={withBase("/agent-skill")}
           className={styles.agentLink}
           title="Let a coding agent build your STRK20 integration"
           aria-label="Agent skill"

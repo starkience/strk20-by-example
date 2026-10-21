@@ -1,3 +1,4 @@
+import { withBase } from "../lib/url"
 import React, { useEffect, useRef, useState } from "react"
 import Search from "./svg/Search"
 import useDebounce from "../hooks/useDebounce"
@@ -75,7 +76,7 @@ function HeaderSearch() {
     } else if (e.key === "Enter") {
       const result = results[active]
       if (result) {
-        window.location.assign(result.url)
+        window.location.assign(withBase(result.url))
       }
     } else if (e.key === "Escape") {
       close()
@@ -153,7 +154,7 @@ function HeaderSearch() {
               {results.map((result, i) => (
                 <li key={result.url}>
                   <a
-                    href={result.url}
+                    href={withBase(result.url)}
                     className={`${styles.result} ${i === active ? styles.active : ""}`}
                     onMouseEnter={() => setActive(i)}
                   >

@@ -1,3 +1,4 @@
+import { withBase } from "../lib/url"
 import React from "react"
 import SEO from "./SEO"
 import Html from "./Html"
@@ -59,7 +60,7 @@ const Example: React.FC<Props> = ({
 
         <nav className={styles.prevNext} aria-label="Previous and next pages">
           {prev ? (
-            <a href={prev.path} className={styles.prevLink}>
+            <a href={withBase(prev.path)} className={styles.prevLink}>
               <span className={styles.pagerLabel}>&larr; Previous</span>
               <span className={styles.pagerTitle}>{prev.title}</span>
             </a>
@@ -67,7 +68,7 @@ const Example: React.FC<Props> = ({
             <span />
           )}
           {next ? (
-            <a href={next.path} className={styles.nextLink}>
+            <a href={withBase(next.path)} className={styles.nextLink}>
               <span className={styles.pagerLabel}>Next &rarr;</span>
               <span className={styles.pagerTitle}>{next.title}</span>
             </a>

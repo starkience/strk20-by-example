@@ -1,3 +1,4 @@
+import { withBase } from "../../lib/url"
 import React from "react"
 import { useAppContext } from "../../contexts/AppContext"
 
@@ -13,7 +14,9 @@ const Strk20: React.FC<Props> = ({ size, className = "" }) => {
 
   return (
     <img
-      src={state.theme === "dark" ? "/strk20-logo.png" : "/strk20-logo-ink.png"}
+      src={withBase(
+        state.theme === "dark" ? "/strk20-logo.png" : "/strk20-logo-ink.png",
+      )}
       alt="STRK20"
       height={size}
       style={{ height: size, width: "auto", display: "block" }}

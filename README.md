@@ -75,3 +75,13 @@ highlighting, run `npm run pages:all` - highlighted HTML is frozen into
 `contracts/` holds the Cairo sources for example pages, adapted from the
 starknet-privacy monorepo. They are not compiled standalone in v1 - see
 `contracts/README.md`.
+
+### Hosting under /docs
+
+Set `VITE_PUBLIC_URL=/docs` and `SITE_URL=https://strk20.starknet.io/docs`
+when building the documentation hosting project. Output is nested under
+`build/docs`; the website proxies `/docs` and `/docs/:path*` to that project.
+Leave these variables unset to build the standalone documentation site.
+
+The build regenerates client routes after generating pages. Its verification
+checks navigation route coverage, internal links, and raw Markdown mirrors.
