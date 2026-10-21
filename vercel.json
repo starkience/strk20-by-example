@@ -4,6 +4,28 @@
   "outputDirectory": "build",
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "strk20-by-example.org"
+        }
+      ],
+      "destination": "https://strk20.starknet.io/docs/",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.strk20-by-example.org"
+        }
+      ],
+      "destination": "https://strk20.starknet.io/docs/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
